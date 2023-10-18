@@ -1,0 +1,36 @@
+// import { ref, computed } from 'vue'
+import { defineStore } from 'pinia'
+
+export const useMovieStore = defineStore('movieStore', {
+  state: () => ({
+    movies: [
+      {
+        meter: '444',
+        pc: '2'
+      },
+      {
+        meter: '7',
+        pc: '5'
+      }
+    ],
+    activeTab: 1
+  }),
+  actions: {
+    setActiveTab(id) {
+      // this.aciveTab = id;
+      // this.aciveTab = id;
+      console.log('🦴', this.movies)
+      this.movies[0].meter = id
+    }
+  }
+})
+
+// export const useCounterStore = defineStore('counter', () => {
+//   const count = ref(0)
+//   const doubleCount = computed(() => count.value * 2)
+//   function increment() {
+//     count.value++
+//   }
+
+//   return { count, doubleCount, increment }
+// })
