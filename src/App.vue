@@ -8,24 +8,29 @@ const qwe = (id) => {
 // import TheWelcome from './components/TheWelcome.vue'
 // import NumKeyboard from './components/NumKeyboard.vue'
 
+import TableBox from './components/table/TableBox.vue'
 import TaBlica2 from './components/TaBlica2.vue'
 import TaBlica1 from './components/Tablica1.vue'
-// import InputsList from './components/InputsList.vue'
+import InputsList from './components/InputsList.vue'
 </script>
 
 <template>
   <main>
-    <button @click="qwe(198889)">🦴</button>
+    <!-- <button @click="qwe(198889)">🦴</button> -->
     <!-- <TheWelcome /> -->
     <!-- <NumKeyboard /> -->
+    
+    <TableBox/>
     <!-- <InputsList/> -->
+
     <!-- <TaBlica2/> -->
     <!-- <TaBlica2 /> -->
-    <TaBlica1 :propsTest="moveieStore.movies" />
-
-    <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" />
+    <!-- <TaBlica1 :propsTest="moveieStore.movies" /> -->
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br>   -->
+    <!-- <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" /> -->
+    
     <!-- <TaBlica1/> -->
-    💔{{ moveieStore.movies }}💔
+    <!-- 💔{{ moveieStore.movies }}💔 -->
   </main>
 </template>
 

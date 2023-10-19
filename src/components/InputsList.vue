@@ -1,11 +1,26 @@
 <script setup>
 import InputBox from './InputBox.vue'
+import InputBox2 from './InputBox2.vue'
+const qwe = (id) => {
+  moveieStore.setActiveTab(id)
+}
+
+import Movie from './TaBlica2.vue'
+import { useMovieStore } from '../stores/dataForCalculation'
+const moveieStore = useMovieStore()
+
 </script>
 
 <template>
   <div id="box">
-    <InputBox propsMeter="8" />
-    <InputBox propsMeter="7.2" />
+        <button @click="qwe(198889)">🦴</button>
+    <!-- <InputBox propsMeter="123" /> -->
+    💩
+    <!-- <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" /> -->
+    <InputBox2 v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" />
+    
+
+    <!-- <InputBox propsMeter="798" /> -->
   </div>
 </template>
 
