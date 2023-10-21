@@ -6,12 +6,13 @@ const moveieStore = useMovieStore()
 <script>
 export default {
     props: {
-    lineNumber: String 
+    lineNumber: Number,
+    rowCount: Number
   },
   data: function () {
     return {
       // msg: 'Я родился',
-      rowCount: 5,
+      // rowCount: 5,
       lineCount: 5,
       numbers: [1, 2, 3, 4, 5] //DEL
       // displayCounter: '',
@@ -35,15 +36,16 @@ export default {
 <template>
   <tr class="line">
     <!-- <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" /> -->
-    {{ lineNumber }}
-    <TableRow v-for="n in evenNumbers" :key="n" :movie="movie" :lineNumber="lineNumber" :rowNumber="n" />
+    <!-- {{ lineNumber }} -->
+    <!-- <TableRow v-for="n in evenNumbers" :key="n"  :lineNumber="lineNumber" :rowNumber="n" /> -->
+    <TableRow  v-for="n in rowCount" :key="n"   :lineNumber="lineNumber" :rowNumber="n" />
     <!-- <TableRow /> -->
   </tr>
 </template>
 <style scoped>
 .line {
-  border: solid red 1px;
-  padding: 3px;
-  margin: 3px;
+  /* border: solid red 1px; */
+  /* padding: 3px; */
+  /* margin: 3px; */
 }
 </style>
