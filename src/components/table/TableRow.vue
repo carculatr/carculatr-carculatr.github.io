@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import TableRow from './TableRow.vue'
+// import TableRow from './TableRow.vue'
 import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
 
@@ -8,80 +8,39 @@ const props = defineProps({
   rowNumber: Number,
   lineNumber: Number
 })
-const pc1 = props.rowNumber - 1;
-const pc2 = props.lineNumber - 1;
-
-// const pc2
-console.log("😶",props.rowNumber);
-const rollLength2 = ref(40)
+const pc1 = props.rowNumber - 1
+const pc2 = props.lineNumber - 1
+const rollLength = ref(0)
 function calculate() {
-  // count.value++
-  var meter1 = moveieStore.movies[0].meter //метраж1
-  var meter2 = moveieStore.movies[1].meter //метраж2
-  // var numRow = props.rowNumber-1
-  // var numLine = props.lineNumber-1
-
-  // var summ = meter1 * numRow + meter2 * numLine
+  var meter1 = moveieStore.movies[0].meter * 1000 //метраж1 (умноженный на 1000 дабы избавиться от бага с плавающей запятой)
+  var meter2 = moveieStore.movies[1].meter * 1000 //метраж2
   var summ = meter1 * pc1 + meter2 * pc2
-
-  console.log('💩', summ)
-
-  rollLength2.value = summ
-
-  // moveieStore.movies[0].meter }} x {{ rowNumber }}шт</div> -->
-  // <!-- <div> {{ moveieStore.movies[1].meter }} x {{ lineNumber }}шт </div> -->
+  summ = summ / 1000 //обход бага с плавающей запятой
+  rollLength.value = summ
+  //   console.log(`
+  // ${meter1} * ${pc1} + ${meter2} * ${pc2}
+  //   ${summ/1000}`);
 }
 calculate()
-// reactive state
-
-// const emit = defineEmits(['change', 'delete'])
-</script>
-<script>
-// import { useMovieStore } from '../../stores/dataForCalculation'
-// import { createPinia } from 'pinia';
-// const moveieStore = useMovieStore()
-export default {
-  // props: {
-  // rowNumber: Number,
-  // lineNumber: Number
-  // },
-  data: function () {
-    return {
-      rollLength: '333',
-      // msg: 'Я родился',
-      rowCount: 5,
-      lineCount: 5,
-      numbers: [1, 2, 3, 4, 5] //DEL
-      // displayCounter: '',
-      // meter: 7.23,
-      // focused: false
-    }
-  },
-  methods: {
-    evenNumbers() {
-      // var qwe = this.numbers.filter(number => number % 2 === 0);
-      var qwe2 = Array(this.rowCount)
-        .fill()
-        .map((e, i) => i + 1)
-      var qwe3 = this.rowNumber
-      console.log('🍓')
-      return qwe3
-    }
-  }
-}
 </script>
 
 <template>
   <td>
-    <div class="cell" v-if="pc1!=0 || pc2!=0">
-      <div class="rollLength">{{ rollLength2 }}</div>
-      <div class="poltora">{{ rollLength2+1.5 }}</div>
-      
-      <div class="pc" v-if="pc1!=0">
-        <div>{{ moveieStore.movies[0].meter }} <span class="x">x</span> {{ pc1 }}<span class="pc-descripion">шт</span></div>
+    <div class="cell" v-if="pc1 != 0 || pc2 != 0">
+      <div class="rollLength">{{ rollLength }}</div>
+      <div class="poltora">{{ rollLength + 1.5 }}</div>
+
+      <div class="pc" v-if="pc1 != 0">
+        <div>
+          {{ moveieStore.movies[0].meter }} <span class="x">x</span> {{ pc1
+          }}<span class="pc-descripion">шт</span>
+        </div>
       </div>
-      <div class="pc" v-if="pc2!=0">
-        <div>{{ moveieStore.movies[1].meter }} <span class="x">x</span> {{ pc2 }}<span class="pc-descripion">шт</span></div>
+      <div class="pc" v-if="pc2 != 0">
+        <div>
+          {{ moveieStore.movies[1].meter }} <span class="x">x</span> {{ pc2
+          }}<span class="pc-descripion">шт</span>
+        </div>
       </div>
     </div>
   </td>
@@ -92,35 +51,40 @@ export default {
   color: black;
   font-size: 20px;
 }
-.pc{
+.pc {
   font-size: 11px;
   /* background: red; */
-  border-radius:3px;
+  border-radius: 3px;
   /* padding:3px; */
   color: gray;
 }
-.poltora{
-font-size:12px;
-color:rgb(200, 200, 200);
+.poltora {
+  font-size: 12px;
+  color: rgb(200, 200, 200);
 }
 .cell {
+  /* background: gold; */
+  top: 0px;
+  position: relative;
+  /* position: absolute; */
   display: flex;
   align-items: center;
   flex-direction: column;
   /* border: solid blue 1px; */
 }
-td{
-
+td {
   /* background: tomato; */
   /* margin:0px; */
-  border:1px solid;
-  padding:5px;
+  border: 1px solid;
+  /* padding: 5px; */
+  padding-top: none;
+  vertical-align: top;
 }
 
-.x,.pc-descripion{
+.x,
+.pc-descripion {
   /* background: red; */
   /* padding:0 1px ; */
-  color:rgb(220, 220, 220);
+  color: rgb(220, 220, 220);
 }
-
 </style>

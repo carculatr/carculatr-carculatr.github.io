@@ -1,48 +1,50 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import TableLine from './TableLine.vue'
 import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
+const rollLength = 71
+const rowCount = ref(1)
+const lineCount = ref(5)
+
+var  calculatePc = function() {
+  console.log('🧴', `
+ ${rollLength} / ${moveieStore.movies[0].meter} 
+ ${rollLength / moveieStore.movies[0].meter} 
+ ${Math.round(rollLength / moveieStore.movies[0].meter)}
+  `)
+  rowCount.value = Math.round(rollLength / moveieStore.movies[0].meter);
+  lineCount.value = Math.round(rollLength / moveieStore.movies[1].meter);
+
+  
+}
+calculatePc();
 </script>
 
 <script>
 export default {
   data: function () {
     return {
-      maxRollLentgh: 70,
-      rowCount: 4,
-      lineCount: 4, 
+      // maxRollLentgh: 70, //максимальный метраж ролика который рассчиывать
+      // rowCount: 4,
+      // lineCount: 4
     }
   },
-  computed: {
-    // evenNumbers() {
-    //   // var qwe = this.numbers.filter(number => number % 2 === 0);
-    //   var qwe2 = Array(this.rowCount)
-    //     .fill()
-    //     .map((e, i) => i + 1);
-    //     console.log("😶",qwe2) 
-    //   return qwe2
-    // }
+  created: function () {
+    //рассчитать кол-во штук
   }
 }
 </script>
 
 <template>
-  
-  <!-- 🤯{{ moveieStore }}🤯 -->
-    <table>
-      <tbody>
-        <!-- :movie="movie" -->
-        <!-- <TableLine v-for="n in evenNumbers" :key="n"  :lineNumber="n"/> -->
-        <TableLine  v-for="n in lineCount" :key="n" :rowCount="rowCount" :lineNumber="n"/>
-      </tbody>
-    </table>
+  <table>
+    <tbody>
+      <TableLine v-for="n in lineCount" :key="n" :rowCount="rowCount" :lineNumber="n" />
+    </tbody>
+  </table>
 </template>
 <style>
-table{
-    border-collapse: collapse;
-}
-td {
-  /* background: gold; */
-  /* margin: 3px; */
+table {
+  border-collapse: collapse;
 }
 </style>

@@ -21,14 +21,14 @@ export default {
     }
   },
   computed: {
-    evenNumbers() {
-      // var qwe = this.numbers.filter(number => number % 2 === 0);
-      var qwe2 = Array(this.rowCount)
-        .fill()
-        .map((e, i) => i + 1)
-      // console.log("🍓",qwe);
-      return qwe2
-    }
+    // evenNumbers() {
+    //   // var qwe = this.numbers.filter(number => number % 2 === 0);
+    //   var qwe2 = Array(this.rowCount)
+    //     .fill()
+    //     .map((e, i) => i + 1)
+    //   // console.log("🍓",qwe);
+    //   return qwe2
+    // }
   }
 }
 </script>
