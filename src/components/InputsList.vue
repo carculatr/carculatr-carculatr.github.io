@@ -15,7 +15,7 @@ const moveieStore = useMovieStore()
   <div id="box">
         <button @click="qwe(198889)">🦴</button>
     <!-- <InputBox propsMeter="123" /> -->
-    💩
+    💩{{ moveieStore.movies }}
     <!-- <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" /> -->
     <InputBox2 v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" />
     
@@ -35,12 +35,18 @@ const moveieStore = useMovieStore()
   min-height: 140px;
   display: flex;
   flex-direction: column;
-  top: 0px;
+  /* top: 0px; */
   left: 0px;
   position: absolute;
   width: 100%;
   height: 50%;
   background: #787878;
   padding-bottom: 3px;
+  
+  
+  /* background: red; */
+  position:relative;
+  /* top:0px; */
+  left:0px;
 }
 </style>

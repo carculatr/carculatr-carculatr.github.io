@@ -1,24 +1,29 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import TableLine from './TableLine.vue'
 import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
 const rollLength = 71
-const rowCount = ref(1)
-const lineCount = ref(5)
+const rowCount = ref(0)
+const lineCount = ref(0)
 
-var  calculatePc = function() {
-  console.log('🧴', `
- ${rollLength} / ${moveieStore.movies[0].meter} 
- ${rollLength / moveieStore.movies[0].meter} 
- ${Math.round(rollLength / moveieStore.movies[0].meter)}
-  `)
-  rowCount.value = Math.round(rollLength / moveieStore.movies[0].meter);
-  lineCount.value = Math.round(rollLength / moveieStore.movies[1].meter);
-
-  
+var calculatePc = function () {
+  //   console.log('🧴', `
+  //  ${rollLength} / ${moveieStore.movies[0].meter}
+  //  ${rollLength / moveieStore.movies[0].meter}
+  //  ${Math.round(rollLength / moveieStore.movies[0].meter)}
+  //   `)
+  rowCount.value = Math.round(rollLength / moveieStore.movies[0].meter)
+  lineCount.value = Math.round(rollLength / moveieStore.movies[1].meter)
 }
-calculatePc();
+calculatePc()
+
+watch(moveieStore.movies, async () => {
+  console.log("❓")
+  calculatePc()
+  console.log(rowCount);
+})
+
 </script>
 
 <script>
@@ -43,8 +48,11 @@ export default {
     </tbody>
   </table>
 </template>
-<style>
+<style scoped>
 table {
+  /* position: absolute; */
+  top: 5px;
+  left: 5px;
   border-collapse: collapse;
 }
 </style>

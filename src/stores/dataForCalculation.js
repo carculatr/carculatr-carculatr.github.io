@@ -21,6 +21,11 @@ export const useMovieStore = defineStore('movieStore', {
       // this.aciveTab = id;
       console.log('🦴', this.movies)
       this.movies[0].meter = id
+    },
+    toggleWathed(id) {
+      // console.log("");
+      // const idx = this.movies.findIndex(el => el.id === id)
+      console.log("💔",id);
     }
   }
 })
