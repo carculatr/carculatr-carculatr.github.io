@@ -1,5 +1,5 @@
 <script setup>
-import TableRow from './TableRow.vue'
+import TableCell from './TableCell.vue'
 import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
 </script>
@@ -38,7 +38,7 @@ export default {
     <!-- <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" /> -->
     <!-- {{ lineNumber }} -->
     <!-- <TableRow v-for="n in evenNumbers" :key="n"  :lineNumber="lineNumber" :rowNumber="n" /> -->
-    <TableRow  v-for="n in rowCount" :key="n"   :lineNumber="lineNumber" :rowNumber="n" />
+    <TableCell  v-for="n in rowCount" :key="n"   :lineNumber="lineNumber" :rowNumber="n" />
     <!-- <TableRow /> -->
   </tr>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import Movie from './components/TaBlica2.vue'
+// import Movie from './components/TaBlica2.vue'
 import { useMovieStore } from './stores/dataForCalculation'
 const moveieStore = useMovieStore()
 const qwe = (id) => {
@@ -9,8 +9,8 @@ const qwe = (id) => {
 // import NumKeyboard from './components/NumKeyboard.vue'
 
 import TableBox from './components/table/TableBox.vue'
-import TaBlica2 from './components/TaBlica2.vue'
-import TaBlica1 from './components/Tablica1.vue'
+// import TaBlica2 from './components/TaBlica2.vue'
+// import TaBlica1 from './components/Tablica1.vue'
 import InputsList from './components/InputsList.vue'
 </script>
 
@@ -21,7 +21,7 @@ import InputsList from './components/InputsList.vue'
     <!-- <NumKeyboard /> -->
     
     <InputsList/>
-    <TableBox/>
+    <TableBox :meter1="3" :meter2="4" :store="moveieStore.movies"/>
 
     <!-- <TaBlica2/> -->
     <!-- <TaBlica2 /> -->

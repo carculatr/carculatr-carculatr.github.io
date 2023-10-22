@@ -1,59 +1,69 @@
-<script>
-export default {
-  props: {
-    propsMeter: String
-  },
-  created: function () {
-    console.log('🥕', this.propsMeter)
-    this.meter = this.propsMeter
-  },
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import { useMovieStore } from '../stores/dataForCalculation'
+const moveieStore = useMovieStore()
 
-  data: function () {
-    return {
-      // msg: 'Я родился',
-      counter: '',
-      displayCounter: '',
-      meter: 7.23,
-      focused: false
-    }
-  },
-  methods: {
-    minus: function () {
-      this.counter--
-      if (this.counter <= 0) this.counter = ''
-    },
-    plus: function () {
-      this.counter++
-    },
-    eraser: function () {
-      const input = this.$refs.email
-      this.$refs.email.focus()
-      this.meter = ''
-      this.counter = ''
-    }
-  },
-  watch: {
-    counter: function (newVal, oldVal) {
-      // if (newVal <= 0) this.counter = '0'
-    }
+const counter = ref('')
+const meter = ref('')
+const props = defineProps(['movie', 'index'])
+
+var minus = function () {
+  this.counter--
+  // moveieStore.movies[props.index].pc = this.counter
+  // moveieStore.movies[props.index].pc = this.meter
+  if (this.counter <= 0) {
+    this.counter = ''
+    // moveieStore.movies[props.index].pc = 0
+    // moveieStore.movies[props.index].meter = 0
   }
 }
+var plus = function () {
+  this.counter++
+  // moveieStore.movies[props.index].meter = this.counter
+  // moveieStore.movies[props.index].pc = this.counter
+}
+
+const inputMeter = ref()
+var eraser = function () {
+  meter.value = ''
+  counter.value = ''
+  this.inputMeter.focus()
+}
+var selectTxt = function () {
+  this.inputMeter.select()
+}
+
+const startDataFromPinia = function () {
+  const pc = moveieStore.movies[props.index].pc
+  if (pc > 0) {
+    counter.value = moveieStore.movies[props.index].pc
+  }
+  meter.value = moveieStore.movies[props.index].meter
+}
+startDataFromPinia()
+
+watch(counter, async (newQuestion) => {
+  moveieStore.movies[props.index].pc = newQuestion
+})
+watch(meter, async (newQuestion) => {
+  moveieStore.movies[props.index].meter = newQuestion
+})
 </script>
 
 <template>
+  <!-- 🍓{{ movie.meter }}m {{ movie.pc }}шт🍓 -->
   <!-- <input @focus="focused = true" @blur="focused = false" /> -->
   <!-- <span v-show="focused">FOCUS444ED</span> -->
 
-  <div class="value1 value">
-    <div class="meterPc qwe">
-      <!-- м. -->
-      <!-- <br> -->
-      <input ref="email" v-model="meter" type="number" class="meter" />
+  <div class="value">
+    <!-- Метраж -->
+    <div class="meterPc">
+      <input @click="selectTxt" ref="inputMeter" v-model="meter" type="number" class="meter" />
+      <!-- <button @click="moveieStore.toggleWathed(3)" class="eraser"></button> -->
       <button @click="eraser" class="eraser"></button>
     </div>
+    <!-- штук -->
     <div class="boxPc">
-      <!-- шт -->
-      <!-- <br> -->
       <button @click="minus" class="increment minus">-</button>
       <input v-model="counter" type="number" class="pc" placeholder="ШТ" />
       <button @click="plus" class="increment plus">+</button>
@@ -106,6 +116,7 @@ input:focus {
 }
 .boxPc {
   /* flex-direction: column; */
+  opacity: 0.2;
 }
 
 .pc {

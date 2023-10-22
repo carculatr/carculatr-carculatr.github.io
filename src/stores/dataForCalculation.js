@@ -6,11 +6,11 @@ export const useMovieStore = defineStore('movieStore', {
     movies: [
       {
         meter: '8',
-        pc: '2'
+        pc: '0'
       },
       {
         meter: '7.2',
-        pc: '15'
+        pc: '0'
       }
     ],
     activeTab: 1

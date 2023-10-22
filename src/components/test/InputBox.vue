@@ -1,53 +1,46 @@
-<script setup>
-import { useMovieStore } from '../stores/dataForCalculation'
-const moveieStore = useMovieStore()
-import { ref, watch, onMounted } from 'vue'
-const counter = ref(0)
-const meter = ref(0)
-// const meter = ref(333);
-// pc:"",
-// counter: '',
-// displayCounter: '',
-// meter: 7.23,
-// focused: false
-const props = defineProps({
-  movie: {
-    type: Object,
-    required: true,
-    default: () => {}
-  }
-})
+<script>
+export default {
+  props: {
+    propsMeter: String
+  },
+  created: function () {
+    console.log('🥕', this.propsMeter)
+    this.meter = this.propsMeter
+  },
 
-var minus = function () {
-  if (this.counter <= 0) {
-    this.counter = ''
-    moveieStore.movies[0].pc = this.counter
-  } else {
-    this.counter--
-    moveieStore.movies[0].meter = 0
-    moveieStore.movies[0].pc = 0
+  data: function () {
+    return {
+      // msg: 'Я родился',
+      counter: '',
+      displayCounter: '',
+      meter: 7.23,
+      focused: false
+    }
+  },
+  methods: {
+    minus: function () {
+      this.counter--
+      if (this.counter <= 0) this.counter = ''
+    },
+    plus: function () {
+      this.counter++
+    },
+    eraser: function () {
+      const input = this.$refs.email
+      this.$refs.email.focus()
+      this.meter = ''
+      this.counter = ''
+    }
+  },
+  watch: {
+    counter: function (newVal, oldVal) {
+      // if (newVal <= 0) this.counter = '0'
+    }
   }
 }
-var plus = function () {
-  this.counter++
-  moveieStore.movies[0].meter = this.counter
-  moveieStore.movies[0].pc = this.counter
-}
-
-const inputMeter = ref()
-var eraser = function () {
-  meter.value = ''
-  counter.value = ''
-  this.inputMeter.focus()
-}
-// watch(counter, async (newQuestion, oldQuestion) => {
-// console.log("🍃☠☠☠",newQuestion)
-// })
 </script>
 
 <template>
-  🍓{{ movie.meter }}🍓{{ movie.pc }}🍓
-
   <!-- <input @focus="focused = true" @blur="focused = false" /> -->
   <!-- <span v-show="focused">FOCUS444ED</span> -->
 
@@ -55,9 +48,8 @@ var eraser = function () {
     <div class="meterPc qwe">
       <!-- м. -->
       <!-- <br> -->
-      <input ref="inputMeter" v-model="meter" type="number" class="meter" />
-      <button @click="moveieStore.toggleWathed(3)" class="eraser"></button>
-      <!-- <button @click="eraser" class="eraser"></button> -->
+      <input ref="email" v-model="meter" type="number" class="meter" />
+      <button @click="eraser" class="eraser"></button>
     </div>
     <div class="boxPc">
       <!-- шт -->
