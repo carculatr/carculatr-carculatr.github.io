@@ -5,7 +5,7 @@ export const useMovieStore = defineStore('movieStore', {
   state: () => ({
     movies: [
       {
-        meter: '8',
+        meter: '4.02',
         pc: '0'
       },
       {

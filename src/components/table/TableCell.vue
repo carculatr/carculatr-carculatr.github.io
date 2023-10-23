@@ -1,5 +1,5 @@
 <script setup>
-import { ref,watch, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
 
@@ -18,11 +18,15 @@ const pc2 = props.lineNumber - 1
 //   rollLength.value = summ
 // }
 // calculate()
+// console.log( `
+// ${moveieStore.movies[0].meter} * 1000) * ${pc1} +${moveieStore.movies[1].meter} 1000 * ${pc2} ${1000}
+// ⚡${((moveieStore.movies[0].meter * 1000) * pc1 + (moveieStore.movies[1].meter * 1000) * pc2)/1000}
 
+// `)
 // watch works directly on a ref
 // watch(moveieStore.movies, async () => {
-  // console.log("🍃🤷‍♂️🤷‍♂️🤷‍♂️")
-  // calculate()
+// console.log("🍃🤷‍♂️🤷‍♂️🤷‍♂️")
+// calculate()
 // })
 </script>
 
@@ -32,8 +36,18 @@ const pc2 = props.lineNumber - 1
       <!-- #TODO разобраться с реактивостью -->
       <!-- <div class="rollLength">{{ rollLength }}</div> -->
       <!-- <div class="poltora">{{ rollLength + 1.5 }}</div> -->
-      <div class="rollLength">{{ ((moveieStore.movies[0].meter * 1000) * pc1 + (moveieStore.movies[1].meter * 1000) * pc2)/1000 }}</div>
-      <div class="poltora">{{ ((moveieStore.movies[0].meter * 1000) * pc1 + (moveieStore.movies[1].meter * 1000) * pc2)/1000 + 1.5 }}</div>
+      <!-- <div class="rollLength">{{ ((moveieStore.movies[0].meter * 1000) * pc1 + (moveieStore.movies[1].meter * 1000) * pc2)/1000 }}</div> -->
+      <!-- <div class="poltora">{{ ((moveieStore.movies[0].meter * 1000) * pc1 + (moveieStore.movies[1].meter * 1000) * pc2)/1000 + 1.5 }}</div> -->
+      <div class="rollLength">
+        {{ +(moveieStore.movies[0].meter * pc1 + moveieStore.movies[1].meter * pc2).toFixed(2) }}
+      </div>
+      <div class="poltora">
+        {{
+          (+(moveieStore.movies[0].meter * pc1 + moveieStore.movies[1].meter * pc2) + 1.5).toFixed(
+            2
+          )
+        }}
+      </div>
 
       <div class="pc-box" v-if="pc1 != 0">
         <div>
@@ -65,13 +79,13 @@ const pc2 = props.lineNumber - 1
 <style scoped>
 .rollLength {
   /* padding:5px; */
-  margin:-8px 0;
+  margin: -8px 0;
   color: black;
   font-size: 20px;
 }
 .pc-box {
   /* background: red; */
-  margin:-3px 0;
+  margin: -3px 0;
   font-size: 10px;
   /* background: red; */
   /* border-radius: 3px; */
@@ -80,7 +94,7 @@ const pc2 = props.lineNumber - 1
 }
 .poltora {
   font-size: 12px;
-  margin:-2px 0;
+  margin: -2px 0;
   color: rgb(200, 200, 200);
 }
 .cell {
@@ -109,6 +123,10 @@ td {
   /* padding:0 1px ; */
   color: rgb(220, 220, 220);
 }
-.pc{color:rgba(200, 0, 0, 0.719);}
-.meter{color:rgba(0, 165, 0, 0.83)}
+.pc {
+  color: rgba(200, 0, 0, 0.719);
+}
+.meter {
+  color: rgba(0, 165, 0, 0.83);
+}
 </style>
