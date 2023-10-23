@@ -9,6 +9,26 @@ const props = defineProps({
 })
 const pc1 = props.rowNumber - 1
 const pc2 = props.lineNumber - 1
+const invalid1 = ref(false) //ненужные но отображаемые ячейки
+// const invalid3 = ref(true) //ненужные но отображаемые ячейки
+const invalid2 = ref(false) //совсем ненужные ячейки
+function ifInvalid() {
+  var ExtraPc1 = +moveieStore.movies[0].pc - 1
+  var ExtraPc2 = +moveieStore.movies[1].pc
+  if (ExtraPc1 < 0) ExtraPc1 = 999
+  if (ExtraPc2 < 0) ExtraPc2 = 999
+  if (ExtraPc1 < pc1 || ExtraPc2 < pc2) {
+    invalid1.value = true
+  } else {
+    invalid1.value = false
+  }
+  if (ExtraPc1 < pc1 || ExtraPc2 < pc2) {
+    invalid2.value = true
+  } else {
+    invalid2.value = false
+  }
+}
+ifInvalid()
 // const rollLength = ref(0)
 // function calculate() {
 //   var meter1 = moveieStore.movies[0].meter * 100 //метраж1 (умноженный на 1000 дабы избавиться от бага с плавающей запятой)
@@ -24,14 +44,23 @@ const pc2 = props.lineNumber - 1
 
 // `)
 // watch works directly on a ref
-// watch(moveieStore.movies, async () => {
-// console.log("🍃🤷‍♂️🤷‍♂️🤷‍♂️")
-// calculate()
-// })
+watch(moveieStore.movies, async () => {
+  console.log('🍃🤷‍♂️🤷‍♂️🤷‍♂️')
+  // calculate()
+  ifInvalid()
+})
 </script>
 
+<!-- v-if="!(+moveieStore.movies[0].pc + 3 < pc1 || +moveieStore.movies[1].pc + 3 < pc2)" -->
 <template>
-  <td>
+  <!-- <td    :class="{false: invalid1 }"> -->
+  <!-- <td
+    :class="{ invalid1 }"
+    v-if="!(+moveieStore.movies[0].pc + 3 < pc1 || +moveieStore.movies[1].pc + 3 < pc2)"
+  > -->
+  <td v-if="!invalid2" :class="{ invalid1 }">
+    <!-- <td v-if="!invalid2" :class="{ invalid1, invalid2 }"> -->
+    <!-- ⚡{{ moveieStore.movies[0].pc }}x{{ moveieStore.movies[1].pc }}x{{ pc1 }}x{{ pc2 }} -->
     <div class="cell" v-if="pc1 != 0 || pc2 != 0">
       <!-- #TODO разобраться с реактивостью -->
       <!-- <div class="rollLength">{{ rollLength }}</div> -->
@@ -48,6 +77,7 @@ const pc2 = props.lineNumber - 1
           )
         }}
       </div>
+      3333
 
       <div class="pc-box" v-if="pc1 != 0">
         <div>
@@ -77,6 +107,21 @@ const pc2 = props.lineNumber - 1
   </td>
 </template>
 <style scoped>
+.invalid1 {
+  /* background: red; */
+  /* border: 3px solid tomato; */
+  opacity: 0.2;
+  /* display: ; */
+  border: dashed 1px rgba(0, 0, 0, 0.13);
+}
+.invalid2 {
+  /* background: red; */
+  /* border: 3px solid tomato; */
+  background: red;
+  /* display: ; */
+  border: dashed 1px rgba(0, 0, 0, 0.13);
+}
+
 .rollLength {
   /* padding:5px; */
   margin: -8px 0;
