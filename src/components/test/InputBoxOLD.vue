@@ -11,18 +11,23 @@ export default {
   data: function () {
     return {
       // msg: 'Я родился',
-      counter: '',
+      counter: '99',
       displayCounter: '',
       meter: 7.23,
       focused: false
     }
   },
   methods: {
+    qwe: function () {
+      console.log('🔰QWE🍓🍓🍓🍓🍓')
+    },
     minus: function () {
+      console.log('🔰 minus')
       this.counter--
       if (this.counter <= 0) this.counter = ''
     },
     plus: function () {
+      console.log('🔰 plus')
       this.counter++
     },
     eraser: function () {
@@ -44,6 +49,7 @@ export default {
   <!-- <input @focus="focused = true" @blur="focused = false" /> -->
   <!-- <span v-show="focused">FOCUS444ED</span> -->
 
+  <button @click="qwe" class="qwe">QWE</button> 
   <div class="value1 value">
     <div class="meterPc qwe">
       <!-- м. -->

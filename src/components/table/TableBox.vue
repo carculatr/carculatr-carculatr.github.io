@@ -6,6 +6,7 @@ const moveieStore = useMovieStore()
 
 const maxRollLength = 71
 const maxPc = 25
+
 const rowCount = ref(0)
 const lineCount = ref(0)
 
@@ -32,32 +33,13 @@ var calculatePc = function () {
 calculatePc()
 
 watch(moveieStore.movies, async () => {
-  // console.log("❓")
   calculatePc()
-  // console.log(rowCount);
 })
 </script>
 
-<script>
-export default {
-  data: function () {
-    return {
-      // maxRollLentgh: 70, //максимальный метраж ролика который рассчиывать
-      // rowCount: 4,
-      // lineCount: 4
-    }
-  },
-  created: function () {
-    //рассчитать кол-во штук
-  }
-}
-</script>
+
 
 <template>
-  <!-- {{ moveieStore.movies }}🍃 <br />
-  {{ props.store[0].meter }}🍃🍃 <br />
-  {{ props.meter1 }}🍃 <br />
-  {{ props.meter2 }}🍃 <br /> -->
 
   <table>
     <tbody>
