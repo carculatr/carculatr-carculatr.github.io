@@ -35,13 +35,41 @@ calculatePc()
 watch(moveieStore.movies, async () => {
   calculatePc()
 })
+
+/*🍓🍓🍓🍓🍓🍓 */
+const inputMeter = ref()
+let scale = 1
+// mouse wheel, trackpad pitch
+svg.addEventListener(
+  'wheel',
+  /** @param {WheelEvent} evt */ (evt) => {
+    evt.preventDefault()
+
+    // calc nextScale
+
+    const delta = evt.deltaY || evt.deltaX
+    const scaleStep =
+      Math.abs(delta) < 50
+        ? 0.05 // touchpad pitch
+        : 0.25 // mouse wheel
+
+    const scaleDelta = delta < 0 ? scaleStep : -scaleStep
+    const nextScale = scale + scaleDelta // 'scale' is previous scale
+
+    // calc fixedPoint
+    const fixedPoint = { x: evt.clientX, y: evt.clientY }
+
+    // scale
+    // 'svgEl' is element to scale
+    svgScale(svgEl, fixedPoint, scale, nextScale)
+    scale = nextScale
+  }
+)
+/*🍓🍓🍓🍓🍓🍓 */
 </script>
 
-
-
 <template>
-
-  <table>
+  <table  ref="testScale">
     <tbody>
       <TableLine v-for="n in lineCount" :key="n" :rowCount="rowCount" :lineNumber="n" />
       <!-- #FIXME если через функцию то не реактивно?  -->

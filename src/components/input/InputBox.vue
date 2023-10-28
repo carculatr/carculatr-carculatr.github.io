@@ -1,6 +1,7 @@
 <script setup>
-import { ref, watch/*, onMounted*/ } from 'vue'
-import { useMovieStore } from '../stores/dataForCalculation'
+import { ref, watch /*, onMounted*/ } from 'vue'
+import InputMeterTips from './InputMeterTips.vue'
+import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
 
 const counter = ref('')
@@ -19,7 +20,6 @@ var plus = function () {
   // moveieStore.movies[props.index].meter = this.counter
   // moveieStore.movies[props.index].pc = this.counter
 }
-
 
 // const inputMeter = ref()
 // const inputMeter ="i";
@@ -65,7 +65,7 @@ var selectTxt = function (el) {
   // inputMeter.value.select()
 }
 var pressEnter = function () {
-  alert('ENTER', props.index)
+  console.log('ENTER', props.index)
 }
 const startDataFromPinia = function () {
   const pc = moveieStore.movies[props.index].pc
@@ -83,45 +83,48 @@ watch(meter, async (newQuestion) => {
   moveieStore.movies[props.index].meter = newQuestion
 })
 
-
-const qwe = ref();
 const inputMeter = ref()
-const eraser = function () {
-  meter.value = ''
+
+const eraserClick = function () {
+  inputMeter.value.focus()
+  // counter.value = ''
+  // meter.value = ''
+}
+const eraserMousedown = function () {
   counter.value = ''
-  qwe.value.focus();
-console.log(qwe.value.focus());  
-  // inputMeter.value.focus()
-  // console.log(inputMeter._rawValue.focus());
-  // $refs.input.focus()
-  // inputMeter.valueselect();
+  meter.value = ''
 }
-const qwe2 = function () { 
-  console.log("🍓");
-}
-
-
 </script>
 
 <template>
-        <!-- <button v-on:keyup.enter="pressEnter">-</button> -->
+  <!-- <button v-on:keyup.enter="pressEnter">-</button> -->
   <div class="value">
     <!-- Метраж -->
     <div class="meterPc">
-      <input ref="qwe" v-model="meter" type="number" class="meter" />
-      <!-- v-on:keyup.enter="pressEnter" -->
-      <!-- @click="selectTxt" -->
+      <input
+        ref="inputMeter"
+        v-model="meter"
+        type="number"
+        class="meter"
+        v-on:keyup.enter="pressEnter"
+        @click="selectTxt"
+      />
       <!-- <button @click="moveieStore.toggleWathed(3)" class="eraser"></button> -->
-      <button v-on:mousedown="eraser" class="eraser"></button>
+      <button @click="eraserClick"
+      v-on:mousedown="eraserMousedown"
+       class="eraser"></button>
     </div>
     <!-- штук -->
     <div class="boxPc">
-      <button v-on:mousedown="minus" class="increment minus" v-on:keyup.enter="pressEnter">-</button>
+      <button v-on:mousedown="minus" class="increment minus" v-on:keyup.enter="pressEnter">
+        -
+      </button>
       <!-- <button  @click="minus" class="increment minus">-</button> -->
       <input @click="selectTxt" v-model="counter" type="number" class="pc" placeholder="ШТ" />
       <button v-on:mousedown="plus" class="increment plus" v-on:keyup.enter="pressEnter">+</button>
     </div>
   </div>
+      <InputMeterTips/>
 </template>
 
 <style scoped>
@@ -132,6 +135,7 @@ const qwe2 = function () {
 
 /*контейнер для обоих инпутов одного наименования */
 .value {
+  z-index: 6;
   height: 50%;
   margin: 3px;
   margin-bottom: 0;

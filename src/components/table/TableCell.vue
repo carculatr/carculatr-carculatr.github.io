@@ -150,7 +150,7 @@ td {
   /* display: inline-block; */
   /* overflow: hidden; */
   min-height: 40px;
-  min-width: 45px;
+  min-width: 55px;
   /* background: tomato; */
   /* margin:0px; */
   border: 1px solid rgb(204, 204, 204);

@@ -11,7 +11,7 @@ const qwe = (id) => {
 import TableBox from './components/table/TableBox.vue'
 // import TaBlica2 from './components/TaBlica2.vue'
 // import TaBlica1 from './components/Tablica1.vue'
-import InputsList from './components/InputsList.vue'
+import InputsList from './components/input/InputsList.vue'
 </script>
 
 <template>
