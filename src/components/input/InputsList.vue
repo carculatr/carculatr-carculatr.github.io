@@ -7,8 +7,8 @@ import { ref, watch /*, onMounted*/ } from 'vue'
 import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
 //повится ли инпут по умолчанию
-// const inputOrPreview = ref(false)
-const inputOrPreview = ref(true)
+const inputOrPreview = ref(false)
+// const inputOrPreview = ref(true)
 const inputShow = function () {
   document.querySelector('meta[name="viewport"]').setAttribute('content', "width=device-width, initial-scale=1.0, user-scalable=no")
   

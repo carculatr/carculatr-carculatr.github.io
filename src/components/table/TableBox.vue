@@ -36,39 +36,44 @@ watch(moveieStore.movies, async () => {
   calculatePc()
 })
 
-/*🍓🍓🍓🍓🍓🍓 */
-const inputMeter = ref()
-let scale = 1
-// mouse wheel, trackpad pitch
-svg.addEventListener(
-  'wheel',
-  /** @param {WheelEvent} evt */ (evt) => {
-    evt.preventDefault()
+// /*🍓🍓🍓🍓🍓🍓 */
+// const testScale = ref()
+// let scale = 1
+// // mouse wheel, trackpad pitch
+// var qwe = document.querySelector("table");
+// qwe.addEventListener(
+// // testScale.value.addEventListener(
+//   'wheel',
+//   /** @param {WheelEvent} evt */ (evt) => {
+//     evt.preventDefault()
 
-    // calc nextScale
+//     // calc nextScale
 
-    const delta = evt.deltaY || evt.deltaX
-    const scaleStep =
-      Math.abs(delta) < 50
-        ? 0.05 // touchpad pitch
-        : 0.25 // mouse wheel
+//     const delta = evt.deltaY || evt.deltaX
+//     const scaleStep =
+//       Math.abs(delta) < 50
+//         ? 0.05 // touchpad pitch
+//         : 0.25 // mouse wheel
 
-    const scaleDelta = delta < 0 ? scaleStep : -scaleStep
-    const nextScale = scale + scaleDelta // 'scale' is previous scale
+//     const scaleDelta = delta < 0 ? scaleStep : -scaleStep
+//     const nextScale = scale + scaleDelta // 'scale' is previous scale
 
-    // calc fixedPoint
-    const fixedPoint = { x: evt.clientX, y: evt.clientY }
+//     // calc fixedPoint
+//     const fixedPoint = { x: evt.clientX, y: evt.clientY }
 
-    // scale
-    // 'svgEl' is element to scale
-    svgScale(svgEl, fixedPoint, scale, nextScale)
-    scale = nextScale
-  }
-)
-/*🍓🍓🍓🍓🍓🍓 */
+//     // scale
+//     // 'svgEl' is element to scale
+//     svgScale(svgEl, fixedPoint, scale, nextScale)
+//     scale = nextScale
+//   }
+// )
+// /*🍓🍓🍓🍓🍓🍓 */
 </script>
 
 <template>
+
+
+
   <table  ref="testScale">
     <tbody>
       <TableLine v-for="n in lineCount" :key="n" :rowCount="rowCount" :lineNumber="n" />
@@ -84,9 +89,10 @@ svg.addEventListener(
 </template>
 <style scoped>
 table {
-  /* position: absolute; */
-  top: 5px;
-  left: 5px;
+  position: absolute;
+
+  top: 15px;
+  left: 15px;
   border-collapse: collapse;
 }
 </style>
