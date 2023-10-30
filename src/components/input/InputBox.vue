@@ -124,7 +124,7 @@ const eraserMousedown = function () {
       <button v-on:mousedown="plus" class="increment plus" v-on:keyup.enter="pressEnter">+</button>
     </div>
   </div>
-      <InputMeterTips/>
+      <!-- <InputMeterTips/> -->
 </template>
 
 <style scoped>

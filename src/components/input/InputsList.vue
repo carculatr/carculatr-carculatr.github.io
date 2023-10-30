@@ -62,7 +62,7 @@ const inputHide = function () {
   --border-color: rgb(213, 213, 213);
 }
 
-#boxOff {
+#box {
   z-index: 6;
   min-width: 330px;
   min-height: 140px;
@@ -82,7 +82,7 @@ const inputHide = function () {
   left: 0px;
   height: 100%;
 }
-#box {
+#boxNEW.TEST {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
   /* touch-action: none; */
@@ -123,7 +123,7 @@ const inputHide = function () {
 .close:before {
   transform: rotate(45deg);
 }
-.closeBoxOFF {
+.closeBox {
   z-index: 5;
   position: fixed;
   top: 0;
