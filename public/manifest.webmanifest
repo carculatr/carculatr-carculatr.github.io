@@ -1,6 +1,6 @@
 {
-  "name": "⚡Тест",
-  "short_name": "⚡тес",
+  "name": "⚡Каркулятор",
+  "short_name": "⚡Кар",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#373737",
