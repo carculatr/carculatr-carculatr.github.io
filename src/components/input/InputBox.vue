@@ -151,7 +151,7 @@ input {
   text-align: center;
   outline: none;
   font-size: 40px;
-  background: rgb(255, 255, 255);
+  background: #373737;
   border: 6px solid var(--border-color);
   /* border: 6px solid rgb(206, 206, 206); */
   border-radius: 16px;

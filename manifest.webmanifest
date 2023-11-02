@@ -1,0 +1,15 @@
+{
+  "name": "⚡Каркулятор",
+  "short_name": "⚡Кар",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#373737",
+  "background_color": "#ffdd00",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "512x512",
+      "type": "image/ico"
+    }
+  ]
+}
