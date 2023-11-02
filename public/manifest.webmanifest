@@ -1,15 +1,15 @@
 {
-  "name": "⚡Каркулятор",
-  "short_name": "⚡Кар",
+  "name": "⚡Тест",
+  "short_name": "⚡тес",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#373737",
   "background_color": "#ffdd00",
   "icons": [
     {
-      "src": "/favicon.ico",
+      "src": "favicon.ico",
       "sizes": "512x512",
-      "type": "image/ico"
+      "type": "image/png"
     }
   ]
 }
