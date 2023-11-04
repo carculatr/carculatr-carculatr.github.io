@@ -104,15 +104,14 @@ const eraserMousedown = function () {
       <input
         ref="inputMeter"
         v-model="meter"
+        @click="selectTxt"
+        v-on:keyup.enter="pressEnter"
+        inputmode="numeric"
         type="number"
         class="meter"
-        v-on:keyup.enter="pressEnter"
-        @click="selectTxt"
       />
       <!-- <button @click="moveieStore.toggleWathed(3)" class="eraser"></button> -->
-      <button @click="eraserClick"
-      v-on:mousedown="eraserMousedown"
-       class="eraser"></button>
+      <button @click="eraserClick" v-on:mousedown="eraserMousedown" class="eraser"></button>
     </div>
     <!-- штук -->
     <div class="boxPc">
@@ -124,7 +123,7 @@ const eraserMousedown = function () {
       <button v-on:mousedown="plus" class="increment plus" v-on:keyup.enter="pressEnter">+</button>
     </div>
   </div>
-      <!-- <InputMeterTips/> -->
+  <!-- <InputMeterTips/> -->
 </template>
 
 <style scoped>
@@ -151,7 +150,7 @@ input {
   text-align: center;
   outline: none;
   font-size: 40px;
-  background: #373737;
+  background:rgb(255, 255, 255);
   border: 6px solid var(--border-color);
   /* border: 6px solid rgb(206, 206, 206); */
   border-radius: 16px;
