@@ -3,12 +3,9 @@ import { useMovieStore } from '../../stores/dataForCalculation'
 import { ref, onMounted } from 'vue'
 const moveieStore = useMovieStore()
 
-const el = ref()
+// const el = ref()
 
 onMounted(() => {
-  console.log('🔵')
-  // el.value // <div>
-  // setTimeout(() => {
   const elemRightBottom = document.querySelector('#fixedRightBottom')
 
   var viewport = window.visualViewport
@@ -30,7 +27,6 @@ onMounted(() => {
   window.visualViewport.addEventListener('scroll', viewportHandler)
   window.visualViewport.addEventListener('resize', viewportHandler)
   viewportHandler() //вызвать сразу
-  // }, 0)
 })
 </script>
 

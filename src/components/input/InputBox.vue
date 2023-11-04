@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch /*, onMounted*/ } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import InputMeterTips from './InputMeterTips.vue'
 import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
@@ -77,12 +77,20 @@ const startDataFromPinia = function () {
 startDataFromPinia()
 
 watch(counter, async (newQuestion) => {
+  counter.value = inputFilter(newQuestion).replace(/[.]/g, '')
   moveieStore.movies[props.index].pc = newQuestion
 })
 watch(meter, async (newQuestion) => {
+  inputFilter(newQuestion)
+  meter.value = inputFilter(newQuestion)
   moveieStore.movies[props.index].meter = newQuestion
 })
-
+const inputFilter = function (data) {
+  data = data.replace(/[,]/g, '.') //comma
+  data = data.replace(/[^.\d]/g, '')
+  data = data.replace(/^([^\.]*\.)|\./g, '$1') //double dot
+  return data
+}
 const inputMeter = ref()
 
 const eraserClick = function () {
@@ -94,6 +102,11 @@ const eraserMousedown = function () {
   counter.value = ''
   meter.value = ''
 }
+onMounted(() => {
+  console.log('🍓', inputMeter.value, props.index)
+  // при открытии выделять первый инпут
+  if (props.index == 0) inputMeter.value.focus()
+})
 </script>
 
 <template>
@@ -106,8 +119,9 @@ const eraserMousedown = function () {
         v-model="meter"
         @click="selectTxt"
         v-on:keyup.enter="pressEnter"
+        type="search"
         inputmode="numeric"
-        type="number"
+        autocomplete="off"
         class="meter"
       />
       <!-- <button @click="moveieStore.toggleWathed(3)" class="eraser"></button> -->
@@ -119,7 +133,16 @@ const eraserMousedown = function () {
         -
       </button>
       <!-- <button  @click="minus" class="increment minus">-</button> -->
-      <input @click="selectTxt" v-model="counter" type="number" class="pc" placeholder="ШТ" />
+      <input
+        v-on:keyup.enter="pressEnter"
+        @click="selectTxt"
+        v-model="counter"
+        type="search"
+        inputmode="numeric"
+        autocomplete="off"
+        class="pc"
+        placeholder="ШТ"
+      />
       <button v-on:mousedown="plus" class="increment plus" v-on:keyup.enter="pressEnter">+</button>
     </div>
   </div>
@@ -131,7 +154,10 @@ const eraserMousedown = function () {
   --accent-color: tomato;
   --border-color: rgb(213, 213, 213);
 }
-
+/*убрать крестик из инпутов search */
+input::-webkit-search-cancel-button {
+  display: none;
+}
 /*контейнер для обоих инпутов одного наименования */
 .value {
   z-index: 6;
@@ -150,7 +176,7 @@ input {
   text-align: center;
   outline: none;
   font-size: 40px;
-  background:rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
   border: 6px solid var(--border-color);
   /* border: 6px solid rgb(206, 206, 206); */
   border-radius: 16px;
