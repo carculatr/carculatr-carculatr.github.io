@@ -13,7 +13,7 @@ export const useMovieStore = defineStore('movieStore', {
         pc: '3'
       }
     ],
-    tips:[8,7.2,3,25],
+    tips: [8, 3.25, 7.2, 3, 11.11, 9.25, 10, 15.35, 7.35, 5.5, 5.5, 5.5],
     activeTab: 1
   }),
   actions: {

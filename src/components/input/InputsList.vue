@@ -5,13 +5,18 @@ import InputPreview from './InputPreview.vue'
 import { ref, watch /*, onMounted*/ } from 'vue'
 
 import { useMovieStore } from '../../stores/dataForCalculation'
+
+
+
 const moveieStore = useMovieStore()
 //повится ли инпут по умолчанию
-const inputOrPreview = ref(false)
-// const inputOrPreview = ref(true)
+// const inputOrPreview = ref(false)
+const inputOrPreview = ref(true)
 const inputShow = function () {
-  document.querySelector('meta[name="viewport"]').setAttribute('content', "width=device-width, initial-scale=1.0, user-scalable=no")
-  
+  document
+    .querySelector('meta[name="viewport"]')
+    .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no')
+
   // var scale = 'scale(1)'
   // document.body.style.msTransform = scale // IE 9
   // document.body.style.transform = scale // General
@@ -21,24 +26,20 @@ const inputShow = function () {
   inputOrPreview.value = true
 }
 const inputHide = function () {
-  document.querySelector('meta[name="viewport"]').setAttribute('content', "width=device-width, initial-scale=1.0, user-scalable=yes")
+  document
+    .querySelector('meta[name="viewport"]')
+    .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
   // var scale = 'scale(1)'
   // document.body.style.msTransform = scale // IE 9
   // document.body.style.transform = scale // General
 
   inputOrPreview.value = false
 }
-
-
-
-
-
-
 </script>
 
 <template>
   <div id="box" v-if="inputOrPreview">
-  <!-- <div id="box" v-show="inputOrPreview"> -->
+    <!-- <div id="box" v-show="inputOrPreview"> -->
     <div class="close" @click="inputHide()"></div>
     <div class="closeBox" @click="inputHide()"></div>
 
@@ -52,6 +53,7 @@ const inputHide = function () {
       :key="index"
       :index="index"
       :movie="movie"
+      :="inputOrPreview"
     />
   </div>
   <InputPreview @click="inputShow" v-if="!inputOrPreview" />

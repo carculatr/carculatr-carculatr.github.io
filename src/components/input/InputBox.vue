@@ -1,12 +1,15 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import {ref, watch, onMounted } from 'vue'
 import InputMeterTips from './InputMeterTips.vue'
 import { useMovieStore } from '../../stores/dataForCalculation'
 const moveieStore = useMovieStore()
 
 const counter = ref('')
 const meter = ref('')
-const props = defineProps(['movie', 'index'])
+const props = defineProps(['movie', 'index' /*, 'inputOrPreview'*/])
+const emit = defineEmits(['update:modelValue']);
+emit('update:modelValue',false) 
+console.log(emit.event); 
 var minus = function () {
   counter.value--
   if (counter.value <= 0) {
@@ -65,7 +68,22 @@ var selectTxt = function (el) {
   // inputMeter.value.select()
 }
 var pressEnter = function () {
-  console.log('ENTER', props.index)
+  const listInputs = document.querySelectorAll('input.meter')
+  const idx = props.index
+  const length = listInputs.length - 1
+  if (idx < length) {
+    listInputs[props.index + 1].focus()
+    listInputs[props.index + 1].select()
+  } else {
+    // console.log('ENTER закрыть', props.index)
+    //изменить переменную inputOrPreview дабы закрыть окно
+    // emit('update:modelValue', false) 
+    // emit('update:modelValue', false) 
+  }
+  // listInputs[props.index+1].focus();
+  // listInputs[props.index+1].select();
+  // listInputs[1].focus();
+  // listInputs[1].select();
 }
 const startDataFromPinia = function () {
   const pc = moveieStore.movies[props.index].pc
@@ -103,9 +121,12 @@ const eraserMousedown = function () {
   meter.value = ''
 }
 onMounted(() => {
-  console.log('🍓', inputMeter.value, props.index)
+  // console.log('🍓', inputMeter.value, props.index)
   // при открытии выделять первый инпут
-  if (props.index == 0) inputMeter.value.focus()
+  if (props.index == 0) {   
+    inputMeter.value.focus()
+    inputMeter.value.select()
+  }
 })
 </script>
 
@@ -142,11 +163,12 @@ onMounted(() => {
         autocomplete="off"
         class="pc"
         placeholder="ШТ"
-      />
+      /> 
+      <!-- <button @click="$emit('enlargeText', 0.1)  class="increment plus" v-on:keyup.enter="pressEnter">+</button> -->
       <button v-on:mousedown="plus" class="increment plus" v-on:keyup.enter="pressEnter">+</button>
     </div>
   </div>
-  <!-- <InputMeterTips/> -->
+  <InputMeterTips :parentValue="meter"/>
 </template>
 
 <style scoped>
