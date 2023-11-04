@@ -17,7 +17,7 @@ const inputShow = function () {
   // document.body.style.transform = scale // General
   // alert('l')
 
-  console.log('🍓')
+  // console.log('🍓')
   inputOrPreview.value = true
 }
 const inputHide = function () {
@@ -38,6 +38,7 @@ const inputHide = function () {
 
 <template>
   <div id="box" v-if="inputOrPreview">
+  <!-- <div id="box" v-show="inputOrPreview"> -->
     <div class="close" @click="inputHide()"></div>
     <div class="closeBox" @click="inputHide()"></div>
 
@@ -54,6 +55,7 @@ const inputHide = function () {
     />
   </div>
   <InputPreview @click="inputShow" v-if="!inputOrPreview" />
+  <!-- <InputPreview @click="inputShow" v-show="!inputOrPreview" /> -->
 </template>
 
 <style scoped>
