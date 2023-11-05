@@ -55,7 +55,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 /*🦯 fixed position on scale android */
 /*поле чтобы рассчитать высоту экрана*/
 #layoutViewport {

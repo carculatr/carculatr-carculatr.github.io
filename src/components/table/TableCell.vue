@@ -64,13 +64,13 @@ watch(carcStore.carc.items, async () => {
       :rollLength="rollLength"
     />
     <div class="firstCell" v-if="props.rowNumber == 1 && props.lineNumber == 1">Max3</div>
-    <div class="cell" v-if="rollLength">
+    <div class="carc-cell" v-if="rollLength">
       <!-- <div
       class="cell"
       v-if="+(carcStore.carc.items[0].meter * pc1 + carcStore.carc.items[1].meter * pc2).toFixed(2)"
     > -->
 
-      <div class="rollLength">
+      <div class="carc-sum">
         {{ rollLength }}
         <!-- {{ +(carcStore.carc.items[0].meter * pc1 + carcStore.carc.items[1].meter * pc2).toFixed(2) }} -->
       </div>
@@ -106,91 +106,9 @@ watch(carcStore.carc.items, async () => {
   </td>
 </template>
 <style>
-/* первая ячейка */
-.firstCell {
-  min-height: 40px;
-  opacity: 0.2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* ячейки на которые не хватает бирок */
-.invalid1 {
-  opacity: 0.15;
-  border: dashed 1px rgba(0, 0, 0, 0.13);
-}
-.invalid2 {
-  /* background: red; */
-  /* border: 3px solid tomato; */
-  background: red;
-  /* display: ; */
-  border: dashed 1px rgba(0, 0, 0, 0.13);
-}
-/*сумма значений в ячейке */
-.rollLength {
-  /* padding:5px; */
-  margin: -8px 0;
-  color: black;
-  font-size: 20px;
-}
-.pc-box {
-  /* background: red; */
-  margin: -3px 0;
+@import url("TableCell.scss"); 
+td{
   font-size: 10px;
-  /* background: red; */
-  /* border-radius: 3px; */
-  /* padding:3px; */
-  /* color: gray; */
 }
-/*длинна ролика +1.5 */
-.poltora {
-  font-size: 12px;
-  margin: -2px 0;
-  color: rgb(200, 200, 200);
-}
-.cell {
-  /* background: gold; */
-  top: 0px;
-  position: relative;
-  /* position: absolute; */
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  /* border: solid blue 1px; */
-}
-td {
-  /* display: inline-block; */
-  /* overflow: hidden; */
-  min-height: 40px;
-  min-width: 55px;
-  /* background: tomato; */
-  /* margin:0px; */
-  border: 1px solid rgb(204, 204, 204);
-  /* border-left:3px red dashed; */
-  /* padding: 5px; */
-  padding-top: none;
-  vertical-align: top;
-}
-td:empty,
-:not(:first-child) > td:empty:not(:first-child) {
-  /* background:red; */
-  /* display: none; */
-  /* visibility: hidden; */
-  /* opacity: 0; */
-  /* border:rgba(255, 0, 0, 0) solid; */
-  border-left: transparent solid 2px;
-  border-top: transparent solid 2px;
-}
-.x,
-.pc-descripion {
-  /* background: red; */
-  /* padding:0 1px ; */
-  color: rgb(220, 220, 220);
-}
-.pc {
-  color: rgba(200, 0, 0, 0.719);
-}
-.meter {
-  color: rgba(0, 165, 0, 0.83);
-}
+
 </style>
