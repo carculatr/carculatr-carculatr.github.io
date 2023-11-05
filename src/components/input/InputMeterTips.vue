@@ -10,15 +10,13 @@ const pick = function (data) {
 }
 </script>
 
-<script>
-
-</script>
+<script></script>
 
 <template>
-  <button>
-    {{ carcStore.carc.tips}}
-  </button>
   <ul>
+    <button>
+      {{ carcStore.carc.tips }}
+    </button>
     <li v-on:mousedown="pick(val)" class="item" :key="val" v-for="val in carcStore.carc.tips">
       <span v-bind:class="[props.parentValue == val ? 'picked' : '']">{{}}{{ val }}</span>
     </li>
