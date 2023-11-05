@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
-import { useMovieStore } from '../../stores/dataForCalculation'
-const moveieStore = useMovieStore()
+import { useCarculatorStore } from '../../stores/dataForCalculation'
+const moveieStore = useCarculatorStore()
 const props = defineProps({
   rowNumber: Number,
   lineNumber: Number

@@ -1,7 +1,7 @@
 <script setup>
 // import Movie from './components/TaBlica2.vue'
-import { useMovieStore } from './stores/dataForCalculation'
-const moveieStore = useMovieStore()
+import { useCarculatorStore } from './stores/dataForCalculation'
+const moveieStore = useCarculatorStore()
 const qwe = (id) => {
   moveieStore.setActiveTab(id)
 }

@@ -1,8 +1,8 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import TableLine from './TableLine.vue'
-import { useMovieStore } from '../../stores/dataForCalculation'
-const moveieStore = useMovieStore()
+import { useCarculatorStore } from '../../stores/dataForCalculation'
+const moveieStore = useCarculatorStore()
 
 const maxRollLength = 71
 const maxPc = 25

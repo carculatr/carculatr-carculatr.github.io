@@ -4,11 +4,9 @@ import InputBox from './InputBox.vue'
 import InputPreview from './InputPreview.vue'
 import { ref, watch /*, onMounted*/ } from 'vue'
 
-import { useMovieStore } from '../../stores/dataForCalculation'
+import { useCarculatorStore } from '../../stores/dataForCalculation'
 
-
-
-const moveieStore = useMovieStore()
+const moveieStore = useCarculatorStore()
 //повится ли инпут по умолчанию
 // const inputOrPreview = ref(false)
 const inputOrPreview = ref(true)
@@ -38,26 +36,28 @@ const inputHide = function () {
 </script>
 
 <template>
-  <div id="box" v-if="inputOrPreview">
-    <!-- <div id="box" v-show="inputOrPreview"> -->
-    <div class="close" @click="inputHide()"></div>
-    <div class="closeBox" @click="inputHide()"></div>
+  <!-- <div class="wrap"> -->
+    <div id="box" v-if="inputOrPreview">
+      <div class="closeBox" @click="inputHide()"></div>
+      <!-- <div id="box" v-show="inputOrPreview"> -->
+        <div class="close" @click="inputHide()"></div>
 
-    <!-- <button @click="qwe(198889)">🦴</button> -->
-    <!-- <InputBox propsMeter="123" /> -->
-    <!-- 💩{{ moveieStore.movies }} -->
-    <!-- <br> -->
-    <!-- <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" /> -->
-    <InputBox
-      v-for="(movie, index) of moveieStore.movies"
-      :key="index"
-      :index="index"
-      :movie="movie"
-      :="inputOrPreview"
-    />
-  </div>
-  <InputPreview @click="inputShow" v-if="!inputOrPreview" />
-  <!-- <InputPreview @click="inputShow" v-show="!inputOrPreview" /> -->
+      <!-- <button @click="qwe(198889)">🦴</button> -->
+      <!-- <InputBox propsMeter="123" /> -->
+      <!-- 💩{{ moveieStore.movies }} -->
+      <!-- <br> -->
+      <!-- <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" /> -->
+      <InputBox
+        v-for="(movie, index) of moveieStore.movies"
+        :key="index"
+        :index="index"
+        :movie="movie"
+        v-model="inputOrPreview"
+      />
+    </div>
+    <InputPreview @click="inputShow" v-if="!inputOrPreview" />
+    <!-- <InputPreview @click="inputShow" v-show="!inputOrPreview" /> -->
+  <!-- </div> -->
 </template>
 
 <style scoped>
@@ -128,7 +128,7 @@ const inputHide = function () {
   transform: rotate(45deg);
 }
 .closeBox {
-  z-index: 5;
+  z-index: -1;
   position: fixed;
   top: 0;
   left: 0;

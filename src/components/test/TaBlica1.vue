@@ -1,6 +1,6 @@
 <script setup>
-// import { useMovieStore } from '../stores/counter';
-// const moveieStore = useMovieStore();
+// import { useCarculatorStore } from '../stores/counter';
+// const moveieStore = useCarculatorStore();
 </script>
 <script>
 export default {

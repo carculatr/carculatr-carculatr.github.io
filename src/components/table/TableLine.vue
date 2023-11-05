@@ -1,7 +1,7 @@
 <script setup>
 import TableCell from './TableCell.vue'
-import { useMovieStore } from '../../stores/dataForCalculation'
-const moveieStore = useMovieStore()
+import { useCarculatorStore } from '../../stores/dataForCalculation'
+const moveieStore = useCarculatorStore()
 </script>
 <script>
 export default {

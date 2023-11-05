@@ -1,23 +1,26 @@
 <script setup>
-import { useMovieStore } from '../../stores/dataForCalculation'
-const moveieStore = useMovieStore()
+import { useCarculatorStore } from '../../stores/dataForCalculation'
+const moveieStore = useCarculatorStore()
 const props = defineProps(['parentValue'])
-const pick = function(p) {
-  console.log("❌",p,props.parentValue); 
+const emit = defineEmits(['update:modelValue'])
+
+
+
+const pick = function (data) {
+  emit('update:modelValue',data)
+  // console.log('❌', data, props.parentValue) 
 }
 </script>
 
 <template>
   <ul>
-    <li   v-on:mousedown="pick(val)" class="item" :key="val" v-for="val in moveieStore.tips">
-      <span v-bind:class="[props.parentValue==val ? 'picked' : '']">{{}}{{ val }}</span>
-      
+    <li v-on:mousedown="pick(val)" class="item" :key="val" v-for="val in moveieStore.tips">
+      <span v-bind:class="[props.parentValue == val ? 'picked' : '']">{{}}{{ val }}</span>
     </li>
   </ul>
 </template>
 
 <style scoped>
-
 ul::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -90,8 +93,7 @@ ul {
   align-content: center;
 }
 
-
-.item .picked{
-  background: tomato ;
+.item .picked {
+  background: tomato;
 }
 </style>

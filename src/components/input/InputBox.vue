@@ -1,15 +1,16 @@
 <script setup>
-import {ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import InputMeterTips from './InputMeterTips.vue'
-import { useMovieStore } from '../../stores/dataForCalculation'
-const moveieStore = useMovieStore()
-
-const counter = ref('')
-const meter = ref('')
+import { useCarculatorStore } from '../../stores/dataForCalculation'
+const moveieStore = useCarculatorStore()
 const props = defineProps(['movie', 'index' /*, 'inputOrPreview'*/])
-const emit = defineEmits(['update:modelValue']);
-emit('update:modelValue',false) 
-console.log(emit.event); 
+const emit = defineEmits(['update:modelValue'])
+
+const counter = ref('') //счётчик
+const meter = ref('') //метраж
+const idx = props.index //номер инпута
+// emit('update:modelValue',false)
+
 var minus = function () {
   counter.value--
   if (counter.value <= 0) {
@@ -18,6 +19,7 @@ var minus = function () {
     // moveieStore.movies[props.index].meter = 0
   }
 }
+
 var plus = function () {
   counter.value++
   // moveieStore.movies[props.index].meter = this.counter
@@ -69,21 +71,17 @@ var selectTxt = function (el) {
 }
 var pressEnter = function () {
   const listInputs = document.querySelectorAll('input.meter')
-  const idx = props.index
+  // const idx = props.index
   const length = listInputs.length - 1
   if (idx < length) {
     listInputs[props.index + 1].focus()
     listInputs[props.index + 1].select()
   } else {
-    // console.log('ENTER закрыть', props.index)
+    console.log('ENTER закрыть', props.index)
     //изменить переменную inputOrPreview дабы закрыть окно
-    // emit('update:modelValue', false) 
-    // emit('update:modelValue', false) 
+
+    emit('update:modelValue', false)
   }
-  // listInputs[props.index+1].focus();
-  // listInputs[props.index+1].select();
-  // listInputs[1].focus();
-  // listInputs[1].select();
 }
 const startDataFromPinia = function () {
   const pc = moveieStore.movies[props.index].pc
@@ -96,17 +94,20 @@ startDataFromPinia()
 
 watch(counter, async (newQuestion) => {
   counter.value = inputFilter(newQuestion).replace(/[.]/g, '')
-  moveieStore.movies[props.index].pc = newQuestion
+  // moveieStore.setPc(idx, newQuestion) 
+  moveieStore.movies[props.index].pc = newQuestion  // console.log(moveieStore.setActiveTab);
 })
 watch(meter, async (newQuestion) => {
-  inputFilter(newQuestion)
+  // inputFilter(newQuestion)
   meter.value = inputFilter(newQuestion)
-  moveieStore.movies[props.index].meter = newQuestion
+  // moveieStore.movies[props.index].meter = newQuestion
+  moveieStore.setMeter(idx, newQuestion) 
 })
 const inputFilter = function (data) {
+  data += '' //привести к строке т.к. регэксп ругаица на number
   data = data.replace(/[,]/g, '.') //comma
   data = data.replace(/[^.\d]/g, '')
-  data = data.replace(/^([^\.]*\.)|\./g, '$1') //double dot
+  data = data.replace(/^([^.]*\.)|\./g, '$1') //double dot
   return data
 }
 const inputMeter = ref()
@@ -116,14 +117,20 @@ const eraserClick = function () {
   // counter.value = ''
   // meter.value = ''
 }
+const eraser = ref()
 const eraserMousedown = function () {
+  const el = eraser.value
+  el.classList.remove('animate')
+  setTimeout(() => {
+    el.classList.add('animate')
+  }, 0)
   counter.value = ''
   meter.value = ''
 }
 onMounted(() => {
   // console.log('🍓', inputMeter.value, props.index)
   // при открытии выделять первый инпут
-  if (props.index == 0) {   
+  if (props.index == 0) {
     inputMeter.value.focus()
     inputMeter.value.select()
   }
@@ -132,43 +139,52 @@ onMounted(() => {
 
 <template>
   <!-- <button v-on:keyup.enter="pressEnter">-</button> -->
-  <div class="value">
-    <!-- Метраж -->
-    <div class="meterPc">
-      <input
-        ref="inputMeter"
-        v-model="meter"
-        @click="selectTxt"
-        v-on:keyup.enter="pressEnter"
-        type="search"
-        inputmode="numeric"
-        autocomplete="off"
-        class="meter"
-      />
-      <!-- <button @click="moveieStore.toggleWathed(3)" class="eraser"></button> -->
-      <button @click="eraserClick" v-on:mousedown="eraserMousedown" class="eraser"></button>
+  <div class="wrap">
+    <div class="value">
+      <!-- Метраж -->
+      <div class="meterPc">
+        <input
+          ref="inputMeter"
+          v-model="meter"
+          @click="selectTxt"
+          v-on:keyup.enter="pressEnter"
+          type="search"
+          inputmode="numeric"
+          autocomplete="off"
+          class="meter"
+        />
+        <!-- <button @click="moveieStore.toggleWathed(3)" class="eraser"></button> -->
+        <button
+          ref="eraser"
+          @click="eraserClick"
+          v-on:mousedown="eraserMousedown"
+          class="eraser"
+        ></button>
+      </div>
+      <!-- штук -->
+      <div class="boxPc">
+        <button v-on:mousedown="minus" class="increment minus" v-on:keyup.enter="pressEnter">
+          -
+        </button>
+        <!-- <button  @click="minus" class="increment minus">-</button> -->
+        <input
+          v-on:keyup.enter="pressEnter"
+          @click="selectTxt"
+          v-model="counter"
+          type="search"
+          inputmode="numeric"
+          autocomplete="off"
+          class="pc"
+          placeholder="ШТ"
+        />
+        <!-- <button @click="$emit('enlargeText', 0.1)  class="increment plus" v-on:keyup.enter="pressEnter">+</button> -->
+        <button v-on:mousedown="plus" class="increment plus" v-on:keyup.enter="pressEnter">
+          +
+        </button>
+      </div>
     </div>
-    <!-- штук -->
-    <div class="boxPc">
-      <button v-on:mousedown="minus" class="increment minus" v-on:keyup.enter="pressEnter">
-        -
-      </button>
-      <!-- <button  @click="minus" class="increment minus">-</button> -->
-      <input
-        v-on:keyup.enter="pressEnter"
-        @click="selectTxt"
-        v-model="counter"
-        type="search"
-        inputmode="numeric"
-        autocomplete="off"
-        class="pc"
-        placeholder="ШТ"
-      /> 
-      <!-- <button @click="$emit('enlargeText', 0.1)  class="increment plus" v-on:keyup.enter="pressEnter">+</button> -->
-      <button v-on:mousedown="plus" class="increment plus" v-on:keyup.enter="pressEnter">+</button>
-    </div>
+    <InputMeterTips v-model="meter" :parentValue="meter" />
   </div>
-  <InputMeterTips :parentValue="meter"/>
 </template>
 
 <style scoped>
@@ -289,7 +305,34 @@ button {
   background-color: rgba(161, 161, 161, 0.5);
   opacity: 0.8;
 }
+@keyframes brush-animate {
+  0% {
+    transform: translateX(0px);
+    opacity: 0.3;
+  }
+  /* 7% {
+    transform: translateX(50px);
+    opacity: 0.15;
+  } */
+  11% {
+    transform: translateX(100px);
+    opacity: 0;
+    background-color: transparent;
+  }
+  12% {
+    transform: translateX(0px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+.eraser.animate {
+  animation: brush-animate 5s;
+}
 .eraser {
+  z-index: 9;
+
   font-family: 'Courier New', Courier, monospace;
   width: 50px;
   height: 50px;

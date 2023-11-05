@@ -1,7 +1,7 @@
 <script setup>
-import { useMovieStore } from '../../stores/dataForCalculation'
+import { useCarculatorStore } from '../../stores/dataForCalculation'
 import { ref, onMounted } from 'vue'
-const moveieStore = useMovieStore()
+const moveieStore = useCarculatorStore()
 
 // const el = ref()
 
