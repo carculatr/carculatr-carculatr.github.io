@@ -1,6 +1,6 @@
 <script setup>
-import { useCarculatorStore } from '../../stores/dataForCalculation'
-const moveieStore = useCarculatorStore()
+import { useCarcStore } from '../../stores/dataForCalculation'
+const carcStore = useCarcStore()
 const props = defineProps(['parentValue'])
 const emit = defineEmits(['update:modelValue'])
 
@@ -14,7 +14,7 @@ const pick = function (data) {
 
 <template>
   <ul>
-    <li v-on:mousedown="pick(val)" class="item" :key="val" v-for="val in moveieStore.tips">
+    <li v-on:mousedown="pick(val)" class="item" :key="val" v-for="val in carcStore.carc.tips">
       <span v-bind:class="[props.parentValue == val ? 'picked' : '']">{{}}{{ val }}</span>
     </li>
   </ul>

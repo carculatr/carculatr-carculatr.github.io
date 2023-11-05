@@ -1,7 +1,7 @@
 <script setup>
 import TableCell from './TableCell.vue'
-import { useCarculatorStore } from '../../stores/dataForCalculation'
-const moveieStore = useCarculatorStore()
+import { useCarcStore } from '../../stores/dataForCalculation'
+const carcStore = useCarcStore()
 </script>
 <script>
 export default {
@@ -35,7 +35,6 @@ export default {
 
 <template>
   <tr class="line">
-    <!-- <Movie v-for="movie of moveieStore.movies" :key="movie.id" :movie="movie" /> -->
     <!-- {{ lineNumber }} -->
     <!-- <TableRow v-for="n in evenNumbers" :key="n"  :lineNumber="lineNumber" :rowNumber="n" /> -->
     <TableCell  v-for="n in rowCount" :key="n"   :lineNumber="lineNumber" :rowNumber="n" />

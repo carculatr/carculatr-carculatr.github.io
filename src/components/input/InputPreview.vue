@@ -1,7 +1,7 @@
 <script setup>
-import { useCarculatorStore } from '../../stores/dataForCalculation'
+import { useCarcStore } from '../../stores/dataForCalculation'
 import { ref, onMounted } from 'vue'
-const moveieStore = useCarculatorStore()
+const carcStore = useCarcStore()
 
 // const el = ref()
 
@@ -37,18 +37,18 @@ onMounted(() => {
     <div id="layoutViewport"></div>
     <div id="fixedRightBottom">
       <div class="box">
-        <div class="meterBox" v-if="moveieStore.movies[0].meter">
-          {{ moveieStore.movies[0].meter }}
+        <div class="meterBox" v-if="carcStore.carc.items[0].meter">
+          {{ carcStore.carc.items[0].meter }}
 
-          <div class="pc" v-if="moveieStore.movies[0].pc">
-            {{ moveieStore.movies[0].pc }}<span class="pc-description">шт</span>
+          <div class="pc" v-if="carcStore.carc.items[0].pc">
+            {{ carcStore.carc.items[0].pc }}<span class="pc-description">шт</span>
           </div>
         </div>
         <!-- <div v-else>0</div> -->
-        <div class="meterBox" v-if="moveieStore.movies[1].meter">
-          {{ moveieStore.movies[1].meter }}
-          <div class="pc" v-if="moveieStore.movies[1].pc">
-            {{ moveieStore.movies[1].pc }} <span class="pc-description">шт</span>
+        <div class="meterBox" v-if="carcStore.carc.items[1].meter">
+          {{ carcStore.carc.items[1].meter }}
+          <div class="pc" v-if="carcStore.carc.items[1].pc">
+            {{ carcStore.carc.items[1].pc }} <span class="pc-description">шт</span>
           </div>
         </div>
       </div>

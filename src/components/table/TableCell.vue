@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
-import { useCarculatorStore } from '../../stores/dataForCalculation'
-const moveieStore = useCarculatorStore()
+import { useCarcStore } from '../../stores/dataForCalculation'
+const carcStore = useCarcStore()
 const props = defineProps({
   rowNumber: Number,
   lineNumber: Number
@@ -13,9 +13,9 @@ const invalid1 = ref(false) //ненужные но отображаемые я�
 const invalid1Length = 3
 const invalid2 = ref(false) //совсем ненужные ячейки
 function ifInvalid() {
-  var ExtraPc1 = +moveieStore.movies[0].pc /*- 1*/
-  // var ExtraPc1 = +moveieStore.movies[0].pc +2
-  var ExtraPc2 = +moveieStore.movies[1].pc /*- 1*/
+  var ExtraPc1 = +carcStore.carc.items[0].pc /*- 1*/
+  // var ExtraPc1 = +carcStore.carc.items[0].pc +2
+  var ExtraPc2 = +carcStore.carc.items[1].pc /*- 1*/
   if (ExtraPc1 < 1) ExtraPc1 = 999
   if (ExtraPc2 < 1) ExtraPc2 = 999
 
@@ -35,14 +35,14 @@ ifInvalid()
 var rollLength = ref(0)
 var rollLengthCalculate = function () {
   rollLength.value = +(
-    moveieStore.movies[0].meter * pc1 +
-    moveieStore.movies[1].meter * pc2
+    carcStore.carc.items[0].meter * pc1 +
+    carcStore.carc.items[1].meter * pc2
   ).toFixed(2)
 }
 rollLengthCalculate()
 
 
-watch(moveieStore.movies, async () => {
+watch(carcStore.carc.items, async () => {
   ifInvalid()
   rollLengthCalculate()
 })
@@ -54,12 +54,12 @@ watch(moveieStore.movies, async () => {
     <div class="cell" v-if="rollLength">
       <!-- <div
       class="cell"
-      v-if="+(moveieStore.movies[0].meter * pc1 + moveieStore.movies[1].meter * pc2).toFixed(2)"
+      v-if="+(carcStore.carc.items[0].meter * pc1 + carcStore.carc.items[1].meter * pc2).toFixed(2)"
     > -->
 
       <div class="rollLength">
         {{ rollLength }}
-        <!-- {{ +(moveieStore.movies[0].meter * pc1 + moveieStore.movies[1].meter * pc2).toFixed(2) }} -->
+        <!-- {{ +(carcStore.carc.items[0].meter * pc1 + carcStore.carc.items[1].meter * pc2).toFixed(2) }} -->
       </div>
       <div class="poltora">
         {{ (rollLength + 1.5).toFixed(2) }}
@@ -68,7 +68,7 @@ watch(moveieStore.movies, async () => {
       <div class="pc-box" v-if="pc1 != 0">
         <div>
           <span class="meter">
-            {{ moveieStore.movies[0].meter }}
+            {{ carcStore.carc.items[0].meter }}
           </span>
           <span class="x"> x </span>
           <span class="pc">
@@ -80,7 +80,7 @@ watch(moveieStore.movies, async () => {
       <div class="pc-box" v-if="pc2 != 0">
         <div>
           <span class="meter">
-            {{ moveieStore.movies[1].meter }}
+            {{ carcStore.carc.items[1].meter }}
           </span>
           <span class="x"> x </span>
           <span class="pc">

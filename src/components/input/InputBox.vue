@@ -1,9 +1,9 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import InputMeterTips from './InputMeterTips.vue'
-import { useCarculatorStore } from '../../stores/dataForCalculation'
-const moveieStore = useCarculatorStore()
-const props = defineProps(['movie', 'index' /*, 'inputOrPreview'*/])
+import { useCarcStore } from '../../stores/dataForCalculation'
+const carcStore = useCarcStore()
+const props = defineProps([/*'movOFFie',*/ 'index' /*, 'inputOrPreview'*/])
 const emit = defineEmits(['update:modelValue'])
 
 const counter = ref('') //счётчик
@@ -15,15 +15,15 @@ var minus = function () {
   counter.value--
   if (counter.value <= 0) {
     counter.value = ''
-    // moveieStore.movies[props.index].pc = 0
-    // moveieStore.movies[props.index].meter = 0
+    // carcStore.carc.items[props.index].pc = 0
+    // carcStore.carc.items[props.index].meter = 0
   }
 }
 
 var plus = function () {
   counter.value++
-  // moveieStore.movies[props.index].meter = this.counter
-  // moveieStore.movies[props.index].pc = this.counter
+  // carcStore.carc.items[props.index].meter = this.counter
+  // carcStore.carc.items[props.index].pc = this.counter
 }
 
 // const inputMeter = ref()
@@ -84,24 +84,24 @@ var pressEnter = function () {
   }
 }
 const startDataFromPinia = function () {
-  const pc = moveieStore.movies[props.index].pc
+  const pc = carcStore.carc.items[props.index].pc
   if (pc > 0) {
-    counter.value = moveieStore.movies[props.index].pc
+    counter.value = carcStore.carc.items[props.index].pc
   }
-  meter.value = moveieStore.movies[props.index].meter
+  meter.value = carcStore.carc.items[props.index].meter
 }
 startDataFromPinia()
 
 watch(counter, async (newQuestion) => {
   counter.value = inputFilter(newQuestion).replace(/[.]/g, '')
-  // moveieStore.setPc(idx, newQuestion) 
-  moveieStore.movies[props.index].pc = newQuestion  // console.log(moveieStore.setActiveTab);
+  // carcStore.setPc(idx, newQuestion) 
+  carcStore.carc.items[props.index].pc = newQuestion  // console.log(carcStore.setActiveTab);
 })
 watch(meter, async (newQuestion) => {
   // inputFilter(newQuestion)
   meter.value = inputFilter(newQuestion)
-  // moveieStore.movies[props.index].meter = newQuestion
-  moveieStore.setMeter(idx, newQuestion) 
+  // carcStore.carc.items[props.index].meter = newQuestion
+  carcStore.setMeter(idx, newQuestion) 
 })
 const inputFilter = function (data) {
   data += '' //привести к строке т.к. регэксп ругаица на number
@@ -153,7 +153,7 @@ onMounted(() => {
           autocomplete="off"
           class="meter"
         />
-        <!-- <button @click="moveieStore.toggleWathed(3)" class="eraser"></button> -->
+        <!-- <button @click="carcStore.toggleWathed(3)" class="eraser"></button> -->
         <button
           ref="eraser"
           @click="eraserClick"

@@ -1,8 +1,8 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import TableLine from './TableLine.vue'
-import { useCarculatorStore } from '../../stores/dataForCalculation'
-const moveieStore = useCarculatorStore()
+import { useCarcStore } from '../../stores/dataForCalculation'
+const carcStore = useCarcStore()
 
 const maxRollLength = 71
 const maxPc = 25
@@ -18,12 +18,12 @@ const props = defineProps({
 
 var calculatePc = function () {
   //   console.log('🧴', `
-  //  ${maxRollLength} / ${moveieStore.movies[0].meter}
-  //  ${maxRollLength / moveieStore.movies[0].meter}
-  //  ${Math.round(maxRollLength / moveieStore.movies[0].meter)}
+  //  ${maxRollLength} / ${carcStore.carc.items[0].meter}
+  //  ${maxRollLength / carcStore.carc.items[0].meter}
+  //  ${Math.round(maxRollLength / carcStore.carc.items[0].meter)}
   //   `)
-  // rowCount.value = Math.round(maxRollLength / moveieStore.movies[0].meter)
-  // lineCount.value = Math.round(maxRollLength / moveieStore.movies[1].meter)
+  // rowCount.value = Math.round(maxRollLength / carcStore.carc.items[0].meter)
+  // lineCount.value = Math.round(maxRollLength / carcStore.carc.items[1].meter)
   let tabWidth = Math.round(maxRollLength / props.store[0].meter)
   let tabHeight = Math.round(maxRollLength / props.store[1].meter)
 
@@ -32,7 +32,7 @@ var calculatePc = function () {
 }
 calculatePc()
 
-watch(moveieStore.movies, async () => {
+watch(carcStore.carc.items, async () => {
   calculatePc()
 })
 
@@ -79,9 +79,9 @@ watch(moveieStore.movies, async () => {
       <TableLine v-for="n in lineCount" :key="n" :rowCount="rowCount" :lineNumber="n" />
       <!-- #FIXME если через функцию то не реактивно?  -->
       <!-- <TableLine
-        v-for="n in Math.round(maxRollLength / moveieStore.movies[1].meter)"
+        v-for="n in Math.round(maxRollLength / carcStore.carc.items[1].meter)"
         :key="n"
-        :rowCount="Math.round(maxRollLength / moveieStore.movies[0].meter)"
+        :rowCount="Math.round(maxRollLength / carcStore.carc.items[0].meter)"
         :lineNumber="n"
       /> -->
     </tbody>
