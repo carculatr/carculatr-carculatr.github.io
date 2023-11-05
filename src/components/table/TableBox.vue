@@ -16,6 +16,7 @@ const props = defineProps({
   store: Array
 })
 
+
 var calculatePc = function () {
   //   console.log('🧴', `
   //  ${maxRollLength} / ${carcStore.carc.items[0].meter}

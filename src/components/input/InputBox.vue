@@ -92,24 +92,29 @@ const startDataFromPinia = function () {
 }
 startDataFromPinia()
 
-/*🎉 */
-// carcStore.carc.tips.push(777)      
-// console.log("🎉", carcStore.carc.tips);   
-/*🎉 */
-  
 watch(counter, async (newQuestion) => {
-  counter.value = inputFilter(newQuestion).replace(/[.]/g, '')
-  carcStore.setPc(idx, newQuestion) 
-  // carcStore.carc.items[props.index].pc = newQuestion  // console.log(carcStore.setActiveTab);
+  const valFilter = inputFilter(newQuestion).replace(/[.]/g, '') //убрать точки запятые и точки для счётчика
+  counter.value = valFilter
 
+  carcStore.setPc(idx, valFilter)
+  // carcStore.carc.items[props.index].pc = newQuestion  // console.log(carcStore.setActiveTab);
 })
 watch(meter, async (newQuestion) => {
   // inputFilter(newQuestion)
-  meter.value = inputFilter(newQuestion)
+  let valFilter = inputFilter(newQuestion)
+
+  meter.value = valFilter
   // carcStore.carc.items[props.index].meter = newQuestion
-  carcStore.setMeter(idx, newQuestion) 
+  //привести к числу, иначе может проскочить "3." ошибки не вызовет, но не красиво
+  valFilter = valFilter * 1
+
+  // отправлять в хранилище, только если больше нуля или меньше N
+  if (valFilter > 0.2 && valFilter < 44) {
+    carcStore.setMeter(idx, valFilter)
+  }
 })
 const inputFilter = function (data) {
+  //пропустить только числа
   data += '' //привести к строке т.к. регэксп ругаица на number
   data = data.replace(/[,]/g, '.') //comma
   data = data.replace(/[^.\d]/g, '')
@@ -240,7 +245,7 @@ input:focus {
   /* outline: dashed red 1px; */
 }
 .boxPc {
-  content:"";
+  content: '';
   /* flex-direction: column; */
   /* opacity: 0.2; */
 }

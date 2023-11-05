@@ -9,7 +9,7 @@ import { useCarcStore } from '../../stores/dataForCalculation'
 const carcStore = useCarcStore()
 //повится ли инпут по умолчанию
 // const inputOrPreview = ref(false)
-const inputOrPreview = ref(true)
+const inputOrPreview = ref(false)
 const inputShow = function () {
   document
     .querySelector('meta[name="viewport"]')
@@ -27,6 +27,12 @@ const inputHide = function () {
   document
     .querySelector('meta[name="viewport"]')
     .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
+
+
+// При закрытии поля ввода записать в подсказки
+  carcStore.carc.items.forEach((item) => {
+    carcStore.tipsPush(item.meter)
+  })
   // var scale = 'scale(1)'
   // document.body.style.msTransform = scale // IE 9
   // document.body.style.transform = scale // General

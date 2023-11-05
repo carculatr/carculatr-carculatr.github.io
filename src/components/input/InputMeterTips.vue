@@ -1,4 +1,5 @@
 <script setup>
+// import { ref } from 'vue'
 import { useCarcStore } from '../../stores/dataForCalculation'
 const carcStore = useCarcStore()
 const props = defineProps(['parentValue'])
@@ -6,19 +7,21 @@ const emit = defineEmits(['update:modelValue'])
 
 const pick = function (data) {
   emit('update:modelValue', data)
-  // console.log('❌', data, props.parentValue)
 }
 </script>
 
 <script></script>
 
 <template>
+  <!-- <ul>  {{ carcStore.sortTips() }}</ul> -->
   <ul>
-    <button>
-      {{ carcStore.carc.tips }}
-    </button>
-    <li v-on:mousedown="pick(val)" class="item" :key="val" v-for="val in carcStore.carc.tips">
-      <span v-bind:class="[props.parentValue == val ? 'picked' : '']">{{}}{{ val }}</span>
+    <li
+      v-on:mousedown="pick(item[0])"
+      class="item"
+      :key="item[2]"
+      v-for="item in carcStore.sortTips()"
+    >
+      <span v-bind:class="[props.parentValue == item[0] ? 'picked' : '']">{{ item[0] }}</span>
     </li>
   </ul>
 </template>

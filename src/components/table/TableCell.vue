@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
+import PopupCell from './PopupCell.vue'
 import { useCarcStore } from '../../stores/dataForCalculation'
 const carcStore = useCarcStore()
 const props = defineProps({
@@ -8,6 +9,11 @@ const props = defineProps({
 })
 const pc1 = props.rowNumber - 1
 const pc2 = props.lineNumber - 1
+const showPopup = ref(false) //показать попап
+// вывести для теста у одного блока попап
+if (props.rowNumber == 2 && props.lineNumber== 2) {
+  showPopup.value = true;
+}
 const invalid1 = ref(false) //ненужные но отображаемые ячейки
 // const invalid3 = ref(true) //ненужные но отображаемые ячейки
 const invalid1Length = 3
@@ -41,7 +47,6 @@ var rollLengthCalculate = function () {
 }
 rollLengthCalculate()
 
-
 watch(carcStore.carc.items, async () => {
   ifInvalid()
   rollLengthCalculate()
@@ -49,7 +54,15 @@ watch(carcStore.carc.items, async () => {
 </script>
 
 <template>
-  <td v-if="!invalid2" :class="{ invalid1 }">
+  <td @click="showPopup = !showPopup" v-if="!invalid2" :class="{ invalid1 }">
+    <PopupCell
+    v-if="showPopup" 
+      :meter1="carcStore.carc.items[0].meter"
+      :meter2="carcStore.carc.items[1].meter"
+      :pc1="props.rowNumber"
+      :pc2="props.lineNumber"
+      :rollLength="rollLength"
+    />
     <div class="firstCell" v-if="props.rowNumber == 1 && props.lineNumber == 1">Max3</div>
     <div class="cell" v-if="rollLength">
       <!-- <div
@@ -92,20 +105,18 @@ watch(carcStore.carc.items, async () => {
     </div>
   </td>
 </template>
-<style scoped>
+<style>
+/* первая ячейка */
 .firstCell {
-  /* background: red; */
   min-height: 40px;
   opacity: 0.2;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+/* ячейки на которые не хватает бирок */
 .invalid1 {
-  /* background: red; */
-  /* border: 3px solid tomato; */
-  opacity: 0.07;
-  /* display: ; */
+  opacity: 0.15;
   border: dashed 1px rgba(0, 0, 0, 0.13);
 }
 .invalid2 {
@@ -115,7 +126,7 @@ watch(carcStore.carc.items, async () => {
   /* display: ; */
   border: dashed 1px rgba(0, 0, 0, 0.13);
 }
-
+/*сумма значений в ячейке */
 .rollLength {
   /* padding:5px; */
   margin: -8px 0;
@@ -131,6 +142,7 @@ watch(carcStore.carc.items, async () => {
   /* padding:3px; */
   /* color: gray; */
 }
+/*длинна ролика +1.5 */
 .poltora {
   font-size: 12px;
   margin: -2px 0;
