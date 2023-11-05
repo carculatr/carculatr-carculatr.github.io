@@ -8,9 +8,9 @@ const carcStore = useCarcStore()
 
 <template>
   <main>
-
     <InputsList />
-    <TableBox :meter1="3" :meter2="4" :store="carcStore.carc.items" />
+    <TableBox :store="carcStore.carc.items" />
+    <!-- <TableBox :meter1="3" :meter2="4" :store="carcStore.carc.items" /> -->
   </main>
 </template>
 
@@ -22,6 +22,7 @@ body {
 
 @media (min-width: 1024px) {
   header .wrapper {
+    content: '';
   }
 }
 </style>

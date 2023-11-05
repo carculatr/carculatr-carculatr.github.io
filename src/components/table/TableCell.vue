@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { useCarcStore } from '../../stores/dataForCalculation'
 const carcStore = useCarcStore()
 const props = defineProps({

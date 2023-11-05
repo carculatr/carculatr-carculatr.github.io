@@ -4,15 +4,20 @@ const carcStore = useCarcStore()
 const props = defineProps(['parentValue'])
 const emit = defineEmits(['update:modelValue'])
 
-
-
 const pick = function (data) {
-  emit('update:modelValue',data)
-  // console.log('❌', data, props.parentValue) 
+  emit('update:modelValue', data)
+  // console.log('❌', data, props.parentValue)
 }
 </script>
 
+<script>
+
+</script>
+
 <template>
+  <button>
+    {{ carcStore.carc.tips}}
+  </button>
   <ul>
     <li v-on:mousedown="pick(val)" class="item" :key="val" v-for="val in carcStore.carc.tips">
       <span v-bind:class="[props.parentValue == val ? 'picked' : '']">{{}}{{ val }}</span>

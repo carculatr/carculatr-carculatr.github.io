@@ -1,6 +1,6 @@
 <script setup>
 import { useCarcStore } from '../../stores/dataForCalculation'
-import { ref, onMounted } from 'vue'
+import {  onMounted } from 'vue'
 const carcStore = useCarcStore()
 
 // const el = ref()

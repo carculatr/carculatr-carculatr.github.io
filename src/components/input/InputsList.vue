@@ -2,7 +2,7 @@
 // import InputBox from './InputBox.vue'
 import InputBox from './InputBox.vue'
 import InputPreview from './InputPreview.vue'
-import { ref, watch /*, onMounted*/ } from 'vue'
+import { ref } from 'vue'
 
 import { useCarcStore } from '../../stores/dataForCalculation'
 
@@ -36,17 +36,19 @@ const inputHide = function () {
 </script>
 
 <template>
-  <div id="box" v-if="inputOrPreview">
-    <div class="closeBox" @click="inputHide()"></div>
-    <div class="close" @click="inputHide()"></div>
-    <InputBox
-      v-for="(movie, index) of carcStore.carc.items"
-      :key="index"
-      :index="index"
-      v-model="inputOrPreview"
-    />
+  <div class="wrap">
+    <div id="box" v-if="inputOrPreview">
+      <div class="closeBox" @click="inputHide()"></div>
+      <div class="close" @click="inputHide()"></div>
+      <InputBox
+        v-for="(movie, index) of carcStore.carc.items"
+        :key="index"
+        :index="index"
+        v-model="inputOrPreview"
+      />
+    </div>
+    <InputPreview @click="inputShow" v-if="!inputOrPreview" />
   </div>
-  <InputPreview @click="inputShow" v-if="!inputOrPreview" />
 </template>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <script setup>
 import TableCell from './TableCell.vue'
-import { useCarcStore } from '../../stores/dataForCalculation'
-const carcStore = useCarcStore()
+// import { useCarcStore } from '../../stores/dataForCalculation'
+// const carcStore = useCarcStore()
 </script>
 <script>
 export default {
@@ -43,6 +43,7 @@ export default {
 </template>
 <style scoped>
 .line {
+  content:"";
   /* border: solid red 1px; */
   /* padding: 3px; */
   /* margin: 3px; */

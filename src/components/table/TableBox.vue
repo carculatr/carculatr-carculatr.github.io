@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import TableLine from './TableLine.vue'
 import { useCarcStore } from '../../stores/dataForCalculation'
 const carcStore = useCarcStore()
@@ -11,8 +11,8 @@ const rowCount = ref(0)
 const lineCount = ref(0)
 
 const props = defineProps({
-  meter1: Number,
-  meter2: Number,
+  // meter1: Number,
+  // meter2: Number,
   store: Array
 })
 

@@ -92,10 +92,16 @@ const startDataFromPinia = function () {
 }
 startDataFromPinia()
 
+/*🎉 */
+// carcStore.carc.tips.push(777)      
+// console.log("🎉", carcStore.carc.tips);   
+/*🎉 */
+  
 watch(counter, async (newQuestion) => {
   counter.value = inputFilter(newQuestion).replace(/[.]/g, '')
-  // carcStore.setPc(idx, newQuestion) 
-  carcStore.carc.items[props.index].pc = newQuestion  // console.log(carcStore.setActiveTab);
+  carcStore.setPc(idx, newQuestion) 
+  // carcStore.carc.items[props.index].pc = newQuestion  // console.log(carcStore.setActiveTab);
+
 })
 watch(meter, async (newQuestion) => {
   // inputFilter(newQuestion)
@@ -138,7 +144,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <button v-on:keyup.enter="pressEnter">-</button> -->
   <div class="wrap">
     <div class="value">
       <!-- Метраж -->
@@ -235,6 +240,7 @@ input:focus {
   /* outline: dashed red 1px; */
 }
 .boxPc {
+  content:"";
   /* flex-direction: column; */
   /* opacity: 0.2; */
 }
