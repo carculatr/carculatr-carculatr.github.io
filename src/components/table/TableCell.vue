@@ -10,9 +10,9 @@ const props = defineProps({
 const pc1 = props.rowNumber - 1
 const pc2 = props.lineNumber - 1
 const showPopup = ref(false) //показать попап
-// вывести для теста у одного блока попап
-if (props.rowNumber == 2 && props.lineNumber== 2) {
-  showPopup.value = true;
+//#TODO убрать вывести для теста у одного блока попап test
+if (props.rowNumber == 2 && props.lineNumber == 2) {
+  showPopup.value = true
 }
 const invalid1 = ref(false) //ненужные но отображаемые ячейки
 // const invalid3 = ref(true) //ненужные но отображаемые ячейки
@@ -54,15 +54,24 @@ watch(carcStore.carc.items, async () => {
 </script>
 
 <template>
-  <td @click="showPopup = !showPopup" v-if="!invalid2" :class="{ invalid1 }">
+  <td
+    @click="showPopup = !showPopup /*Открыть попап при клике на чейку*/"
+    v-if="!invalid2 /*Не показывать ненужные ячейки на которые нет бирок*/"
+    :class="{
+      showPopup /*задать класс что с этого поля открыта ячейка*/,
+      invalid1 /*всёже показать несколько ячеек на которые нет бирок*/
+    }"
+  >
     <PopupCell
-    v-if="showPopup" 
+      v-model="showPopup"
+      v-if="showPopup"
       :meter1="carcStore.carc.items[0].meter"
       :meter2="carcStore.carc.items[1].meter"
-      :pc1="props.rowNumber"
-      :pc2="props.lineNumber"
+      :pc1="pc1"
+      :pc2="pc2"
       :rollLength="rollLength"
     />
+    <!-- <td @click="showPopup = !showPopup" v-if="!invalid2"  :class="[showPopup ? 'show' : 'hide']"> -->
     <div class="firstCell" v-if="props.rowNumber == 1 && props.lineNumber == 1">Max3</div>
     <div class="carc-cell" v-if="rollLength">
       <!-- <div
@@ -105,10 +114,54 @@ watch(carcStore.carc.items, async () => {
     </div>
   </td>
 </template>
-<style>
-@import url("TableCell.scss"); 
-td{
+<style scoped>
+@import url('TableCell.scss');
+td {
   font-size: 10px;
 }
 
+.firstCell {
+  min-height: 40px;
+  opacity: 0.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showPopup {
+  border-color: (transparent);
+  outline: solid 3px tomato;
+  z-index: 1;
+  position: relative;
+}
+/* затемнять ячейки на которые не хватает бирок */
+/* не затемнять когда из ячейки вызван showPopup */
+.invalid1:not(.showPopup) {
+  opacity: 0.15;
+  border: dashed 1px rgba(0, 0, 0, 0.13);
+}
+
+td {
+  /* display: inline-block; */
+  /* overflow: hidden; */
+  min-height: 40px;
+  min-width: 55px;
+  /* background: tomato; */
+  /* margin:0px; */
+  border: 1px solid rgb(204, 204, 204);
+  /* border-left:3px red dashed; */
+  /* padding: 5px; */
+  padding-top: none;
+  vertical-align: top;
+}
+td:empty,
+:not(:first-child) > td:empty:not(:first-child) {
+  /* background:red; */
+  /* display: none; */
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  /* border:rgba(255, 0, 0, 0) solid; */
+  border-left: transparent solid 2px;
+  border-top: transparent solid 2px;
+}
 </style>

@@ -21,7 +21,7 @@ const pick = function (data) {
       :key="item[2]"
       v-for="item in carcStore.sortTips()"
     >
-      <span v-bind:class="[props.parentValue == item[0] ? 'picked' : '']">{{ item[0] }}</span>
+      <span :class="[props.parentValue == item[0] ? 'picked' : '']">{{ item[0] }}</span>
     </li>
   </ul>
 </template>
