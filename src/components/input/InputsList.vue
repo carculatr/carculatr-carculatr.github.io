@@ -23,19 +23,20 @@ const inputShow = function () {
   // console.log('🍓')
   inputOrPreview.value = true
 }
-const inputHide = function () {
+const s3inputHide = function (data) {
+  console.log('🔰inputHide', data)
+}
+const inputHide = function (p) {
+  console.log('🔰inputHide', p)
+  //изменить масштаб
   document
     .querySelector('meta[name="viewport"]')
     .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
 
-
-// При закрытии поля ввода записать в подсказки
+  // При закрытии поля ввода записать в подсказки
   carcStore.carc.items.forEach((item) => {
     carcStore.tipsPush(item.meter)
   })
-  // var scale = 'scale(1)'
-  // document.body.style.msTransform = scale // IE 9
-  // document.body.style.transform = scale // General
 
   inputOrPreview.value = false
 }
@@ -47,11 +48,14 @@ const inputHide = function () {
       <div class="closeBox" @click="inputHide()"></div>
       <div class="close" @click="inputHide()"></div>
       <InputBox
+        :onHid4e-input="inputHide"
+        v-model="inputHide"
         v-for="(movie, index) of carcStore.carc.items"
         :key="index"
         :index="index"
-        v-model="inputOrPreview"
       />
+      <!-- @hide-input="inputHide" -->
+      <!-- v-model="inputOrPreview" -->
     </div>
     <InputPreview @click="inputShow" v-if="!inputOrPreview" />
   </div>

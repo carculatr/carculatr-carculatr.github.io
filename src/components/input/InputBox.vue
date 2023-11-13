@@ -3,13 +3,21 @@ import { ref, watch, onMounted } from 'vue'
 import InputMeterTips from './InputMeterTips.vue'
 import { useCarcStore } from '../../stores/dataForCalculation'
 const carcStore = useCarcStore()
-const props = defineProps([/*'movOFFie',*/ 'index' /*, 'inputOrPreview'*/])
+const props = defineProps(['onHide-input',/*'movOFFie',*/ 'index' /*, 'inputOrPreview'*/])
 const emit = defineEmits(['update:modelValue'])
+// const emit = defineEmits(['input-hide'])
+emit('update:modelValue')
+
+// emit('hide-input')
+// emit('onHide-input')
+    // props['onHide-input
+    // props
+
+
 
 const counter = ref('') //счётчик
 const meter = ref('') //метраж
 const idx = props.index //номер инпута
-// emit('update:modelValue',false)
 
 var minus = function () {
   counter.value--
@@ -78,9 +86,10 @@ var pressEnter = function () {
     listInputs[props.index + 1].select()
   } else {
     console.log('ENTER закрыть', props.index)
+    // emit('hide-input')
     //изменить переменную inputOrPreview дабы закрыть окно
 
-    emit('update:modelValue', false)
+    // emit('update:modelValue', false)
   }
 }
 const startDataFromPinia = function () {
@@ -151,6 +160,9 @@ onMounted(() => {
 <template>
   <div class="wrap">
     <div class="value">
+      <!-- <button @click="$emit('hid4e-input','qwe')">
+      Вызвать родительский filledInput 
+    </button> -->
       <!-- Метраж -->
       <div class="meterPc">
         <input

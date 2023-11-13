@@ -12,7 +12,7 @@ const pc2 = props.lineNumber - 1
 const showPopup = ref(false) //показать попап
 //#TODO убрать вывести для теста у одного блока попап test
 if (props.rowNumber == 2 && props.lineNumber == 2) {
-  showPopup.value = true
+  // showPopup.value = true
 }
 const invalid1 = ref(false) //ненужные но отображаемые ячейки
 // const invalid3 = ref(true) //ненужные но отображаемые ячейки
