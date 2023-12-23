@@ -1,6 +1,6 @@
 <script setup>
 // import { ref } from 'vue'
-import { useCarcStore } from '../../stores/dataForCalculation'
+import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
 const props = defineProps(['parentValue'])
 const emit = defineEmits(['update:modelValue'])

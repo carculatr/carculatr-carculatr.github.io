@@ -1,6 +1,7 @@
 <script setup>
 import TableBox from './components/table/TableBox.vue'
-import InputsList from './components/input/InputsList.vue'
+import DivanBox from './components/select/divan/DivanBox.vue'
+import RollBox from './components/select/roll/RollBox.vue'
 // import NumKeyboard from './components/NumKeyboard.vue'
 import { useCarcStore } from './stores/dataForCalculation'
 const carcStore = useCarcStore()
@@ -8,7 +9,9 @@ const carcStore = useCarcStore()
 
 <template>
   <main>
-    <InputsList />
+    <RollBox />
+    <DivanBox />
+    <!-- <NumKeyboard /> -->
     <TableBox :store="carcStore.carc.items" />
     <!-- <TableBox :meter1="3" :meter2="4" :store="carcStore.carc.items" /> -->
   </main>

@@ -1,15 +1,14 @@
 <script setup>
-// import InputBox from './InputBox.vue'
 import InputBox from './InputBox.vue'
-import InputPreview from './InputPreview.vue'
+import DivanButton from './DivanButton.vue'
 import { ref } from 'vue'
 
-import { useCarcStore } from '../../stores/dataForCalculation'
-
+import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
-//повится ли инпут по умолчанию
-// const inputOrPreview = ref(false)
-const inputOrPreview = ref(false)
+
+const inputOrPreview = ref(false) //показывать ли попап с вводом
+
+
 const inputShow = function () {
   document
     .querySelector('meta[name="viewport"]')
@@ -23,9 +22,9 @@ const inputShow = function () {
   // console.log('🍓')
   inputOrPreview.value = true
 }
-const s3inputHide = function (data) {
-  console.log('🔰inputHide', data)
-}
+// const inputHide = function (data) {
+//   console.log('🔰inputHide', data)
+// }
 const inputHide = function (p) {
   console.log('🔰inputHide', p)
   //изменить масштаб
@@ -44,11 +43,12 @@ const inputHide = function (p) {
 
 <template>
   <div class="wrap">
+    <!-- либо инпуты ввода -->
     <div id="box" v-if="inputOrPreview">
-      <div class="closeBox" @click="inputHide()"></div>
-      <div class="close" @click="inputHide()"></div>
+      <div class="back-drop" @click="inputHide"></div>
+      <div class="close" @click="inputHide"></div>
       <InputBox
-        :onHid4e-input="inputHide"
+        @inputHide="inputHide"
         v-model="inputHide"
         v-for="(movie, index) of carcStore.carc.items"
         :key="index"
@@ -57,7 +57,8 @@ const inputHide = function (p) {
       <!-- @hide-input="inputHide" -->
       <!-- v-model="inputOrPreview" -->
     </div>
-    <InputPreview @click="inputShow" v-if="!inputOrPreview" />
+    <!-- либо кнопки -->
+    <DivanButton @click="inputShow" v-if="!inputOrPreview" />
   </div>
 </template>
 
@@ -106,12 +107,13 @@ const inputHide = function (p) {
 .close {
   cursor: pointer;
   z-index: 8;
-  background: rgba(0, 0, 0, 0.685);
+  background: rgba(0, 0, 0, 0.605);
   position: absolute;
   right: 0;
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  opacity: 0.5;
 }
 .close:before,
 .close:after {
@@ -128,7 +130,7 @@ const inputHide = function (p) {
 .close:before {
   transform: rotate(45deg);
 }
-.closeBox {
+.back-drop {
   z-index: -1;
   position: fixed;
   top: 0;

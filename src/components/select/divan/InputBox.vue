@@ -1,12 +1,12 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import InputMeterTips from './InputMeterTips.vue'
-import { useCarcStore } from '../../stores/dataForCalculation'
+import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
 const props = defineProps(['onHide-input',/*'movOFFie',*/ 'index' /*, 'inputOrPreview'*/])
-const emit = defineEmits(['update:modelValue'])
-// const emit = defineEmits(['input-hide'])
-emit('update:modelValue')
+// const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['inputHide'])
+// emit('update:modelValue')
 
 // emit('hide-input')
 // emit('onHide-input')
@@ -82,14 +82,12 @@ var pressEnter = function () {
   // const idx = props.index
   const length = listInputs.length - 1
   if (idx < length) {
+    //переместиться на следующий инпут
     listInputs[props.index + 1].focus()
     listInputs[props.index + 1].select()
   } else {
-    console.log('ENTER закрыть', props.index)
-    // emit('hide-input')
-    //изменить переменную inputOrPreview дабы закрыть окно
-
-    // emit('update:modelValue', false)
+    //закрыть окно если последний инпут
+    emit('inputHide')
   }
 }
 const startDataFromPinia = function () {

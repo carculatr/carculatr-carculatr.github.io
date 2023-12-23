@@ -1,6 +1,6 @@
 <script setup>
-import { useCarcStore } from '../../stores/dataForCalculation'
-import {  onMounted } from 'vue'
+import { useCarcStore } from '@/stores/dataForCalculation'
+import { onMounted } from 'vue'
 const carcStore = useCarcStore()
 
 // const el = ref()
@@ -30,11 +30,11 @@ onMounted(() => {
 })
 </script>
 
-<script></script>
 <template>
   <div id="wrap">
     <!-- поле чтобы рассчитать высоту экрана -->
     <div id="layoutViewport"></div>
+
     <div id="fixedRightBottom">
       <div class="box">
         <div class="meterBox" v-if="carcStore.carc.items[0].meter">
