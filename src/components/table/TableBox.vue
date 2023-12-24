@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import TableLine from './TableLine.vue'
+import M3panzoom from './M3panZoom.vue'
 import { useCarcStore } from '../../stores/dataForCalculation'
 const carcStore = useCarcStore()
 
@@ -15,7 +16,6 @@ const props = defineProps({
   // meter2: Number,
   store: Array
 })
-
 
 var calculatePc = function () {
   //   console.log('🧴', `
@@ -72,26 +72,25 @@ watch(carcStore.carc.items, async () => {
 </script>
 
 <template>
-
-
-
-  <table  ref="testScale">
-    <tbody>
-      <TableLine v-for="n in lineCount" :key="n" :rowCount="rowCount" :lineNumber="n" />
-      <!-- #FIXME если через функцию то не реактивно?  -->
-      <!-- <TableLine
-        v-for="n in Math.round(maxRollLength / carcStore.carc.items[1].meter)"
-        :key="n"
-        :rowCount="Math.round(maxRollLength / carcStore.carc.items[0].meter)"
-        :lineNumber="n"
-      /> -->
-    </tbody>
-  </table>
+  <M3panzoom>
+    <table ref="testScale">
+      <tbody>
+        <TableLine v-for="n in lineCount" :key="n" :rowCount="rowCount" :lineNumber="n" />
+        <!-- #FIXME если через функцию то не реактивно?  -->
+        <!-- <TableLine
+          v-for="n in Math.round(maxRollLength / carcStore.carc.items[1].meter)"
+          :key="n"
+          :rowCount="Math.round(maxRollLength / carcStore.carc.items[0].meter)"
+          :lineNumber="n"
+          /> -->
+      </tbody>
+    </table>
+  </M3panzoom>
 </template>
 <style scoped>
 table {
-  position: absolute;
-
+  /* position: absolute; */
+/* background: gold; */
   top: 15px;
   left: 15px;
   border-collapse: collapse;

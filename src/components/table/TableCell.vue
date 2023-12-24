@@ -62,7 +62,7 @@ watch(carcStore.carc.items, async () => {
       invalid1 /*всёже показать несколько ячеек на которые нет бирок*/
     }"
   >
-    <PopupCell
+    <!-- <PopupCell
       v-model="showPopup"
       v-if="showPopup"
       :meter1="carcStore.carc.items[0].meter"
@@ -70,7 +70,7 @@ watch(carcStore.carc.items, async () => {
       :pc1="pc1"
       :pc2="pc2"
       :rollLength="rollLength"
-    />
+    /> -->
     <!-- <td @click="showPopup = !showPopup" v-if="!invalid2"  :class="[showPopup ? 'show' : 'hide']"> -->
     <div class="firstCell" v-if="props.rowNumber == 1 && props.lineNumber == 1">Max3</div>
     <div class="carc-cell" v-if="rollLength">

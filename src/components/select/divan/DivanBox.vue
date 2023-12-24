@@ -30,7 +30,7 @@ const inputHide = function (p) {
   //изменить масштаб
   document
     .querySelector('meta[name="viewport"]')
-    .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
+    // .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
 
   // При закрытии поля ввода записать в подсказки
   carcStore.carc.items.forEach((item) => {
