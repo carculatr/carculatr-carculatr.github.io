@@ -45,7 +45,7 @@ onMounted(() => {
     else if (x < -calcL) x = -calcL
     if (y > calcB) y = calcB
     else if (y < -calcT) y = -calcT
-    panzoom.pan(x, y, { duration: 200, animate: true })
+    // panzoom.pan(x, y, { duration: 200, animate: true })
 
     // const calc = w / 2 / scale//центр по границе
     // M3data.value = `x:${x}  scale:${scale}  |factW:${factW}|parentW:${parentW}  `
@@ -72,6 +72,11 @@ onMounted(() => {
   outline: solid 23px tomato;
   width: 100%;
   height: 100%;
+
+    top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
   /* background: gray; */
 }
 
@@ -85,13 +90,15 @@ onMounted(() => {
   /* height: 100px; */
 }
 #panzoom-element {
-    display: inline-flex;
-  /* outline:dashed rgba(255, 0, 0, 0.501) 1px; */
+    /* display: inline-flex; */
+    display: inline-block;
+  outline:dashed rgba(255, 0, 0, 0.501) 1px;
+  background: rgba(255, 217, 0, 0.249);
 }
 
 
 .testwrap:before {
-  content: '';
+  /* content: ''; */
   position: absolute;
   /* background: rgba(0, 0, 0, 0.227); */
   top: -150%;
