@@ -16,7 +16,7 @@ if (props.rowNumber == 2 && props.lineNumber == 2) {
 }
 const invalid1 = ref(false) //ненужные но отображаемые ячейки
 // const invalid3 = ref(true) //ненужные но отображаемые ячейки
-const invalid1Length = 3
+const invalid1Length = 2
 const invalid2 = ref(false) //совсем ненужные ячейки
 function ifInvalid() {
   var ExtraPc1 = +carcStore.carc.items[0].pc /*- 1*/
