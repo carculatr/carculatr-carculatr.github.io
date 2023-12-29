@@ -52,7 +52,7 @@ const PZM3transformDebounce = debounce((param) => {
     // PZ.moveTo(newX, newY)
     PZ.smoothMoveTo(newX, newY)
   }
-}, 100)
+}, 200)
 const m3test = () => {
   console.log('transform')
   // PZ.smoothZoom(220, 320, 3)
@@ -187,19 +187,31 @@ const M3panzoomTouchEnd = (e) => {
   <button @click="PZ.zoomAbs(200, 200, 0.5)">z200:200 0.5</button>
   <button @click="PZ.zoomAbs(200, 200, 1)">z200:200 1</button>
   <button @click="PZ.zoomAbs(200, 200, 2)">z200:200 2</button> -->
-<theEaster1/>
   <div class="wrapper">
     <div id="panzoom-element">
+      <div class="easter">
+        <theEaster1 />
+      </div>
       <slot> </slot>
     </div>
   </div>
 </template>
 
 <style>
+.easter {
+  /* background: rgba(255, 0, 0, 0.214); */
+  /* opacity: 0.3; */
+  bottom: 0;
+  position: absolute;
+  /* outline:3px solid red; */
+  width: 240px;
+  height: 240px;
+  transform: translateY(2200px);
+}
 #panzoom-element {
   display: inline-flex;
   /* 🔴🔴🔴 */
-  background: rgba(255, 0, 0, 0.1);
+  /* background: rgba(255, 0, 0, 0.1); */
   /* overflow: hidden; */
   /* height: 2100px; */
   /* width: 150px; */
@@ -221,10 +233,10 @@ const M3panzoomTouchEnd = (e) => {
   /* display: inline-flex; */
   /* 🔴🔴🔴 */
   /* overflow: hidden; */
-  height: 500px;
-  width: 500px;
-  top: 100px;
-  left: 100px;
-  background: rgba(255, 217, 0, 0.46);
+  /* height: 500px; */
+  /* width: 500px; */
+  /* top: 100px; */
+  /* left: 100px; */
+  /* background: rgba(255, 217, 0, 0.46); */
 }
 </style>
