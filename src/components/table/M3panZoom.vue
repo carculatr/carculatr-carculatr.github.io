@@ -19,7 +19,7 @@ const debounce = (callback, wait) => {
     }, wait)
   }
 }
-// .toFixed()*1
+
 const PZM3transformDebounce = debounce((param) => {
   const parentRectangle = PZdiv.parentElement.getBoundingClientRect()
   const parentW = parentRectangle.width //ширина родительского элемента
@@ -27,8 +27,6 @@ const PZM3transformDebounce = debounce((param) => {
   const factRectangle = PZdiv.getBoundingClientRect()
   const factW = factRectangle.width //фактическаяя ширина элемента
   const factH = factRectangle.height //фактическаяя высота элемента
-  // const edgeOffsetW = 0 // желаемое смещение от края
-  // const edgeOffsetH = 0 // желаемое смещение от края
   const edgeOffsetW = parentW / 3 // желаемое смещение от края
   const edgeOffsetH = parentH / 3 // желаемое смещение от края
   const x = PZ.getTransform().x
@@ -43,12 +41,11 @@ const PZM3transformDebounce = debounce((param) => {
   if (factH < -y + edgeOffsetH) newY = edgeOffsetH - factH
   if (y + edgeOffsetH > parentH) newY = parentH - edgeOffsetH
 
-  console.log(x, newX, edgeOffsetW, '-', factW, x !== newX, '🐓', y, newY, y !== newY)
   //если новые координаты не совпадают, то переместить элемент
   // if (x !== newX || y !== newY) {
-  // if (x-9< newX ||x+9> newX|| y+9< newY ||y-9> newY) {
+    //если новые координаты не совпадают(с погреностью в 30 пикселей), то переместить элемент
   if (x > newX + 30 || x < newX - 30 || y > newY + 30 || y < newY - 30) {
-    console.log(x, newX, edgeOffsetW, '-', factW, x !== newX, '🔥', y, newY, y !== newY)
+    // console.log(x, newX, edgeOffsetW, '-', factW, x !== newX, '🔥', y, newY, y !== newY)
     // PZ.moveTo(newX, newY)
     PZ.smoothMoveTo(newX, newY)
   }
@@ -81,7 +78,7 @@ onMounted(() => {
     smoothScroll: false,
     zoomDoubleClickSpeed: 1,
     zoomSpeed: 1.065,
-    // pinchSpeed: 2.6,
+    pinchSpeed: 1.5,
 
     maxZoom: 4,
     minZoom: 0.6,

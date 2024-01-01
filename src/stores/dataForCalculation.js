@@ -3,6 +3,9 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 
 export const useCarcStore = defineStore('CarculatorStore', () => {
+ const sessionCarc = ref({
+   popup:[''] 
+ })
   const carc = ref({
     items: [
       {
@@ -20,10 +23,15 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     ],
     // tips: [8, 3.25, 7.2, 3, 11.11, 9.25, 10, 15.35, 7.35, 5.5, 5.5, 5.5],
     set: {
-      darkTheme: false,
-      grid: true
+      // themes: {
+      //   theme:"light",
+      //   colorTT: true,
+      //   cologGrid:false,
+      // },
+      grid: false
     }
   })
+ 
 
   //кол-во элементов для которых делать увеличенный индекс = кол-ву инпутов
   const quantityItems = carc.value.items.length
@@ -104,7 +112,18 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     // console.log(carc.value.tips)
     // carc.value.tips
   }
-
+  const setTheme = (theme) => {
+    if (theme == 'colorTT') {
+      carc.value.set.themes.colorTT = !carc.value.set.themes.colorTT
+    } else if (theme == 'M3colorGrid') {
+      carc.value.set.themes.colorGrid = !carc.value.set.themes.colorGrid
+    } else {
+      carc.value.set.themes.theme = theme
+    }
+  }
+  const setGrid = () => {
+    carc.value.set.grid = !carc.value.set.grid
+  }
   //чтение из localStorage
   const carcInLocalStorage = localStorage.getItem('carc')
   if (carcInLocalStorage) {
@@ -116,6 +135,7 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     () => carc,
     (state) => {
       localStorage.setItem('carc', JSON.stringify(state))
+      // console.log(state);
     },
     //глубокое слежение
     { deep: true }
@@ -125,7 +145,10 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     sortTips,
     tipsPush,
     carc,
+    sessionCarc,
     setMeter,
-    setPc
+    setPc,
+    setTheme,
+    setGrid
   }
 })

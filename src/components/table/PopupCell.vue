@@ -10,7 +10,7 @@ const emit = defineEmits(['update:modelValue'])
 <template>
   <!-- <div class="backdrop" @click="$emit('update:modelValue')"> -->
   <div class="backdrop">
-    <div class="pupup">
+    <div class="popup">
       <!-- 🍪🍪🍪Скопированно из TableCell🍪🍪🍪 -->
       <div class="carc-cell" v-if="rollLength">
         <!-- <div
@@ -73,7 +73,7 @@ const emit = defineEmits(['update:modelValue'])
       background: rgba(255, 0, 0, 0.211);
   }
 }
-.pupup {
+.popup {
     .invalid1 & {
     border:6px solid tomato
   }

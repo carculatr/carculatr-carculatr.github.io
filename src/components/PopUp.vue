@@ -1,0 +1,96 @@
+<script setup>
+import CarcSetting from './CarcSetting.vue'
+import { ref, watch } from 'vue'
+import { useCarcStore } from '@/stores/dataForCalculation'
+const carcStore = useCarcStore()
+const showPopup = ref(true)
+const popupContant = ref('')
+const close = () => {
+  carcStore.sessionCarc.popup[0] = ''
+}
+watch(carcStore.sessionCarc.popup, async (newVal) => {
+  popupContant.value = newVal[0]
+  if (newVal[0] == false) {
+    document.body.classList.remove("m3popup")
+  } else {
+    document.body.classList.add("m3popup")
+  }
+})
+// setTimeout(() => {
+//   carcStore.sessionCarc.popup[0] = "";
+// }, 1000);
+</script>
+<template>
+  <div class="backdrop" @click="close" v-show="popupContant">
+    <!-- <div class="backdrop" @click="showPopup = false" v-if="showPopup"> -->
+    <div class="popup" v-on:click.stop>
+      <div class="close" @click="close"></div>
+      <!-- {{ carcStore.sessionCarc.popup }} -->
+      <CarcSetting v-if="popupContant == 'settings'" />
+    </div>
+  </div>
+</template>
+
+<style>
+/* размыть кроме попапа */
+body.m3popup .blur>*{
+    filter: blur(3px);
+}
+</style>
+<style scoped lang="scss">
+.backdrop {
+  overflow: hidden;
+  z-index: 30;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  background: var(--m3-backdrop);
+  // background: rgba(21, 21, 21, 0.878);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // .M3dark &{background: rgba(255, 255, 255, 0.726);}
+}
+
+.popup {
+  position: relative;
+  padding: 40px 30px 30px;
+  border-radius: 10px;
+  /* width: 50%; */
+  /* height: 50%; */
+  background: var(--m3-bg-popup);
+  color: var(--m3-color);
+  // background:rgb(49, 49, 49);
+  /* width:; */
+}
+.close {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  top: 0px;
+  right: 0px;
+  position: absolute;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 0.5;
+}
+.close::before,
+.close::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 50%;
+  left: 50%;
+  top: 25%;
+  background: var(--m3-color);
+
+  transform: rotate(45deg);
+}
+.close::before {
+  transform: rotate(-45deg);
+}
+</style>

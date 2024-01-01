@@ -55,7 +55,7 @@ watch(carcStore.carc.items, async () => {
 
 <template>
   <td
-    @click="showPopup = !showPopup /*Открыть попап при клике на чейку*/"
+    @click="showPopup = !showPopup /*Открыть попап при клике на ячейку*/"
     v-if="!invalid2 /*Не показывать ненужные ячейки на которые нет бирок*/"
     :class="{
       showPopup /*задать класс что с этого поля открыта ячейка*/,
@@ -72,7 +72,13 @@ watch(carcStore.carc.items, async () => {
       :rollLength="rollLength"
     /> -->
     <!-- <td @click="showPopup = !showPopup" v-if="!invalid2"  :class="[showPopup ? 'show' : 'hide']"> -->
-    <div class="firstCell" v-if="props.rowNumber == 1 && props.lineNumber == 1">Max3</div>
+    <div
+      class="firstCell"
+      v-if="props.rowNumber == 1 && props.lineNumber == 1"
+      @click="carcStore.sessionCarc.popup[0] = 'settings'"
+    >
+      Max3
+    </div>
     <div class="carc-cell" v-if="rollLength">
       <!-- <div
       class="cell"
@@ -121,16 +127,18 @@ td {
 }
 
 .firstCell {
+  /* background: red; */
   min-height: 40px;
   opacity: 0.2;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--m3-color);
 }
 
 .showPopup {
   border-color: (transparent);
-  outline: solid 3px tomato;
+  outline: solid 3px var(--m3-color-accent);
   z-index: 1;
   position: relative;
 }
@@ -138,7 +146,7 @@ td {
 /* не затемнять когда из ячейки вызван showPopup */
 .invalid1:not(.showPopup) {
   opacity: 0.15;
-  border: dashed 1px rgba(0, 0, 0, 0.13);
+  border: dashed 1px var(--m3-color-grid-muted);
 }
 
 td {
@@ -148,7 +156,7 @@ td {
   min-width: 55px;
   /* background: tomato; */
   /* margin:0px; */
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid var(--m3-color-grid);
   /* border-left:3px red dashed; */
   /* padding: 5px; */
   padding-top: none;

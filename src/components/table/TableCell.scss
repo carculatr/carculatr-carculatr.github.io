@@ -1,11 +1,12 @@
 /*сумма значений в ячейке */
+.carc-list-item,
 .carc-cell {
   user-select: none;
   display: flex;
   align-items: center;
   flex-direction: column;
   .carc-sum {
-    color: black;
+    color:var(--m3-color);
     margin: -0.4em 0;
     font-size: 2em;
   }
@@ -13,7 +14,7 @@
   .poltora {
     font-size: 1.1em;
     margin: -0.18em 0;
-    color: rgb(200, 200, 200);
+    color: var(--m3-color-muted-2);
   }
   //бокс для "сколько каких штук"
   .pc-box {
@@ -21,13 +22,13 @@
     font-size: 1em;
     .x,
     .pc-descripion {
-      color: rgb(220, 220, 220);
+      color: var(--m3-color-muted-3)
     }
     .pc {
-      color: rgba(200, 0, 0, 0.719);
+      color:var(--m3-color-tt2);
     }
     .meter {
-      color: rgba(0, 165, 0, 0.83);
+      color:var(--m3-color-tt1);
     }
   }
 }
