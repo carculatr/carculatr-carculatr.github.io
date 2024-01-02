@@ -11,120 +11,93 @@ const m2 = carcStore.carc.items[1].meter
 
 <template>
   <div class="carc-list-item">
-    <div class="wrap">
-
-      <div class="qwe grid-sum">
-        <div class="carc-sum">
-          {{ sum }}
+    <div class="grid-warp">
+      <div class="grid-warp2 decrypt">
+        <div v-if="pc1" class="pc-box">
+          <div class="m">{{ m1 }}</div>
+          <div class="x">x</div>
+          <div class="pc">{{ pc1 }}<span>шт</span></div>
+        </div>
+        <div v-if="pc2" class="pc-box">
+          <div class="m">{{ m2 }}</div>
+          <div class="x">x</div>
+          <div class="pc">{{ pc2 }}<span>шт</span></div>
         </div>
       </div>
-
-
-      <div class="qwe grid-poltora">
-        <div class="poltora">
-          {{ (sum + 1.5).toFixed(2) }}
-        </div>
-      </div>
-
-      <div class="qwe grid-pc1">
-        <span class="pc">
-          {{ pc1 }}
-        </span>
-        <span class="pc-descripion">шт</span>
-      </div>
-
-      <div class="qwe grid-m1">
-        <span class="meter">
-          {{ m1 }}
-        </span>
-      </div>
-      <div class="qwe grid-pc2">
-        <span class="pc">
-          {{ pc2 }}
-        </span>
-        <span class="pc-descripion">шт</span>
-      </div>
-      <div class="qwe grid-m2">
-        <span class="meter">
-          {{ m2 }}
-        </span>
-      </div>
-      <div class="qwe grid-x1"><span class="x"> x </span></div>
-      <div class="qwe grid-x1"><span class="x"> x </span></div>
+      <div class="qwe grid-poltora poltora">{{ (sum + 1.5).toFixed(2) }}</div>
+      <div class="qwe grid-sum sum ">{{ sum }}</div>
     </div>
-
-    <div class="pc-box" v-if="pc1 != 0"></div>
-    <br>
 
     <!-- 🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕 -->
   </div>
+  <div class="pc-box" v-if="pc1 != 0"></div>
+  <!-- <br /> -->
 </template>
-<style scoped>
-/* @import url('../table/TableCell.scss'); */
+
+<style lang="scss" scoped>
 /* #TODO полосатый список */
-.wrap {
+.carc-list-item {
+  user-select: none;
+  color:var(--m3-color)
+}
+.sum {
+  font-size: 2rem;
+  
+}
+.poltora {
+  font-size: 1.2rem;
+  color: var(--m3-color-muted-1);
+}
+.m {
+  color: var(--m3-color-tt1);
+}
+.pc {
+  color: var(--m3-color-tt2);
+}
+.pc > span,
+.x {
+  color: var(--m3-color-muted-2);
+}
+.grid-warp {
   display: grid;
   justify-content: center;
-  grid-template-columns: 50px 50px 20px 550px 140px;
+  grid-template-columns: 350px 70px 80px;
   /* grid-template-rows: repeat(1, 1fr); */
-  grid-template-areas:
-    ' poltora m1 x1 pc1 sum '
-    ' .       m2 x1 pc2 sum ';
+  /* grid-template-areas: ' poltora decrypt  sum '; */
 }
-.grid-sum,
-.grid-poltora,
-.grid-pc1,
-.grid-pc2,
-.grid-m1,
-.grid-m2,
-.grid-pc10,
-.grid-x1,
-.grid-x2 {
+.decrypt {
+  // grid-template-columns: 77px 14px 77px;
+  display: grid;
+  // grid-template-areas: ' m1 x  pc1 ';
+}
+.decrypt > div,
+.grid-warp>div,
+.center,
+.left,
+.right,
+.top,
+.bottom {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.grid-sum {
-  grid-area: sum;
+.left {
+  justify-content: left;
 }
-.grid-poltora {
-  grid-area: poltora;
+.right {
+  justify-content: right;
 }
-.grid-pc1 {
-  grid-area: pc1;
+.top {
+  /* align-items: flex-start; */
 }
-.grid-pc2 {
-  grid-area: pc2;
-}
-.grid-m1 {
-  grid-area: m1;
-}
-.grid-m2 {
-  grid-area: m2;
-}
-.grid-pc10 {
-  grid-area: 🥕;
-}
-.grid-x1 {
-  grid-area: x1;
-}
-.grid-x2 {
-  grid-area: x2;
+.bottom {
+  align-items: flex-end;
 }
 
-.qwe {
-  background: rgba(255, 217, 0, 0.412);
-  margin: 3px;
-}
 
 .carc-list-item {
-  color: var(--m3-color);
+  // color: var(--m3-color);
   /* background: gold; */
-  border-bottom: solid 1px var(--m3-color-muted-1);
-}
-
-.m {
-  color: var(--m3-color-tt1);
+  // border-bottom: solid 1px var(--m3-color-muted-1);
 }
 </style>

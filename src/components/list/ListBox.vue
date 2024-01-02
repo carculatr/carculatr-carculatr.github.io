@@ -16,7 +16,7 @@ const m1 = carcStore.carc.items[0].meter
 const m2 = carcStore.carc.items[1].meter
 
 const calculate = () => {
-  let list = [];
+  let list = []
   //перебот первых бирок
   for (let index1 = 0; index1 <= pc1; index1++) {
     console.log('🥕', index1)
@@ -32,25 +32,30 @@ const calculate = () => {
     return a[0] - b[0]
   })
   // удалить нулевой элемент
- list.splice(0, 1);
+  list.splice(0, 1)
   // list.
   return list
 }
-list.value=calculate()
+list.value = calculate()
 
 //🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
 </script>
 <template>
   <button @click="carcStore.sessionCarc.popup[0] = 'settings'">settings</button>
   <div>
-    {{ m1 }}м {{ pc1 }}шт
-    <br />
-    {{ m2 }}м {{ pc2 }}шт
-    <br />
-    {{ list }}
-    <div :key="val" v-for="val in list">
-      <!-- {{ val }} -->
-      <ListItem :valItem="val"/>
+
+    <div :key="val" v-for="val in list" class="stripe">
+
+        <ListItem :valItem="val" />
     </div>
   </div>
 </template>
+<style scoped>
+.stripe {
+  /* background: gold; */
+  /* border-bottom: 1px solid var(--m3-color-muted-3); */
+}
+.stripe:nth-child(even) {
+  background-color: var(--m3-bg-even)
+}
+</style>

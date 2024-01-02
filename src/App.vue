@@ -38,8 +38,8 @@ if (!carcStore.carc?.set?.themes?.theme) {
       <DivanBox />
       <!-- {{  }} -->
       <!-- <NumKeyboard /> -->
-      <ListBox  />
-      <!-- <ListBox v-if="!carcStore.carc.set.grid" :store="carcStore.carc.items" /> -->
+      <!-- <ListBox  /> -->
+      <ListBox v-if="!carcStore.carc.set.grid" :store="carcStore.carc.items" />
       <TableBox v-if="carcStore.carc.set.grid" :store="carcStore.carc.items" />
       <!-- <TableBox :meter1="3" :meter2="4" :store="carcStore.carc.items" /> -->
     </div>
