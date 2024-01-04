@@ -5,8 +5,8 @@ import M3panzoom from './M3panZoom.vue'
 import { useCarcStore } from '../../stores/dataForCalculation'
 const carcStore = useCarcStore()
 
-const maxRollLength = 71
-const maxPc = 25
+const maxRollLength = 71//максимальная длина рулона
+const maxPc = 25//максимальное количество отрезов(в таблице)
 
 const rowCount = ref(0)
 const lineCount = ref(0)
@@ -37,7 +37,7 @@ watch(carcStore.carc.items, async () => {
   calculatePc()
 })
 
-// /*🍓🍓🍓🍓🍓🍓 */
+// /*🍓🍓🍓🍓🍓🍓 test/
 // const testScale = ref()
 // let scale = 1
 // // mouse wheel, trackpad pitch
@@ -68,7 +68,7 @@ watch(carcStore.carc.items, async () => {
 //     scale = nextScale
 //   }
 // )
-// /*🍓🍓🍓🍓🍓🍓 */
+// /*🍓🍓🍓🍓🍓🍓 test end*/
 </script>
 
 <template>

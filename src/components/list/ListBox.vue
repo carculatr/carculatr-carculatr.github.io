@@ -1,21 +1,25 @@
 <script setup>
+import { ref, watch } from 'vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 import ListItem from './ListItem.vue'
 const carcStore = useCarcStore()
-import { ref } from 'vue'
 const list = ref([])
 const maxlentgh = 30 //максимальная длинна рассчитываемого ролика
 
 //🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
-const pc1 = carcStore.carc.items[0].pc
-const pc2 = carcStore.carc.items[1].pc
+let pc1 = carcStore.carc.items[0].pc
+let pc2 = carcStore.carc.items[1].pc;
+pc1++;
+
+// const pc1 = ref(carcStore.carc.items[0].pc)
+// const pc2 = ref(carcStore.carc.items[1].pc)
 
 // #todo рассчитать сколько штук можут быть при данном метраже чтобы не было бльших чисел
 
 const m1 = carcStore.carc.items[0].meter
 const m2 = carcStore.carc.items[1].meter
 
-const calculate = () => {
+const calculateList = () => {
   let list = []
   //перебот первых бирок
   for (let index1 = 0; index1 <= pc1; index1++) {
@@ -36,17 +40,21 @@ const calculate = () => {
   // list.
   return list
 }
-list.value = calculate()
+
+watch(carcStore.carc.items, async () => {
+  console.log('🔰calculateList')
+  recalc()
+})
+const recalc = () => (list.value = calculateList())
+recalc()
 
 //🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
 </script>
 <template>
   <button @click="carcStore.sessionCarc.popup[0] = 'settings'">settings</button>
   <div>
-
     <div :key="val" v-for="val in list" class="stripe">
-
-        <ListItem :valItem="val" />
+      <ListItem :valItem="val" />
     </div>
   </div>
 </template>
@@ -56,6 +64,6 @@ list.value = calculate()
   /* border-bottom: 1px solid var(--m3-color-muted-3); */
 }
 .stripe:nth-child(even) {
-  background-color: var(--m3-bg-even)
+  background-color: var(--m3-bg-even);
 }
 </style>
