@@ -3,47 +3,97 @@ import { ref, watch } from 'vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 import ListItem from './ListItem.vue'
 const carcStore = useCarcStore()
-const list = ref([])
-const maxlentgh = 30 //максимальная длинна рассчитываемого ролика
+let list = ref([])
+const maxLentgh = 70 //максимальная длинна рассчитываемого ролика
 
 //🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
-let pc1 = carcStore.carc.items[0].pc
-let pc2 = carcStore.carc.items[1].pc;
-pc1++;
-
-// const pc1 = ref(carcStore.carc.items[0].pc)
 // const pc2 = ref(carcStore.carc.items[1].pc)
+// setTimeout(() => {
+//   // pc1.value++;
+//   pc2++;
+//   console.log("🔵")
+//   recalc()
+// }, 2000);
 
 // #todo рассчитать сколько штук можут быть при данном метраже чтобы не было бльших чисел
 
-const m1 = carcStore.carc.items[0].meter
-const m2 = carcStore.carc.items[1].meter
-
 const calculateList = () => {
+  let pc1 = carcStore.carc.items[0].pc
+  let pc2 = carcStore.carc.items[1].pc
+
+  //Если 0 штук, то по умолчанию ставим 50,(всёравно потом обрежется в цикле до maxLentgh)
+  if (pc1 == 0) pc1 = 50
+  if (pc2 == 0) pc2 = 50
+
+  const m1 = carcStore.carc.items[0].meter
+  const m2 = carcStore.carc.items[1].meter
   let list = []
+
   //перебот первых бирок
   for (let index1 = 0; index1 <= pc1; index1++) {
-    console.log('🥕', index1)
+    // выйти из цикла если метраж больше maxLentgh
+    // #TODO Проверить на производительность "==" и ">"
+    if (index1 * m1 > maxLentgh) break
+
     // переборы вторых бирок
     for (let index2 = 0; index2 <= pc2; index2++) {
-      const sum = index1 * m1 + index2 * m2
-      list.push([sum, index1, index2])
-      console.log(`${index1}*${m1}+${index2}*${m2}=${sum}`)
+      let sum = index1 * m1 + index2 * m2
+      // выйти из цикла если метраж больше maxLentgh
+      if (sum > maxLentgh) break
+      // list.push([sum, index1, index2])
+      list.push([sum, [[index1, index2]]])
+      // console.log(`${index1}*${m1}+${index2}*${m2}=${sum}`)
     }
   }
+
   // отсортировать по сумме
   list.sort(function (a, b) {
     return a[0] - b[0]
   })
+
+  // сгруппировать повторяющиеся
+  var result = list.reduce((prev, current) => {
+    //если первый элемент, задаём массив в который будем пушить
+    if (prev === 0)
+      prev = [
+        // список всех подсчётов
+        [
+          0, // сумма подсчёта
+          [
+            /*[5,6],[6,5]*/
+          ] // Массив для массива бирок. если будут дубли дубли метража, то внутри будет несколько массивов
+        ]
+      ]
+    // предыдущий элемент массива
+    const prevEl = prev.at(-1)
+    //если повтор
+    if (prevEl[0] === current[0]) {
+      //добавить в предыдущий
+      prevEl[1].push(current[1][0])
+    } //если не повтр
+    else {
+      // просто добавляем текущее значение
+      prev.push(current)
+      // console.log("🔥not doube", current);
+    }
+
+    return prev
+  }, 0)
+  // console.log(result)
+  // console.log(list)
+
+  list = result
   // удалить нулевой элемент
   list.splice(0, 1)
+
   // list.
+  // console.log('🔰NEW LIST', list)
   return list
 }
 
 watch(carcStore.carc.items, async () => {
-  console.log('🔰calculateList')
   recalc()
+  // console.log('🔰recalc', list.value)
 })
 const recalc = () => (list.value = calculateList())
 recalc()
@@ -58,12 +108,15 @@ recalc()
     </div>
   </div>
 </template>
-<style scoped>
-.stripe {
-  /* background: gold; */
-  /* border-bottom: 1px solid var(--m3-color-muted-3); */
-}
-.stripe:nth-child(even) {
+<style scoped lang="scss">
+  // чётные полосы
+.stripe:nth-child(odd) {
   background-color: var(--m3-bg-even);
 }
+
+
+
+/* .stripe {
+  outline: 1px solid rgba(0, 0, 255, 0.201);
+} */
 </style>

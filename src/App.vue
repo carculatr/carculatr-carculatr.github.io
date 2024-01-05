@@ -47,7 +47,7 @@ if (!carcStore.carc?.set?.themes?.theme) {
   </main>
 </template>
 
-<style>
+<style lang="scss">
 body {
   background: var(--m3-bg);
   padding: none;
@@ -58,8 +58,15 @@ main {
   left: 0;
   background: var(--m3-bg);
   /* background: red !important; */
-  min-height: 100px;
-  height: 100vh;
+  min-height: 100vh;
+  /* height: 30%; */
+  height:310%;
+  /* position: relative; */
+// padding: 333px;
+padding-top:10vh;
+  // отступ после
+  padding-bottom:30vh
+
 }
 
 @media (min-width: 1024px) {

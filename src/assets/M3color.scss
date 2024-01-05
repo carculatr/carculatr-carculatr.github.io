@@ -28,22 +28,23 @@
   --m3-color-accent: tomato;
   --m3-bg: #181818;
   --m3-color: rgb(255, 255, 255);
-  --m3-color-muted-1: #ababab;
-  --m3-color-muted-2: #7c7c7c;
-  --m3-color-muted-3: #4a4a4a;
+  --m3-color-muted-1: #d2d2d2;
+  --m3-color-muted-2: #696969;
+  --m3-color-muted-3: #3c3c3c;
   --m3-color-grid: rgb(69, 69, 69);
   --m3-color-grid-muted: rgba(71, 71, 71, 0.644);
   --m3-bg-popup: rgb(28, 28, 28);
   --m3-backdrop: rgba(255, 255, 255, 0.156);
-    --m3-bg-even: rgba(119, 119, 119, 0.173);
+  --m3-bg-even: rgba(119, 119, 119, 0.173);
+  --m3-color-tt1: var(--m3-color-muted-1);
+  --m3-color-tt2: var(--m3-color-muted-1);
   &.colorTT {
     --m3-color-tt1: rgba(0, 217, 0, 0.83);
     --m3-color-tt2: rgb(255, 0, 0);
   }
-    &.M3colorGrid {
+  &.M3colorGrid {
     --m3-color-grid: gold;
   }
-
 }
 .M3black {
   --m3-bg: #000000;
@@ -51,7 +52,7 @@
   --m3-color-muted-2: #606060;
   --m3-color-muted-3: #2d2d2d;
   --m3-backdrop: rgba(93, 93, 93, 0.329);
-    --m3-bg-even: rgba(163, 163, 163, 0.115);
+  --m3-bg-even: rgba(163, 163, 163, 0.115);
 }
 .M3ColorGrid {
   --m3-color-grid-muted: rgba(255, 47, 0, 0.355);
