@@ -1,0 +1,25 @@
+* {
+  --accent-color: tomato;
+  --border-color: rgb(213, 213, 213);
+}
+/*убрать крестик из инпутов search */
+input::-webkit-search-cancel-button {
+  display: none;
+}
+input {
+  text-align: center;
+  outline: none;
+  font-size: 40px;
+  background: rgb(255, 255, 255);
+  border: 6px solid var(--border-color);
+  /* border: 6px solid rgb(206, 206, 206); */
+  border-radius: 16px;
+  /* margin:10px; */
+  padding: 4px 9px;
+}
+input:active,
+input:focus {
+  /* background: red; */
+  /* border-color:rgb(0, 128, 255); */
+  border-color: var(--accent-color);
+}

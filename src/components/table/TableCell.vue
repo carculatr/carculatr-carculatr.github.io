@@ -120,8 +120,8 @@ watch(carcStore.carc.items, async () => {
     </div>
   </td>
 </template>
-<style scoped>
-@import url('TableCell.scss');
+<style scoped lang="scss">
+@import '_TableCell';
 td {
   font-size: 10px;
 }

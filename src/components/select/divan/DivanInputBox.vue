@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import InputMeterTips from './InputMeterTips.vue'
+import PopUp from '@/components/PopUp.vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
 const props = defineProps(['onHide-input',/*'movOFFie',*/ 'index' /*, 'inputOrPreview'*/])
@@ -167,14 +168,8 @@ onMounted(() => {
 </template>
 
 <style scoped>
-* {
-  --accent-color: tomato;
-  --border-color: rgb(213, 213, 213);
-}
-/*убрать крестик из инпутов search */
-input::-webkit-search-cancel-button {
-  display: none;
-}
+@import '@/assets/css/_input.scss';
+
 /*контейнер для обоих инпутов одного наименования */
 .value {
   z-index: 6;
@@ -189,23 +184,6 @@ input::-webkit-search-cancel-button {
   align-items: center;
 }
 
-input {
-  text-align: center;
-  outline: none;
-  font-size: 40px;
-  background: rgb(255, 255, 255);
-  border: 6px solid var(--border-color);
-  /* border: 6px solid rgb(206, 206, 206); */
-  border-radius: 16px;
-  /* margin:10px; */
-  padding: 4px 9px;
-}
-input:active,
-input:focus {
-  /* background: red; */
-  /* border-color:rgb(0, 128, 255); */
-  border-color: var(--accent-color);
-}
 
 .meterPc,
 .boxPc {

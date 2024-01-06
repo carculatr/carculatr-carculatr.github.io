@@ -55,7 +55,7 @@ const emit = defineEmits(['update:modelValue'])
   </div>
 </template>
 <style scoped lang="scss">
-@import url('TableCell.scss');
+@import '_TableCell';
 .backdrop {
 }
 .backdrop {

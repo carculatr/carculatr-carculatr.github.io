@@ -1,0 +1,24 @@
+@mixin mixin-psevdo-plus($property) {
+  border-radius: 50%;
+  &:before,
+    &:after {
+    
+    content: '';
+    position: absolute;
+    width: 40%;
+    left: 30%;
+    height: 6%;
+    top: 47%;
+    background: $property;
+  }
+  &:after {
+    width: 6%;
+    left: 47%;
+    height: 40%;
+    top: 30%;
+  }
+}
+
+// .psevdoPlus {
+//   // @include mixin-psevdo-plus(var(--m3-color));
+// }
