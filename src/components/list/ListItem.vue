@@ -1,17 +1,21 @@
 <script setup>
 import ListItemPcBox from './ListItemPcBox.vue'
+import ListItemRollBox from './ListItemRollBox.vue'
 const props = defineProps(['valItem'])
 const sum = props.valItem[0].toFixed(2) * 1
 </script>
 
 <template>
+    <!--  подходящие ролики  -->
+  <ListItemRollBox :sum="sum" />
   <div class="carc-list-item">
     <div class="grid-warp">
-      <ListItemPcBox :pc5="props.valItem[1]" />
+      <ListItemPcBox :pcs="props.valItem[1]" />
       <div class="grid-sum sum">{{ sum }}</div>
       <div class="grid-poltora poltora">{{ (sum + 1.5).toFixed(2) }}</div>
     </div>
   </div>
+
 </template>
 
 <style lang="scss" scoped>
@@ -44,9 +48,11 @@ const sum = props.valItem[0].toFixed(2) * 1
   align-items: center;
 }
 .poltora {
-   align-items: center;
-   justify-content: flex-start
+  align-items: center;
+  justify-content: flex-start;
 }
+
+
 </style>
 
 <!-- 

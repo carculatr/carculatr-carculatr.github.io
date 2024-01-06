@@ -27,10 +27,9 @@ const carcStore = useCarcStore()
   </div>
 </template>
 <style scoped lang="scss">
-button {
-  /* width: 133px; */
-  /* height: 1 33px; */
-  /* position: fixed; */
+.wrap{
+  position: relative;
+  z-index: 2;
 }
 .box {
   display: flex;

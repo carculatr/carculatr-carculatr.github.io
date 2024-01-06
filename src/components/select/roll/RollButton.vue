@@ -21,6 +21,10 @@ const carcStore = useCarcStore()
 <style scoped lang="scss">
 // @import url('@/assets/css/psevdoPlus');
 @import '@/assets/css/psevdoPlus';
+.wrap{
+  position: relative;
+  z-index: 2;
+}
 .box {
   opacity: 0.8;
   display: flex;

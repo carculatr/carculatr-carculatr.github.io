@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { useCarcStore } from '@/stores/dataForCalculation'
 import ListItem from './ListItem.vue'
+import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
 let list = ref([])
 const maxLentgh = 70 //максимальная длинна рассчитываемого ролика
@@ -114,9 +114,6 @@ recalc()
   background-color: var(--m3-bg-even);
 }
 
-
-
-/* .stripe {
-  outline: 1px solid rgba(0, 0, 255, 0.201);
-} */
+//скрыть метражи не подходящие под ролики
+// .stripe:not(:has(.approach)){ display: none;}
 </style>

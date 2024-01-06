@@ -1,14 +1,14 @@
 <script setup>
 import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
-defineProps(['pc5'])
+defineProps(['pcs'])
 const m1 = carcStore.carc.items[0].meter
 const m2 = carcStore.carc.items[1].meter
 </script>
 
 <template>
   <div class="decrypt">
-    <div class="pc-boxes" :key="pc" v-for="pc in pc5">
+    <div class="pc-boxes" :key="pc" v-for="pc in pcs">
       <div class="pc-box" v-if="pc[0]">
         <div class="m">{{ m1 }}</div>
         <div class="x">x</div>
