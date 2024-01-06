@@ -4,12 +4,12 @@ import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
 
 // значение инпута
-const inputVal = ref('44')
+const inputVal = ref('')
 // #TODO чтобы нельзя было вводить что то кроме чисел и точки
 watch(inputVal, (newValue) => {
   // если метраж больше 80, то удалить последний символ
   //# TODO если удаляем, то сделать инпут на секунду красным
-  if (newValue > 80) {
+  if (newValue > 99) {
     setTimeout(() => {
       inputVal.value = newValue.slice(0, -1)
     }, 100)
@@ -42,15 +42,25 @@ const removeRoll = (roll) => {
   console.log(roll)
   carcStore.carc.rolls.splice(roll, 1)
 }
+
+onMounted(() => {  
+  setTimeout(() => {
+    // при открытии выделять первый инпут
+    inputRoll.value.focus()
+    //и выделять в нём текст
+    inputRoll.value.select()
+  }, 0)
+})
 </script>
 
 <template>
   <div class="wrap">
     <div class="inputContaner">
       <input
+      autofocus
         ref="inputRoll"
         v-model="inputVal"
-        placeholder="m"
+        placeholder="Введите метраж"
         v-on:keyup.enter="addRoll"
         type="search"
         inputmode="numeric"
@@ -73,21 +83,28 @@ const removeRoll = (roll) => {
 @import '@/assets/css/_input';
 @import '@/assets/css/_psevdoPlus';
 
+input::placeholder {
+  // background: #000;
+  font-size: 14px;
+  display: block;
+  // width:40px
+
+}
 .wrap {
   display: flex;
   // justify-content: center;
   // align-items: center;
   // flex-direction: column;
   // flex-wrap: wrap;
-flex-direction: column;
-align-items: center;
+  flex-direction: column;
+  align-items: center;
   // position: absolute;
   z-index: 2;
   // background: rgba(14, 14, 14, 0.786);
   // background: rgba(255, 0, 0, 0.132);
-min-height: 120px;
+  min-height: 120px;
 
-// transition:3s;
+  // transition:3s;
   // width: 100%;
   // width: 600px;
   //  height: 300px;
@@ -111,16 +128,14 @@ min-height: 120px;
   padding: 0.3em;
   border-radius: 2em;
   border: none;
-
 }
-
 
 //ширина инпута
-input{
-  width:140px
+input {
+  width: 140px;
 }
 button.add-roll {
-    --m3-color: rgb(93, 93, 93);
+  --m3-color: rgb(93, 93, 93);
   @include mixin-psevdo-plus(var(--m3-color));
   will-change: transform, box-shadow;
   font-size: 2.7em;
@@ -135,11 +150,11 @@ button.add-roll {
   /* height:50px; */
   transition: 0.4s ease-out;
   // transition: 0.4s cubic-bezier(.64,1.58,.85,.95);
-  transform: rotate(0deg) ;
-  
+  transform: rotate(0deg);
+
   &:disabled {
-      // --m3-color: rgb(202, 202, 202);
-      opacity:0.5;
+    // --m3-color: rgb(202, 202, 202);
+    opacity: 0.5;
     box-shadow: 0 0 0px 0px black;
     // background: #ffffff00;
     transform: rotate(225deg);

@@ -7,7 +7,7 @@ const carcStore = useCarcStore()
 // const showPopup = ref(true)
 const popupContant = ref('')
 // const popupContant = ref('inputRoll')
-// setTimeout(() => (carcStore.sessionCarc.popup[0] = 'inputRoll'), 100)
+// setTimeout(() => (carcStore.sessionCarc.popup[0] = 'inputRoll'), 0)
 const close = () => {
   carcStore.sessionCarc.popup[0] = ''
 }
@@ -23,36 +23,50 @@ watch(carcStore.sessionCarc.popup, async (newVal) => {
 <template>
   <div class="backdrop" @click="close" v-show="popupContant">
     <!-- <div class="backdrop" @click="showPopup = false" v-if="showPopup"> -->
-    <div class="popup" v-on:click.stop>
-      <div class="close" @click="close"></div>
-      <!-- {{ carcStore.sessionCarc.popup }} -->
-      <CarcSetting v-if="popupContant == 'settings'" />
-      <RollInputBox v-if="popupContant == 'inputRoll'" />
+    <div class="animate-warp">
+      <div class="popup" v-on:click.stop>
+        <div class="close" @click="close"></div>
+        <!-- {{ carcStore.sessionCarc.popup }} -->
+        <CarcSetting v-if="popupContant == 'settings'" />
+        <RollInputBox v-if="popupContant == 'inputRoll'" />
+      </div>
     </div>
   </div>
 </template>
 
-<style>
-/* размыть кроме попапа */
-body.m3popup .blur > * {
-  filter: blur(3px);
-}
-</style>
 <style scoped lang="scss">
+.animate-warp {
+  // background: rgba(255, 99, 71, 0.334);
+  height: 100dvh;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s .01s ease-out;
+}
+
+
+.popup {
+  transition: 0.2s .01s ease-out;
+  transform: translateY(-50px);
+}
+@media (max-height: 400px) {
+  .popup {
+    transform: translateY(0px);
+  }
+}
 .backdrop {
+  // padding-bottom: 30%;//🌾
   overflow: hidden;
   z-index: 30;
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 100%;
+  height: 100dvh;
 
   position: fixed;
 
   // background: rgba(21, 21, 21, 0.878);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
   // .M3dark &{background: rgba(255, 255, 255, 0.726);}
   backdrop-filter: blur(0px);
 
@@ -78,6 +92,8 @@ body.m3popup .blur > * {
 }
 
 .popup {
+  // transform:translateY(-100px);
+  max-width: 90vw;
   position: relative;
   padding: 40px 30px 30px;
   border-radius: 10px;
