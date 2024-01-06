@@ -3,7 +3,7 @@ import CarcSetting from './CarcSetting.vue'
 import { ref, watch } from 'vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
-const showPopup = ref(true)
+// const showPopup = ref(true)
 const popupContant = ref('')
 const close = () => {
   carcStore.sessionCarc.popup[0] = ''
@@ -16,9 +16,7 @@ watch(carcStore.sessionCarc.popup, async (newVal) => {
     document.body.classList.add("m3popup")
   }
 })
-// setTimeout(() => {
-//   carcStore.sessionCarc.popup[0] = "";
-// }, 1000);
+
 </script>
 <template>
   <div class="backdrop" @click="close" v-show="popupContant">
@@ -45,15 +43,37 @@ body.m3popup .blur>*{
   left: 0px;
   width: 100%;
   height: 100%;
-
+  
   position: fixed;
-  background: var(--m3-backdrop);
+
   // background: rgba(21, 21, 21, 0.878);
   display: flex;
   justify-content: center;
   align-items: center;
   // .M3dark &{background: rgba(255, 255, 255, 0.726);}
+  backdrop-filter: blur(0px);
+
+  animation: blur .7s;
+// чтобы анимция останаливалась в конечной позиции
+  animation-fill-mode: forwards;
 }
+//keyframes для плавного появления блюра
+@keyframes blur {
+  0% {
+    backdrop-filter: blur(0px);
+    // background: red;
+  }
+ 50% {
+    // backdrop-filter: blur(5px);
+    // background: blue;
+  }  100% {
+    backdrop-filter: blur(2px);
+      background: var(--m3-backdrop);
+    // background: blue;
+  }
+}
+
+
 
 .popup {
   position: relative;
@@ -62,7 +82,10 @@ body.m3popup .blur>*{
   /* width: 50%; */
   /* height: 50%; */
   background: var(--m3-bg-popup);
+// background: rgba(255, 255, 255, 0.785);
+  // backdrop-filter: blur(3px);
   color: var(--m3-color);
+  box-shadow: 0 0 20px #0000003e;
   // background:rgb(49, 49, 49);
   /* width:; */
 }

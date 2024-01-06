@@ -1,5 +1,5 @@
 <script setup>
-import InputBox from './InputBox.vue'
+import DivanInputBox from './DivanInputBox.vue'
 import DivanButton from './DivanButton.vue'
 import { ref } from 'vue'
 
@@ -8,29 +8,19 @@ const carcStore = useCarcStore()
 
 const inputOrPreview = ref(false) //показывать ли попап с вводом
 
-
 const inputShow = function () {
   document
     .querySelector('meta[name="viewport"]')
     .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no')
 
-  // var scale = 'scale(1)'
-  // document.body.style.msTransform = scale // IE 9
-  // document.body.style.transform = scale // General
-  // alert('l')
-
-  // console.log('🍓')
   inputOrPreview.value = true
 }
-// const inputHide = function (data) {
-//   console.log('🔰inputHide', data)
-// }
+
 const inputHide = function (p) {
   console.log('🔰inputHide', p)
   //изменить масштаб
-  document
-    .querySelector('meta[name="viewport"]')
-    // .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
+  document.querySelector('meta[name="viewport"]')
+  // .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
 
   // При закрытии поля ввода записать в подсказки
   carcStore.carc.items.forEach((item) => {
@@ -47,15 +37,13 @@ const inputHide = function (p) {
     <div id="box" v-if="inputOrPreview">
       <div class="back-drop" @click="inputHide"></div>
       <div class="close" @click="inputHide"></div>
-      <InputBox
+      <DivanInputBox
         @inputHide="inputHide"
         v-model="inputHide"
         v-for="(movie, index) of carcStore.carc.items"
         :key="index"
         :index="index"
       />
-      <!-- @hide-input="inputHide" -->
-      <!-- v-model="inputOrPreview" -->
     </div>
     <!-- либо кнопки -->
     <DivanButton @click="inputShow" v-if="!inputOrPreview" />
@@ -63,10 +51,7 @@ const inputHide = function (p) {
 </template>
 
 <style scoped>
-* {
-  --accent-color: tomato;
-  --border-color: rgb(213, 213, 213);
-}
+
 
 #box {
   z-index: 6;
@@ -88,21 +73,7 @@ const inputHide = function (p) {
   left: 0px;
   height: 100%;
 }
-#boxNEW.TEST {
-  -webkit-text-size-adjust: none;
-  text-size-adjust: none;
-  /* touch-action: none; */
-  /* touch-action: pan-x pan-y; */
-  background: red;
-  height: 99%;
-  width: 99%;
-  /* height: 100vh; */
-  /* width: 100vw; */
-  position: fixed;
-  z-index: 6;
-  top: 0;
-  left: 0;
-}
+
 
 .close {
   cursor: pointer;

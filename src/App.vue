@@ -33,7 +33,7 @@ if (!carcStore.carc?.set?.themes?.theme) {
       }
     ]"
   >
-    <div class="blur">
+    <!-- <div class="blur"> -->
       <RollBox />
       <DivanBox />
       <!-- {{  }} -->
@@ -42,7 +42,7 @@ if (!carcStore.carc?.set?.themes?.theme) {
       <ListBox v-if="!carcStore.carc.set.grid" />
       <TableBox v-if="carcStore.carc.set.grid" :store="carcStore.carc.items" />
       <!-- <TableBox :meter1="3" :meter2="4" :store="carcStore.carc.items" /> -->
-    </div>
+    <!-- </div> -->
     <PopUp />
   </main>
 </template>
@@ -54,6 +54,7 @@ body {
   margin: none;
 }
 main {
+  user-select: none;
   top: 0;
   left: 0;
   background: var(--m3-bg);

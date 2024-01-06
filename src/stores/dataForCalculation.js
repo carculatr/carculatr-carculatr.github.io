@@ -3,9 +3,9 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 
 export const useCarcStore = defineStore('CarculatorStore', () => {
- const sessionCarc = ref({
-   popup:[''] 
- })
+  const sessionCarc = ref({
+    popup: ['']
+  })
   const carc = ref({
     items: [
       {
@@ -17,6 +17,7 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
         pc: '3'
       }
     ],
+    rolls: [],
     tips: [
       // [8, 1, 1],
       // [3, 1, 2]
@@ -31,7 +32,6 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
       grid: false
     }
   })
- 
 
   //кол-во элементов для которых делать увеличенный индекс = кол-ву инпутов
   const quantityItems = carc.value.items.length
@@ -127,9 +127,19 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
   //чтение из localStorage
   const carcInLocalStorage = localStorage.getItem('carc')
   if (carcInLocalStorage) {
-    carc.value = JSON.parse(carcInLocalStorage)._value
+    // carc.value = JSON.parse(carcInLocalStorage)._value
+    const newVal = JSON.parse(carcInLocalStorage)._value
+    carc.value = merge(carc.value, newVal)
   }
-
+  function merge(obj1, obj2) {
+    var res = Object.assign({}, obj1, obj2)
+    for (var key in obj1) {
+      if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+        res[key] = Object.assign(obj1[key], obj2[key])
+      }
+    }
+    return res
+  }
   //зпись в localStorage
   watch(
     () => carc,

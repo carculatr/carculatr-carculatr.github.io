@@ -8,49 +8,64 @@ const carcStore = useCarcStore()
     <!-- 🐥 -->
 
     <div class="box">
-      <button class="meterBox" v-if="carcStore.carc.items[0].meter">
-        {{ carcStore.carc.items[0].meter }}
-        <div class="pc" v-if="carcStore.carc.items[0].pc">
-          {{ carcStore.carc.items[0].pc }}<span class="pc-description">шт</span>
-        </div>
-      </button>
-      <!-- <div v-else>0</div> -->
-      <button class="meterBox" v-if="carcStore.carc.items[1].meter">
-        {{ carcStore.carc.items[1].meter }}
-        <div class="pc" v-if="carcStore.carc.items[1].pc">
-          {{ carcStore.carc.items[1].pc }}<span class="pc-description">шт</span>
-        </div>
-      </button>
+      <div :key="val" v-for="val in carcStore.carc.rolls">
+        <button class="meterBox">
+          {{ val }}
+        </button>
+      </div>
     </div>
 
     <!-- 🐥 -->
   </div>
 </template>
 <style scoped lang="scss">
-button {
-  /* width: 133px; */
-  /* height: 1 33px; */
-  /* position: fixed; */
-}
-.box {
+.box {opacity: 0.8;
   display: flex;
   flex-direction: column;
 
-  font-size: 1.4em;
+  font-size: 1.1em;
   position: fixed;
   bottom: 5px;
-  right: 5px;
+  left: 5px;
   z-index: 1;
   /* Если обнулены все поля, то сделать весь экран кнопкой */
-  &:empty {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.123);
+  &:empty {//🥕
+    opacity:0.4;
+    margin: 0px;
+    color: var(--m3-color);
+    color: white;
+    width: 2.7em;
+    height: 2.7em;
+    background: rgb(0, 0, 0);
+    border-radius: 50%;
+    // font-size: 1em;
+    transform: scale(0.8);
+    &:before,//🥕
+    &:after {//🥕
+      content: '';
+      position: absolute;
+      width: 60%;
+      left: 20%;
+      height: 6%;
+      top: 47%;
+      background: rgb(255, 255, 255);
+    }
+    &:after {//🥕
+      content: '';
+      position: absolute;
+      width: 6%;
+      left: 47%;
+      height: 60%;
+      top: 20%;
+      background: rgb(255, 255, 255);
+    }
   }
 }
-
 .meterBox {
-  // text-shadow: #ff0000 3px 3px 1px;
+  display: flex; //🥕
+  justify-content: center; //🥕
+  align-items: center; //🥕
+  text-shadow: #0000009f 0px 0px 3px; //🥕
   margin: 6px;
   color: var(--m3-color);
   color: white;
@@ -68,14 +83,14 @@ button {
     // background: red !important;
   }
   .pc {
-    margin-left:0.2em;
+    margin-left: 0.2em;
     line-height: 1.6em;
     position: relative;
     top: -20px;
     font-size: 0.7em;
     opacity: 0.8;
     .pc-description {
-      margin-left:0.2em;
+      margin-left: 0.2em;
       font-size: 0.8em;
       opacity: 0.4;
     }

@@ -34,44 +34,6 @@ var plus = function () {
   // carcStore.carc.items[props.index].pc = this.counter
 }
 
-// const inputMeter = ref()
-// const inputMeter ="i";
-//стереть данные поля
-
-// const eraser3 = function () {
-//   // meter.value = ''
-//   // counter.value = ''
-//   // Сделать активным поле ввода
-//   // inputMeter.value.focus()
-
-//   // console.log(el);
-//   // console.log(this.inputMeter)
-//   // this.inputMeter.select()
-//   // .select()
-//   // selectTxt(inputMeter._value);
-//   // selectTxt(inputMeter.value);
-//   // inputMeter.value.select()
-// //  inputMeter.value.focus()
-//   // inputMeter.value.focus()
-//   // console.log(  inputMeter.value)
-//   // const inputMeter ="i";
-// //стереть данные поля
-//   // meter.value = ''
-//   // counter.value = ''
-//   // Сделать активным поле ввода
-//   // inputMeter.value.focus()
-
-//   // console.log(el);
-//   // console.log(this.inputMeter)
-//   // this.inputMeter.select()
-//   // .select()
-//   // selectTxt(inputMeter._value);
-//   // selectTxt(inputMeter.value);
-//   // inputMeter.value.select()
-// //  inputMeter.value.focus()
-//   // inputMeter.value.focus()
-//   console.log(  inputMeter.value.)
-// }
 //При клике в поле выделять текст
 var selectTxt = function (el) {
   el.target.select()
@@ -158,9 +120,6 @@ onMounted(() => {
 <template>
   <div class="wrap">
     <div class="value">
-      <!-- <button @click="$emit('hid4e-input','qwe')">
-      Вызвать родительский filledInput 
-    </button> -->
       <!-- Метраж -->
       <div class="meterPc">
         <input
