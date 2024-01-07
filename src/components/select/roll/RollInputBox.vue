@@ -26,7 +26,7 @@ const checkValInput = ref(() => {
 // инпут (для фитльтрации и фокуса)
 const inputRoll = ref()
 const addRoll = () => {
-  // еси значение в инпуте прошло проверку
+  // если значение в инпуте прошло проверку
   if (checkValInput.value()) {
     // избавляемся от лишниих нулей после запяой и округляем до 2 знаков после запятой
     const numReduce = Number(Number(inputVal.value).toFixed(2))

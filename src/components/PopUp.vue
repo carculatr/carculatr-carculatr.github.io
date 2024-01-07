@@ -47,7 +47,7 @@ watch(carcStore.sessionCarc.popup, async (newVal) => {
 
 .popup {
   transition: 0.2s .01s ease-out;
-  transform: translateY(-50px);
+  // transform: translateY(-50px);
 }
 @media (max-height: 400px) {
   .popup {

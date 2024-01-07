@@ -10,7 +10,7 @@ function chengeTheme(theme) {
   <div>
     <button
       :class="['grid-switcher', { act: carcStore.carc.set.grid }]"
-      @click="carcStore.setGrid()"
+      @click="carcStore.setBolean('grid')"
     >
       <span> список </span><span> таблица </span>
     </button>
@@ -22,23 +22,84 @@ function chengeTheme(theme) {
 
     <button class="color-grid" @click="chengeTheme('M3colorGrid')">Цветная сетка</button><br />
     <button class="color" @click="chengeTheme('colorTT')">
-      <span class="color1">Цв</span>етные циф<span class="color2">ры</span></button
-    ><br />
+      <span class="color1">Цв</span>етные циф<span class="color2">ры</span>
+    </button>
+    <br />
+    <div class="checkbox-container">
+      <div class="cbd">
+        <input
+          class="cbd-input"
+          type="checkbox"
+          id="cbd"
+          v-model="carcStore.carc.set.onlyWithRoll"
+        />
+        <label class="cbd-label" for="cbd">
+          <label class="cbd-label-aux" for="cbd"> </label>
+        </label>
+        <label for="cbd">
+          <!-- <label class="cbd-label-aux" for="cbd">🥕fkdjkdkdfjfjfjdkl</label> -->
+        </label>
+      </div>
+      <div>
+        Показывать только <br />
+        метражи c роликами
+      </div>
+    </div>
+    <div class="checkbox-container">
+      <div class="cbd">
+        <input class="cbd-input" type="checkbox" id="cbd2" v-model="carcStore.carc.set.grouped" />
+        <label class="cbd-label" for="cbd2">
+          <label class="cbd-label-aux" for="cbd2"> </label>
+        </label>
+        <label for="cbd2">
+          <!-- <label class="cbd-label-aux" for="cbd">🥕fkdjkdkdfjfjfjdkl</label> -->
+        </label>
+      </div>
+      <div>
+        Группировать <br />
+        одинаковые метражи
+      </div>
+    </div>
 
-    <!-- <br />
     <button>
       Дополнительно шт<br />
-      <button class="smallBtn" @click="chengeTheme('OFF')">+</button>
-      3
-      <button class="smallBtn" @click="chengeTheme('OFF')">-</button><br />
+      <button
+        class="smallBtn"
+        :class="[carcStore.carc.set.additive === '0' ? 'select' : '']"
+        @click="carcStore.setAdditive('0')"
+      >
+        0
+      </button>
+      <button
+        class="smallBtn"
+        :class="[carcStore.carc.set.additive === '1' ? 'select' : '']"
+        @click="carcStore.setAdditive('1')"
+      >
+        1
+      </button>
+      <button
+        class="smallBtn"
+        :class="[carcStore.carc.set.additive === '2' ? 'select' : '']"
+        @click="carcStore.setAdditive('2')"
+      >
+        2
+      </button>
+      <button
+        class="smallBtn"
+        :class="[carcStore.carc.set.additive === '3' ? 'select' : '']"
+        @click="carcStore.setAdditive('3')"
+      >
+        3
+      </button>
       <div class="description">
         Рассчитывать дополнительно несколько штук приглушенным цветом к указанному кол-ву
       </div>
-    </button> -->
+    </button>
   </div>
 </template>
 
 <style scoped lang="scss">
+@import '@/assets/css/_inputCheckbox';
 .colorTT .color1 {
   color: var(--m3-color-tt1);
 }
@@ -133,17 +194,25 @@ button {
   }
 }
 .smallBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   // background: red;
-  width: 40px;
-  font-size: 23px;
+  width: 27.5px;
+  height: 27.5px !important;
+  font-size: 1.4em;
   font-family: 'Courier New', Courier, monospace;
   height: 40px;
   border-radius: 50%;
+  &.select {
+    // background: red;
+    border: tomato solid;
+  }
 }
 .description {
   color: var(--m3-color-muted-2);
   font-size: 12px;
   max-width: 180px;
-  
 }
 </style>

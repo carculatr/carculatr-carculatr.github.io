@@ -18,18 +18,26 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
       }
     ],
     rolls: [],
+    rollTips: [],
     tips: [
+      //сохранение метражей для переиспользования
       // [8, 1, 1],
-      // [3, 1, 2]
+      // [
+      //   3,//метраж
+      //   1,//?
+      //   2 //?
+      // ]
     ],
-    // tips: [8, 3.25, 7.2, 3, 11.11, 9.25, 10, 15.35, 7.35, 5.5, 5.5, 5.5],
     set: {
-      // themes: {
-      //   theme:"light",
-      //   colorTT: true,
-      //   cologGrid:false,
-      // },
-      grid: false
+      themes: {
+        theme: 'light',
+        colorTT: true, //цветные цифры
+        cologGrid: true //цветная сетка
+      },
+      additive: 0, //дополнительно рассчитывать ШТ приглушенным цветом
+      onlyWithRoll: true, //показывать только строки с роликами
+      grouped: false, //группировать с одинаковым метражом
+      grid: false //сетка
     }
   })
 
@@ -121,8 +129,11 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
       carc.value.set.themes.theme = theme
     }
   }
-  const setGrid = () => {
-    carc.value.set.grid = !carc.value.set.grid
+  const setBolean = (func) => {
+    carc.value.set[func] = !carc.value.set[func]
+  }
+  const setAdditive = (n) => {
+    carc.value.set.additive = n
   }
   //чтение из localStorage
   const carcInLocalStorage = localStorage.getItem('carc')
@@ -159,6 +170,7 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     setMeter,
     setPc,
     setTheme,
-    setGrid
+    setBolean,
+    setAdditive
   }
 })

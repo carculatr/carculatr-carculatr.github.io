@@ -1,21 +1,19 @@
 <script setup>
-import { useCarcStore } from '@/stores/dataForCalculation'
-const carcStore = useCarcStore()
-defineProps(['sum'])
+defineProps(['valItem'])
 </script>
 
 <!-- #TODO показать и те на которые немного не хватает -->
 <template>
-  <div class="approach-box">
-    <template :key="roll" v-for="roll in carcStore.carc.rolls">
-      <div class="approach" v-if="roll >= sum && roll <= sum + 1.5">
+  <div class="witch-roll-box">
+    <template :key="roll" v-for="roll in valItem[2]">
+      <div class="witch-roll">
         <div>
-          Ролик <span>{{ roll }}</span
-          ><m>m</m>
+          Ролик <span>{{ roll[0] }}</span
+          ><i>m</i>
         </div>
         <div>
-          запас <span>{{ (roll - sum).toFixed(2) * 1 }}</span
-          ><m>m</m>
+          запас <span>{{ roll[1] }}</span
+          ><i>m</i>
         </div>
       </div>
     </template>
@@ -23,7 +21,7 @@ defineProps(['sum'])
 </template>
 
 <style lang="scss" scoped>
-.approach-box {
+.witch-roll-box {
   z-index: 1;
   position: relative;
   display: flex;
@@ -37,7 +35,7 @@ defineProps(['sum'])
     display: none;
   }
 }
-.approach {
+.witch-roll {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
@@ -52,22 +50,22 @@ defineProps(['sum'])
   overflow: hidden;
   // border: 1px solid rgb(0, 0, 0);
   border-bottom-left-radius: 0;
-&::before{
-  content: '';
-  transform:rotate(45deg);
-  background: rgba(0, 0, 0, 0.367);
-  position: absolute;
-  bottom: -15px;
-  left: -15px;
-  width:  23.9px;
-  height: 23.9px;;
-}
-  &   span {
+  &::before {
+    content: '';
+    transform: rotate(45deg);
+    background: rgba(0, 0, 0, 0.367);
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 23.9px;
+    height: 23.9px;
+  }
+  & span {
     font-size: 1.7em;
     line-height: 1em;
   }
-  m {
-     font-size: 0.9em;
+  i {
+    font-size: 0.9em;
     margin-left: 2px;
     opacity: 0.6;
   }

@@ -1,0 +1,56 @@
+
+.cbd {
+	width: 49.3px;
+	height: 27px;
+	overflow: hidden;
+	border-radius: 20px;
+}
+
+.cbd-label {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: relative;
+	background-color: #90898938;
+	transition: background-color .3s;
+	-o-transition: background-color .3s;
+	-moz-transition: background-color .3s;
+	-webkit-transition: background-color .3s;
+}
+
+.cbd-label-aux {
+	top: 3px;
+	left: 4px;
+	width: 21px;
+	height: 21px;
+	display: block;
+	position: absolute;
+	border-radius: 100%;
+	transition: transform .3s;
+	background-color: var(--m3-bg);
+	box-shadow: 0px 1px 5px 0px rgba(56,55,56,0.61);
+}
+
+.cbd-input:checked + .cbd-label {
+	background-color: var(--m3-color-accent);
+}
+
+.cbd-input:checked + .cbd-label .cbd-label-aux {
+	// left: 33px;
+  transform:translateX(20px)
+}
+
+.cbd-input {
+	display: none;
+}
+
+
+
+.checkbox-container{
+  display: flex;
+  align-items: center
+}
+.checkbox-container>div{
+  line-height: 1em;
+  margin: 4px;
+}

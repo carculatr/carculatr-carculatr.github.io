@@ -6,18 +6,8 @@ const carcStore = useCarcStore()
 let list = ref([])
 const maxLentgh = 70 //максимальная длинна рассчитываемого ролика
 
-//🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
-// const pc2 = ref(carcStore.carc.items[1].pc)
-// setTimeout(() => {
-//   // pc1.value++;
-//   pc2++;
-//   console.log("🔵")
-//   recalc()
-// }, 2000);
-
-// #todo рассчитать сколько штук можут быть при данном метраже чтобы не было бльших чисел
-
 const calculateList = () => {
+  //кол-во берок
   let pc1 = carcStore.carc.items[0].pc
   let pc2 = carcStore.carc.items[1].pc
 
@@ -25,9 +15,10 @@ const calculateList = () => {
   if (pc1 == 0) pc1 = 50
   if (pc2 == 0) pc2 = 50
 
+  //Метражи
   const m1 = carcStore.carc.items[0].meter
   const m2 = carcStore.carc.items[1].meter
-  let list = []
+  let LIST = []
 
   //перебот первых бирок
   for (let index1 = 0; index1 <= pc1; index1++) {
@@ -40,19 +31,26 @@ const calculateList = () => {
       let sum = index1 * m1 + index2 * m2
       // выйти из цикла если метраж больше maxLentgh
       if (sum > maxLentgh) break
-      // list.push([sum, index1, index2])
-      list.push([sum, [[index1, index2]]])
-      // console.log(`${index1}*${m1}+${index2}*${m2}=${sum}`)
+      // LIST.push([sum, index1, index2])
+      LIST.push([
+        sum, //сумма метража бирок
+        [
+          [index1, index2] //кол-во бирок
+          //[2, 1] // 2*4M + 1*2M = 10M - другие бирки
+          //[1, 3] // 1*4M + 3*2M = 10M - с таким-же метражом
+        ],
+        [] //ролики с подходящим метражом
+      ])
     }
   }
 
   // отсортировать по сумме
-  list.sort(function (a, b) {
+  LIST.sort(function (a, b) {
     return a[0] - b[0]
   })
 
   // сгруппировать повторяющиеся
-  var result = list.reduce((prev, current) => {
+  const groupSum = LIST.reduce((prev, current) => {
     //если первый элемент, задаём массив в который будем пушить
     if (prev === 0)
       prev = [
@@ -60,8 +58,9 @@ const calculateList = () => {
         [
           0, // сумма подсчёта
           [
+            // Массив для массива бирок. если будут дубли дубли метража, то внутри будет несколько массивов
             /*[5,6],[6,5]*/
-          ] // Массив для массива бирок. если будут дубли дубли метража, то внутри будет несколько массивов
+          ]
         ]
       ]
     // предыдущий элемент массива
@@ -79,37 +78,54 @@ const calculateList = () => {
 
     return prev
   }, 0)
-  // console.log(result)
-  // console.log(list)
+  LIST = groupSum
 
-  list = result
+  // записать подходящие ролики
+  if (carcStore.carc.rolls.length) {
+    //Если ролики указаны↑
+    // #TODO для производительности можно этот перебор объединить с циклом выше(группировка повторов)
+    //перебор подсчитанных сумм
+    LIST = LIST.map((sumItem) => {
+      //перебор роликов
+      carcStore.carc.rolls.forEach((roll) => {
+        //Если текущая сумма больше ролика, но не больше чем на 1.5 метра
+        if (roll > sumItem[0] && roll < sumItem[0] + 1.5) {
+          // то добавляем в мастер массив[ролик,разница],[ролик2,разница2]
+          sumItem[2].push([
+            roll,
+            Number((roll - sumItem[0]).toFixed(2))
+          ])
+          // sumItem[2].push([roll, Number(roll - sumItem[0].toFixed(2))])
+        }
+      })
+      return sumItem
+    })
+  }
+
   // удалить нулевой элемент
-  list.splice(0, 1)
-
-  // list.
-  // console.log('🔰NEW LIST', list)
-  return list
+  LIST.splice(0, 1)
+  return LIST
 }
+// вызвать при изменении бирок
+watch(carcStore.carc.items, async () => recalc())
+//вызывать при добавлении роликов
+watch(carcStore.carc.rolls, async () => recalc())
 
-watch(carcStore.carc.items, async () => {
-  recalc()
-  // console.log('🔰recalc', list.value)
-})
 const recalc = () => (list.value = calculateList())
 recalc()
 
-//🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕🥕
+
 </script>
 <template>
+  <!-- кнопка настроек -->
   <button @click="carcStore.sessionCarc.popup[0] = 'settings'">settings</button>
-  <div>
-    <div :key="val" v-for="val in list" class="stripe">
-      <ListItem :valItem="val" />
-    </div>
-  </div>
+  <!-- перебор произведений бирок -->
+  <template :key="val" v-for="val in list">
+    <ListItem :valItem="val" />
+  </template>
 </template>
 <style scoped lang="scss">
-  // чётные полосы
+// чётные полосы
 .stripe:nth-child(odd) {
   background-color: var(--m3-bg-even);
 }
