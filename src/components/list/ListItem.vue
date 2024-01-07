@@ -8,17 +8,19 @@ import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
 const checkShow = () => {
   const param1 = !carcStore.carc.rolls[0] //Если роликов нет то показывать все
-  const param2 = carcStore.carc.set //в настройках выбрано только с роликами
+  const param2 = !carcStore.carc.set.onlyWithRoll //в настройках выбрано только с роликами
   const param3 = props.valItem[2][0] //если есть подходящий ролик
-  var qwe =(param1||param2)
-  console.log('🥕', qwe, "🥕",param1,param2,param3)
+  // if(param1)  console.log('🥕', param1)
+  // if(param2)  console.log('🥕🥕', param2)
+  // if(param3)  console.log('🥕🥕🥕', param3)
+  var qwe = param1 || param2||param3
   return qwe
   // return (!carcStore.carc.set.onlyWithRoll  || props.valItem[2][0]) //если есть подходящие ролики
 }
 </script>
 
 <template>
-  {{ carcStore.carc.set.onlyWithRoll }}
+  <!-- {{ carcStore.carc.set.onlyWithRoll }} -->
   <div class="stripe" v-if="checkShow()">
     <!-- <div class="stripe" >   -->
     <!-- {{ valItem[2][0] }} -->
@@ -35,6 +37,14 @@ const checkShow = () => {
 </template>
 
 <style lang="scss" scoped>
+// нечётные полосы
+.stripe:nth-child(even) {
+  background-color: var(--m3-bg-even);
+}
+
+//скрыть метражи не подходящие под ролики
+// .stripe:not(:has(.approach)){ display: none;}
+
 .carc-list-item {
   user-select: none;
   color: var(--m3-color);

@@ -1,13 +1,17 @@
 <script setup>
+import { ref } from 'vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
 function chengeTheme(theme) {
   carcStore.setTheme(theme)
 }
+const hideSettings = ref(false)
+
+
 </script>
 <template>
   <!--  -->
-  <div>
+  <div @dblclick="hideSettings = !hideSettings">
     <button
       :class="['grid-switcher', { act: carcStore.carc.set.grid }]"
       @click="carcStore.setBolean('grid')"
@@ -25,6 +29,13 @@ function chengeTheme(theme) {
       <span class="color1">Цв</span>етные циф<span class="color2">ры</span>
     </button>
     <br />
+
+<div v-if="hideSettings" >
+
+
+
+
+
     <div class="checkbox-container">
       <div class="cbd">
         <input
@@ -95,6 +106,12 @@ function chengeTheme(theme) {
         Рассчитывать дополнительно несколько штук приглушенным цветом к указанному кол-ву
       </div>
     </button>
+
+</div>
+
+
+
+
   </div>
 </template>
 

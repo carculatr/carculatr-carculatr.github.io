@@ -51,7 +51,7 @@ const PZM3transformDebounce = debounce((param) => {
   }
 }, 200)
 const m3test = () => {
-  console.log('transform')
+  // console.log('transform')
   // PZ.smoothZoom(220, 320, 3)
 
   // PZ.getTransform()
@@ -115,7 +115,7 @@ onMounted(() => {
   })
   // после отпускания мыши
   PZ.on('panend', function (e) {
-    console.log('🥕panend')
+    // console.log('🥕panend')
     //проверить, не вылетело ли за экран
     // PZM3transformDebounce(e)
   })

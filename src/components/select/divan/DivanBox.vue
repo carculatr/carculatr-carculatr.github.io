@@ -17,7 +17,7 @@ const inputShow = function () {
 }
 
 const inputHide = function (p) {
-  console.log('🔰inputHide', p)
+  // console.log('🔰inputHide', p)
   //изменить масштаб
   document.querySelector('meta[name="viewport"]')
   // .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')

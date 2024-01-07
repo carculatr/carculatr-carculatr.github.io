@@ -16,9 +16,11 @@ if (props.rowNumber == 2 && props.lineNumber == 2) {
 }
 const invalid1 = ref(false) //ненужные но отображаемые ячейки
 // const invalid3 = ref(true) //ненужные но отображаемые ячейки
-const invalid1Length = 2
+// let qwe =
+// const invalid1Length = carcStore.carc.set.additive
 const invalid2 = ref(false) //совсем ненужные ячейки
 function ifInvalid() {
+  let invalid1Length = carcStore.carc.set.additive*1
   var ExtraPc1 = +carcStore.carc.items[0].pc /*- 1*/
   // var ExtraPc1 = +carcStore.carc.items[0].pc +2
   var ExtraPc2 = +carcStore.carc.items[1].pc /*- 1*/
