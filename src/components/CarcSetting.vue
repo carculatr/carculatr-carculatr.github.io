@@ -15,7 +15,8 @@ function chengeTheme(theme) {
 const hideSettings = ref(false)
 </script>
 <template>
-  <div @dblclick="hideSettings = !hideSettings">
+  <!-- <div @dblclick="hideSettings = !hideSettings"> -->
+  <div @dblclick="carcStore.sessionCarc.popup[0] = 'theEasterDuck'">
     <!-- <button @click="YaMetric('PC vivaldi')">PC vivaldi</button><br />
     <button @click="YaMetric('PC Yandex')">PC Yandex</button><br />
     <button @click="YaMetric('PC Chrome')">PC Chrome</button><br />

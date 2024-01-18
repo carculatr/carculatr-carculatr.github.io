@@ -1,6 +1,8 @@
 <script setup>
 import CarcSetting from './CarcSetting.vue'
 import RollInputBox from '@/components/select/roll/RollInputBox.vue'
+import theEasterPizza from '@/components/other/theEasterPizza.vue'
+import theEasterDuck from '@/components/other/theEasterDuck.vue'
 import { ref, watch } from 'vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
@@ -8,6 +10,7 @@ const carcStore = useCarcStore()
 const popupContant = ref('')
 // const popupContant = ref('inputRoll')
 // setTimeout(() => (carcStore.sessionCarc.popup[0] = 'inputRoll'), 0)
+setTimeout(() => (carcStore.sessionCarc.popup[0] = 'theEasterPizza'), 0)
 // setTimeout(() => (carcStore.sessionCarc.popup[0] = 'settings'), 0)
 const close = () => {
   carcStore.sessionCarc.popup[0] = ''
@@ -19,7 +22,6 @@ watch(carcStore.sessionCarc.popup, async (newVal, oldVal) => {
   } else {
     document.body.classList.add('m3popup')
   }
-  // написать vue 3 хук beforeUnmount
 
 })
 </script>
@@ -32,6 +34,8 @@ watch(carcStore.sessionCarc.popup, async (newVal, oldVal) => {
         <!-- {{ carcStore.sessionCarc.popup }} -->
         <CarcSetting v-if="popupContant == 'settings'" />
         <RollInputBox v-if="popupContant == 'inputRoll'" />
+        <theEasterPizza v-if="popupContant == 'theEasterPizza'" />
+        <theEasterDuck v-if="popupContant == 'theEasterDuck'" />
       </div>
     </div>
   </div>

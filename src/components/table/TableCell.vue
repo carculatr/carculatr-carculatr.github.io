@@ -77,7 +77,7 @@ watch(carcStore.carc.items, async () => {
     <div
       class="firstCell"
       v-if="props.rowNumber == 1 && props.lineNumber == 1"
-      @click="carcStore.sessionCarc.popup[0] = 'settings'"
+      @click="carcStore.sessionCarc.popup[0] = 'theEasterPizza'"
     >
       Max3
     </div>
