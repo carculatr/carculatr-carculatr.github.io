@@ -119,7 +119,7 @@ recalc()
 </script>
 <template>
   <!-- кнопка настроек -->
-  <button @click="carcStore.sessionCarc.popup[0] = 'settings'">settings</button>
+  <button @click="carcStore.sessionCarc.popup[0] = 'theEasterPizza'">settings</button>
   <!-- перебор произведений бирок -->
   <template :key="val" v-for="val in list">
     <ListItem :valItem="val" />

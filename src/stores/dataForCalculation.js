@@ -134,9 +134,10 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
   }
   const setBolean = (func) => {
     carc.value.set[func] = !carc.value.set[func]
-    m3metric('setBolean', func)
+    m3metric(func, carc.value.set[func])
   }
   const setAdditive = (n) => {
+        m3metric('Additive', n)
     carc.value.set.additive = n
   }
   //чтение из localStorage

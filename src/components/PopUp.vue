@@ -10,7 +10,7 @@ const carcStore = useCarcStore()
 const popupContant = ref('')
 // const popupContant = ref('inputRoll')
 // setTimeout(() => (carcStore.sessionCarc.popup[0] = 'inputRoll'), 0)
-setTimeout(() => (carcStore.sessionCarc.popup[0] = 'theEasterPizza'), 0)
+// setTimeout(() => (carcStore.sessionCarc.popup[0] = 'theEasterPizza'), 0)
 // setTimeout(() => (carcStore.sessionCarc.popup[0] = 'settings'), 0)
 const close = () => {
   carcStore.sessionCarc.popup[0] = ''
