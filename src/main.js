@@ -9,3 +9,8 @@ const app = createApp(App)
 app.use(createPinia())
 
 app.mount('#app')
+
+
+   setTimeout(() => {
+     ym(25355216, 'reachGoal', 'test3')
+   }, 1000)

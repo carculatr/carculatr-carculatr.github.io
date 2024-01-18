@@ -1,20 +1,10 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, } from 'vue'
 import InputMeterTips from './InputMeterTips.vue'
-import PopUp from '@/components/PopUp.vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
 const props = defineProps(['onHide-input',/*'movOFFie',*/ 'index' /*, 'inputOrPreview'*/])
-// const emit = defineEmits(['update:modelValue'])
 const emit = defineEmits(['inputHide'])
-// emit('update:modelValue')
-
-// emit('hide-input')
-// emit('onHide-input')
-    // props['onHide-input
-    // props
-
-
 
 const counter = ref('') //счётчик
 const meter = ref('') //метраж

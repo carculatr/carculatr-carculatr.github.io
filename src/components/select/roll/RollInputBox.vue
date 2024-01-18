@@ -1,8 +1,10 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
-
+import m3metric from '@/components/js/m3metric'
+// Метрика при закрытии окна роликов
+onUnmounted(() => m3metric('rollAll'))
 // значение инпута
 const inputVal = ref('')
 // #TODO чтобы нельзя было вводить что то кроме чисел и точки
@@ -34,6 +36,8 @@ const addRoll = () => {
     carcStore.carc.rolls.push(numReduce)
     // очистить инпут
     inputVal.value = ''
+    // метрика
+    m3metric('roll', numReduce)
   }
   //выделить инпут
   inputRoll.value.focus()
@@ -43,7 +47,7 @@ const removeRoll = (roll) => {
   carcStore.carc.rolls.splice(roll, 1)
 }
 
-onMounted(() => {  
+onMounted(() => {
   setTimeout(() => {
     // при открытии выделять первый инпут
     inputRoll.value.focus()
@@ -57,7 +61,7 @@ onMounted(() => {
   <div class="wrap">
     <div class="inputContaner">
       <input
-      autofocus
+        autofocus
         ref="inputRoll"
         v-model="inputVal"
         placeholder="Введите метраж"
@@ -88,7 +92,6 @@ input::placeholder {
   font-size: 14px;
   display: block;
   // width:40px
-
 }
 .wrap {
   display: flex;

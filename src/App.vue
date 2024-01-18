@@ -20,9 +20,7 @@ if (!carcStore.carc?.set?.themes?.theme) {
   }
 }
 
-// console.log(carcStore.carc.set.theme);
 </script>
-
 <template>
   <main
     :class="[

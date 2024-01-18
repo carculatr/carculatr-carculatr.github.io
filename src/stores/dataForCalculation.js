@@ -1,10 +1,10 @@
 // import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
-
+import m3metric from '@/components/js/m3metric'
 export const useCarcStore = defineStore('CarculatorStore', () => {
   const sessionCarc = ref({
-    popup: ['']
+    popup: [''],
   })
   const carc = ref({
     items: [
@@ -30,12 +30,12 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     ],
     set: {
       themes: {
-        theme: 'light',
+        theme: 'M3light',
         colorTT: true, //цветные цифры
         cologGrid: true //цветная сетка
       },
       additive: 0, //дополнительно рассчитывать ШТ приглушенным цветом
-      onlyWithRoll: true, //показывать только строки с роликами
+      onlyWithRoll: false, //показывать только строки с роликами
       grouped: false, //группировать с одинаковым метражом
       grid: false //сетка
     }
@@ -123,14 +123,18 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
   const setTheme = (theme) => {
     if (theme == 'colorTT') {
       carc.value.set.themes.colorTT = !carc.value.set.themes.colorTT
+      m3metric('colorTT', carc.value.set.themes.colorTT)
     } else if (theme == 'M3colorGrid') {
       carc.value.set.themes.colorGrid = !carc.value.set.themes.colorGrid
+      m3metric('colorGrid', carc.value.set.themes.colorGrid)
     } else {
       carc.value.set.themes.theme = theme
+      m3metric('theme', theme)
     }
   }
   const setBolean = (func) => {
     carc.value.set[func] = !carc.value.set[func]
+    m3metric('setBolean', func)
   }
   const setAdditive = (n) => {
     carc.value.set.additive = n

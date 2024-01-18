@@ -8,16 +8,19 @@ const carcStore = useCarcStore()
 const popupContant = ref('')
 // const popupContant = ref('inputRoll')
 // setTimeout(() => (carcStore.sessionCarc.popup[0] = 'inputRoll'), 0)
+// setTimeout(() => (carcStore.sessionCarc.popup[0] = 'settings'), 0)
 const close = () => {
   carcStore.sessionCarc.popup[0] = ''
 }
-watch(carcStore.sessionCarc.popup, async (newVal) => {
+watch(carcStore.sessionCarc.popup, async (newVal, oldVal) => {
   popupContant.value = newVal[0]
   if (newVal[0] == false) {
     document.body.classList.remove('m3popup')
   } else {
     document.body.classList.add('m3popup')
   }
+  // написать vue 3 хук beforeUnmount
+
 })
 </script>
 <template>
@@ -37,16 +40,15 @@ watch(carcStore.sessionCarc.popup, async (newVal) => {
 <style scoped lang="scss">
 .animate-warp {
   // background: rgba(255, 99, 71, 0.334);
-  height: 100dvh;  
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.2s .01s ease-out;
+  transition: 0.2s 0.01s ease-out;
 }
 
-
 .popup {
-  transition: 0.2s .01s ease-out;
+  transition: 0.2s 0.01s ease-out;
   // transform: translateY(-50px);
 }
 @media (max-height: 400px) {
@@ -66,7 +68,7 @@ watch(carcStore.sessionCarc.popup, async (newVal) => {
   position: fixed;
 
   // background: rgba(21, 21, 21, 0.878);
-  
+
   // .M3dark &{background: rgba(255, 255, 255, 0.726);}
   backdrop-filter: blur(0px);
 

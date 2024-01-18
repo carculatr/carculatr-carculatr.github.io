@@ -2,16 +2,17 @@
 import DivanInputBox from './DivanInputBox.vue'
 import DivanButton from './DivanButton.vue'
 import { ref } from 'vue'
-
+import m3metric from '@/components/js/m3metric'
 import { useCarcStore } from '@/stores/dataForCalculation'
+
 const carcStore = useCarcStore()
 
 const inputOrPreview = ref(false) //показывать ли попап с вводом
 
 const inputShow = function () {
-  document
-    .querySelector('meta[name="viewport"]')
-    .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no')
+  // document
+  // .querySelector('meta[name="viewport"]')
+  // .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no')
 
   inputOrPreview.value = true
 }
@@ -19,13 +20,15 @@ const inputShow = function () {
 const inputHide = function (p) {
   // console.log('🔰inputHide', p)
   //изменить масштаб
-  document.querySelector('meta[name="viewport"]')
+  // document.querySelector('meta[name="viewport"]')
   // .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
 
   // При закрытии поля ввода записать в подсказки
   carcStore.carc.items.forEach((item) => {
     carcStore.tipsPush(item.meter)
   })
+  // Метрика при закрытии окна роликов
+  m3metric('divanAll')
 
   inputOrPreview.value = false
 }
@@ -51,8 +54,6 @@ const inputHide = function (p) {
 </template>
 
 <style scoped>
-
-
 #box {
   z-index: 6;
   min-width: 330px;
@@ -73,7 +74,6 @@ const inputHide = function (p) {
   left: 0px;
   height: 100%;
 }
-
 
 .close {
   cursor: pointer;

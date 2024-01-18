@@ -1,17 +1,28 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { useCarcStore } from '@/stores/dataForCalculation'
 const carcStore = useCarcStore()
+import m3metric from '@/components/js/m3metric'
+m3metric('openSetting')
+
+// onUnmounted(() => {
+//   console.log('🔰onUnmounted setting')
+// })
+
 function chengeTheme(theme) {
   carcStore.setTheme(theme)
 }
 const hideSettings = ref(false)
-
-
 </script>
 <template>
-  <!--  -->
   <div @dblclick="hideSettings = !hideSettings">
+    <!-- <button @click="YaMetric('PC vivaldi')">PC vivaldi</button><br />
+    <button @click="YaMetric('PC Yandex')">PC Yandex</button><br />
+    <button @click="YaMetric('PC Chrome')">PC Chrome</button><br />
+    <button @click="YaMetric('mobile Vivaldi')">mobile Vivaldi</button><br />
+    <button @click="YaMetric('mobile yandex')">mobile yandex</button><br />
+    <button @click="YaMetric('mobile chrome')">mobile chrome</button><br /> -->
+
     <button
       :class="['grid-switcher', { act: carcStore.carc.set.grid }]"
       @click="carcStore.setBolean('grid')"
@@ -30,15 +41,10 @@ const hideSettings = ref(false)
     </button>
     <br />
 
-<div v-if="hideSettings" >
-
-
-
-
-
     <div class="checkbox-container">
       <div class="cbd">
         <input
+          @change="m3metric('onlyWithRoll', carcStore.carc.set.onlyWithRoll)"
           class="cbd-input"
           type="checkbox"
           id="cbd"
@@ -58,7 +64,13 @@ const hideSettings = ref(false)
     </div>
     <div class="checkbox-container">
       <div class="cbd">
-        <input class="cbd-input" type="checkbox" id="cbd2" v-model="carcStore.carc.set.grouped" />
+        <input
+          @change="m3metric('grouped', carcStore.carc.set.grouped)"
+          class="cbd-input"
+          type="checkbox"
+          id="cbd2"
+          v-model="carcStore.carc.set.grouped"
+        />
         <label class="cbd-label" for="cbd2">
           <label class="cbd-label-aux" for="cbd2"> </label>
         </label>
@@ -107,11 +119,7 @@ const hideSettings = ref(false)
       </div>
     </button>
 
-</div>
-
-
-
-
+    <div v-if="hideSettings"></div>
   </div>
 </template>
 
