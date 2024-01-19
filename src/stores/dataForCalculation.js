@@ -38,6 +38,9 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
       onlyWithRoll: false, //показывать только строки с роликами
       grouped: false, //группировать с одинаковым метражом
       grid: false //сетка
+    },
+    other: {
+      visit:0
     }
   })
 
@@ -146,8 +149,15 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     // carc.value = JSON.parse(carcInLocalStorage)._value
     const newVal = JSON.parse(carcInLocalStorage)._value
     carc.value = merge(carc.value, newVal)
+    console.log('🔥', carc.value.other.visit)
+    setTimeout(() => {
+      carc.value.other.visit++
+      
+    }, 0);
+    console.log('🔥🔥', carc.value.other.visit)
   }
   function merge(obj1, obj2) {
+    console.log('🔰merge')
     var res = Object.assign({}, obj1, obj2)
     for (var key in obj1) {
       if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
@@ -161,7 +171,7 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     () => carc,
     (state) => {
       localStorage.setItem('carc', JSON.stringify(state))
-      // console.log(state);
+      console.log(state);
     },
     //глубокое слежение
     { deep: true }
