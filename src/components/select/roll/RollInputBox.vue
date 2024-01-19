@@ -43,7 +43,7 @@ const addRoll = () => {
   inputRoll.value.focus()
 }
 const removeRoll = (roll) => {
-  console.log(roll)
+  // console.log(roll)
   carcStore.carc.rolls.splice(roll, 1)
 }
 
@@ -61,7 +61,6 @@ onMounted(() => {
   <div class="wrap">
     <div class="inputContaner">
       <input
-        autofocus
         ref="inputRoll"
         v-model="inputVal"
         placeholder="Введите метраж"
