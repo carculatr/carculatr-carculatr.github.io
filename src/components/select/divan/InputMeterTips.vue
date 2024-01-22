@@ -72,6 +72,15 @@ ul {
   padding: 0px;
   display: flex;
   margin: 13px 0;
+  
+  width:calc(100% - 6px);
+  margin-left: 3px;
+  border-radius: 5px;
+  /* margin-right: 23px; */
+  margin-top:3px;
+  margin-bottom: 3px;
+
+
 }
 
 .item {

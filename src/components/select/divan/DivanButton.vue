@@ -5,29 +5,20 @@ const carcStore = useCarcStore()
 
 <template>
   <div class="wrap">
-    <!-- 🐥 -->
-
     <div class="box">
-      <button class="meterBox" v-if="carcStore.carc.items[0].meter">
-        {{ carcStore.carc.items[0].meter }}
-        <div class="pc" v-if="carcStore.carc.items[0].pc">
-          {{ carcStore.carc.items[0].pc }}<span class="pc-description">шт</span>
-        </div>
-      </button>
-      <!-- <div v-else>0</div> -->
-      <button class="meterBox" v-if="carcStore.carc.items[1].meter">
-        {{ carcStore.carc.items[1].meter }}
-        <div class="pc" v-if="carcStore.carc.items[1].pc">
-          {{ carcStore.carc.items[1].pc }}<span class="pc-description">шт</span>
-        </div>
-      </button>
-    </div>
+        <button class="meterBox" :key="val" v-for="val in carcStore.carc.items">
+            {{ val.meter }}
+            <div class="pc" v-if="val.pc">
+              {{ val.pc }}<span class="pc-description">шт</span>
+            </div>
+        </button>
 
-    <!-- 🐥 -->
+
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
-.wrap{
+.wrap {
   position: relative;
   z-index: 2;
 }
@@ -67,14 +58,14 @@ const carcStore = useCarcStore()
     // background: red !important;
   }
   .pc {
-    margin-left:0.2em;
+    margin-left: 0.2em;
     line-height: 1.6em;
     position: relative;
     top: -20px;
     font-size: 0.7em;
     opacity: 0.8;
     .pc-description {
-      margin-left:0.2em;
+      margin-left: 0.2em;
       font-size: 0.8em;
       opacity: 0.4;
     }

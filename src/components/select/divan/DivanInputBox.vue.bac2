@@ -10,6 +10,7 @@ const counter = ref('') //счётчик
 const meter = ref('') //метраж
 const idx = props.index //номер инпута
 
+
 var minus = function () {
   counter.value--
   if (counter.value <= 0) {
@@ -27,12 +28,12 @@ var plus = function () {
 
 //При клике в поле выделять текст
 var selectTxt = function (el) {
-  console.log('при клике в поле')
+  console.log("при клике в поле")
   // el.target.select()
   // inputMeter.value.select()
 }
 var pressEnter = function () {
-  console.log('🔰pressEnter')
+  console.log("🔰pressEnter")
   const listInputs = document.querySelectorAll('input.meter')
   // const idx = props.index
   const length = listInputs.length - 1
@@ -46,7 +47,7 @@ var pressEnter = function () {
   }
 }
 const startDataFromPinia = function () {
-  console.log('🔰startDataFromPinia')
+  console.log("🔰startDataFromPinia");
   // прекратить выполнение если это
   if (props.index === 'addNew') return false
   const pc = carcStore.carc.items[props.index].pc
@@ -59,7 +60,7 @@ if (props.index !== 'addNew') {
   startDataFromPinia()
 }
 watch(counter, async (newQuestion) => {
-  console.log('🔰watch counter', newQuestion)
+  console.log("🔰watch counter", newQuestion)
   // return false // временно отключить для теста
   // if (props.index === 'addNew') return false
   const valFilter = inputFilter(newQuestion).replace(/[.]/g, '') //убрать точки запятые и точки для счётчика
@@ -69,11 +70,11 @@ watch(counter, async (newQuestion) => {
   // carcStore.carc.items[props.index].pc = newQuestion  // console.log(carcStore.setActiveTab);
 })
 watch(meter, async (newQuestion) => {
-  console.log('🔰watch meter', newQuestion)
-  if (props.index === 'addNew') {
-    // divanAdd()
-    return false
-  }
+  console.log("🔰watch meter", newQuestion)
+  // if (props.index === 'addNew') {
+  //   divanAdd()
+  //   return false
+  // }
   // return false // временно отключить для теста
   // inputFilter(newQuestion)
   let valFilter = inputFilter(newQuestion)
@@ -99,70 +100,63 @@ const inputFilter = function (data) {
 }
 const inputMeter = ref()
 
+const eraserClick = function () {
+  // inputMeter.value.focus()
+
+  // counter.value = ''
+  // meter.value = ''
+}
 const divanDelete = () => {
+  console.log("🔰divanDelete");
   if (props.index == 'addNew') {
     // если это строка добавления дивана, то добавить диван
-    // divanAddButton()
-    divanAddv2();
+    divanAddButton()
     //  и прекратить выполнение данной "divanDelete"
     return false
   }
   const store = carcStore.carc.items
-  //если последний элемент, то не удалять, а очистить
-  if (store.length == 1) {
-    meter.value = ''
-    counter.value = ''
-    inputMeter.value.focus()
-    return false
-  }
+  //не удалять если последний элемент
+  if (store.length == 1) return false
   // удалить метраж
   store.splice(props.index, 1)
-  console.log('🔰divanDelete', props.index, carcStore.carc.items)
 }
 const divanAdd = () => {
-  console.log('🔰divanAdd')
-  // если не нулевое значение
-  if (meter.value > 0) {
-    //убрать фокус с инпута чтобы сразу спрятался(без этого будет белая вспышка)
-    inputMeter.value.blur()
-    //создать новый метраж с текущими показателями
-    const newDivan = { pc: counter.value, meter: meter.value }
-    // отправить новый метраж в стор
+    console.log("🔰divanAdd");
+  //создать новый метраж с текущими показателями
+  if(meter.value>0){
+    const newDivan ={ pc: counter.value, meter: meter.value }
     carcStore.carc.items.push(newDivan)
-    counter.value = ''
-    meter.value = ''
     setTimeout(() => {
-      const listInputs = document.querySelectorAll('input.meter')
-      listInputs[listInputs.length - 2].focus()
-    }, 0)
-    // вделить инпкут с предыдущей стрчоке(последней)
+      counter.value ="0";
+      meter.value = "";
+      divanAddButton2()
+    }, 10)
   }
   // очистить текущие данные
-
+  
   // console.log(carcStore.carc.items)
 }
-const divanAddv2 = () => {
-  console.log("🔰divanAddv2");
-  carcStore.carc.items.push({ pc: '', meter: '' })
-  setTimeout(() => {
-    const listInputs = document.querySelectorAll('input.meter')
-    listInputs[listInputs.length - 2].focus()
-  }, 0);
-}
 const divanAddButton = () => {
-  console.log('🔰divanAddButton')
-  inputMeter.value.focus()
+    console.log("🔰divanAddButton");
+  // inputMeter.value.focus()
 }
 const divanAddButton2 = () => {
-  // console.log('🔰divanAddButton2')
-  // const listInputs = document.querySelectorAll('input.meter')
-  setTimeout(() => {
-    // listInputs[listInputs.length - 2].focus()
-  }, 100)
+      console.log("🔰divanAddButton2");
+  const listInputs = document.querySelectorAll('input.meter')
+  // listInputs[listInputs.length - 2].focus()
 }
 
+const eraser = ref()
+const eraserMousedown = function () {
+  const el = eraser.value
+  el.classList.remove('animate')
+  setTimeout(() => {
+    el.classList.add('animate')
+  }, 0)
+  counter.value = ''
+  meter.value = ''
+}
 onMounted(() => {
-  console.log("🔰onmounted",props.index);
   // console.log('🍓', inputMeter.value, props.index)
   // при открытии выделять первый инпут
   if (props.index == 0) {
@@ -173,9 +167,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <li class="wrap-divans" :class="[props.index === 'addNew' ? 'addNew' : '']">
-    <div class="box-divan">
-      <!-- {{ props.index }}🔞{{ idx }} -->
+  <div class="wrap-divan" :class="[props.index === 'addNew' ? 'addNew' : '']">
+    <div class="value">
+      <!-- {{ props.index  }}🔞{{ idx }} -->
       <!-- Метраж -->
       <div class="meterPc">
         <input
@@ -216,51 +210,39 @@ onMounted(() => {
       </div>
       <div class="delete-box">
         <button class="delete btn1" @click="divanDelete"></button>
-        <button
-          v-if="props.index == 'addNew'"
-          class="delete btn2"
-          @mousedown="divanAddButton2"
-        ></button>
+        <button v-if="props.index == 'addNew'" class="delete btn2" @click="divanAddButton2"></button>
       </div>
     </div>
     <!-- <InputMeterTips v-model="meter" :parentValue="meter" /> -->
-  </li>
+  </div>
 </template>
 
 <style scoped lang="scss">
 @import '@/assets/css/_input.scss';
 @import '@/assets/css/_psevdoPlus';
-.addNew {
-  // background: red;
-  // margin-bottom: -35px;
-}
-//строка добавления без фокуса в инпуте
 .addNew:not(:has(input:focus)) {
   & > div {
     background: transparent;
     & input,
     & .increment {
       // visibility: hidden;
-      opacity: 0;
+      opacity: 0.1;
     }
   }
   & > ul {
     background: transparent;
-    // opacity: 0.1;
+    opacity: 0.1;
   }
   .delete {
     transform: rotate(0deg);
   }
-  // показывать вторую кнопку
   .delete.btn2 {
     // display: none;
     // #FIXME c 2 кнопками бага,→ если выделить инпут новый, и открыть другое окно, потом нажать кнопку плюс, то произойдет ошибка
     visibility: hidden;
   }
 }
-//строка добавления с фокусом в инпуте
 .addNew:has(input:focus) {
-  // показывать первую кнопку
   .delete.btn1 {
     // display: none;
     visibility: hidden;
@@ -269,6 +251,7 @@ onMounted(() => {
 .delete-box {
   position: relative;
 }
+
 .addNew {
   button.delete.btn2 {
     left: 0;
@@ -276,7 +259,7 @@ onMounted(() => {
   }
 }
 /*контейнер для метража */
-.box-divan {
+.value {
   z-index: 6;
   height: 50%;
   margin: 3px;
@@ -287,17 +270,6 @@ onMounted(() => {
   justify-content: space-around;
   justify-content: space-evenly;
   align-items: center;
-}
-// если единственный метраж( не считая строки добавления диванов)
-.wrap-divans:nth-of-type(1):nth-last-child(2) {
-  .delete {
-    // opacity: 0;
-  }
-  .delete:before,
-  .delete:after {
-    // transform:scale(0.1);
-    // opacity: 0.1;
-  }
 }
 
 .meterPc,
@@ -375,11 +347,10 @@ button.delete {
   // border: 3px solid ;
   height: 45px;
   min-width: 45px;
-  .wrap-divans & {
+  .wrap-divan & {
     transform: rotate(45deg);
   }
 }
-
 .eraser {
   z-index: 9;
 

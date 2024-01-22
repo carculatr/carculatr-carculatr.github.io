@@ -9,6 +9,25 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
   const carc = ref({
     items: [
       {
+        meter: '1',
+        pc: '1'
+      },
+      {
+        meter: '2',
+        pc: '2'
+      },
+      { meter: '3', pc: '3' },
+      // { meter: '4', pc: '4' },
+      // { meter: '5', pc: '5' },
+      // { meter: '6', pc: '6' },
+      // { meter: '7', pc: '7' },
+      // { meter: '8', pc: '8' },
+      // { meter: '9', pc: '9' },
+      // { meter: '10', pc: '10' },
+
+    ],
+    itemsOLD: [
+      {
         meter: '3',
         pc: '3'
       },
@@ -40,7 +59,7 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
       grid: false //сетка
     },
     other: {
-      visit:0
+      visit: 0
     }
   })
 
@@ -149,15 +168,14 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     // carc.value = JSON.parse(carcInLocalStorage)._value
     const newVal = JSON.parse(carcInLocalStorage)._value
     carc.value = merge(carc.value, newVal)
-    console.log('🔥', carc.value.other.visit)
+    // console.log('🔥', carc.value.other.visit)
     setTimeout(() => {
       carc.value.other.visit++
       
     }, 0);
-    console.log('🔥🔥', carc.value.other.visit)
+    // console.log('🔥🔥', carc.value.other.visit)
   }
   function merge(obj1, obj2) {
-    console.log('🔰merge')
     var res = Object.assign({}, obj1, obj2)
     for (var key in obj1) {
       if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
@@ -171,13 +189,17 @@ export const useCarcStore = defineStore('CarculatorStore', () => {
     () => carc,
     (state) => {
       localStorage.setItem('carc', JSON.stringify(state))
-      console.log(state);
+      // console.log(state);
     },
     //глубокое слежение
     { deep: true }
   )
-
+  const testSplise = (i) => {
+  let qwe = carc.value.items.splice(i, 1)
+  console.log('🔰testSplise',qwe)
+}
   return {
+    testSplise,
     sortTips,
     tipsPush,
     carc,

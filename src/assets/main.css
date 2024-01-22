@@ -1,5 +1,9 @@
 @import './base.css';
 @import './M3color.scss';
+/*убрать маркеры списков */
+li{
+   list-style-type: none;
+}
 
 #app {
   /* max-width: 1280px; */

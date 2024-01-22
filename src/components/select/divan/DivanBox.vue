@@ -7,22 +7,15 @@ import { useCarcStore } from '@/stores/dataForCalculation'
 
 const carcStore = useCarcStore()
 
-const inputOrPreview = ref(false) //показывать ли попап с вводом
+// const inputOrPreview = ref(false) //показывать ли попап с вводом
+const inputOrPreview = ref(true) //для теста
 
+//показать скрыть ввод диванов
 const inputShow = function () {
-  // document
-  // .querySelector('meta[name="viewport"]')
-  // .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no')
-
   inputOrPreview.value = true
 }
-
+//действие при закрытии инпута
 const inputHide = function (p) {
-  // console.log('🔰inputHide', p)
-  //изменить масштаб
-  // document.querySelector('meta[name="viewport"]')
-  // .setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes')
-
   // При закрытии поля ввода записать в подсказки
   carcStore.carc.items.forEach((item) => {
     carcStore.tipsPush(item.meter)
@@ -44,9 +37,10 @@ const inputHide = function (p) {
         @inputHide="inputHide"
         v-model="inputHide"
         v-for="(movie, index) of carcStore.carc.items"
-        :key="index"
+        :key="carcStore.carc.items[index].meter"
         :index="index"
       />
+      <DivanInputBox @inputHide="inputHide" v-model="inputHide" index="addNew" />
     </div>
     <!-- либо кнопки -->
     <DivanButton @click="inputShow" v-if="!inputOrPreview" />
